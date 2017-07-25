@@ -16,25 +16,14 @@ const server = app.listen(app.get("port"), () => {
 
 const io = require('socket.io')(server)
 
-const gameRoomSettings = {
-  users: []
-}
+const currentPlayers = io.of('/current-players')
 
-io.on('connection', (socket) => {
+currentPlayers.on('connection', (socket) => {
   console.log('a user connected')
-  console.log(gameRoomSettings.users)
-
-  gameRoomSettings.users.push({
-    username: 'ralphie',
-    socketID: socket.id
-  })
-
-  // send message to just one socket
-  io.to(gameRoomSettings.users[0].socketID).emit('message', 'just for my first one.')
 
   socket.on('new user join', (data) => {
     console.log(`${data.name} has joined the game.`)
-    io.sockets.emit('say hello', { name: data.name })
+    socket.emit('say hello', { name: data.name })
   })
 
   socket.on('disconnect', () => {

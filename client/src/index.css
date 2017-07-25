@@ -1,0 +1,83 @@
+/* Overwrites */
+
+.ui.button.squareButton {
+  font-size: 38px!important;
+  max-width: 138px;
+  margin: 10px;
+}
+
+/* Custom */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+p {
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #393939;
+}
+
+#joinButton {
+  margin-top: 10px;
+  width: 200px;
+}
+
+#codeInput {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#usernameInput {
+  text-align: center;
+}
+
+.wrapper {
+  width: 320px!important;
+  margin: 40px auto 22px;
+}
+
+.playerButtonBuffer {
+  margin-top: 39px;
+}
+
+.progressBar {
+  max-width: 280px!important;
+  margin: 12px auto!important;
+}
+
+.timer {
+  font-size: 34px;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: #7f7f7f;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.buttonWrapper { margin-bottom: 21px; }
+
+.bigButton {
+  width: 180px;
+  height: 55px;
+  margin: 10px;
+}
+
+.biggerButton {
+  width: 320px;
+  height: 61px;
+  margin: 20px;
+}
+
+.squareButton {
+  width: 44%;
+  height: 138px;
+}
+
+.bigCode { font-size: 40px; }
+
+.welcome {
+  font-family: 'Niconne', cursive;
+  font-size: 54px;
+}

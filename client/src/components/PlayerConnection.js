@@ -1,16 +1,16 @@
-import React, { Component } from "react"
-const io = require('socket.io-client')
-const socket = io()
+import React from 'react'
+import '../index.css'
 
-class SocketContainer extends Component {
+const io = require('socket.io-client')
+let socket
+
+class PlayerConnection extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      value: ''
+      value: '',
     }
-    socket.on('say hello', (data) => this.sayHello(data.name))
-    socket.on('message', (data) => console.log(data))
   }
 
   sayHello = name => {
@@ -18,7 +18,9 @@ class SocketContainer extends Component {
   }
 
   joinRoom = () => {
-    socket.emit('new user join', { name: this.state.value } )
+    socket = io('/current-players')
+    socket.emit('new user join', { name: this.state.value })
+    socket.on('say hello', (data) => this.sayHello(data.name))
     this.setState({ value: '' })
   }
 
@@ -29,7 +31,7 @@ class SocketContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className='wrapper playerButtonBuffer'>
         <input type='text' name='username' value={this.state.value} onChange={this.onHandleChange}></input>
         <button onClick={()=>(this.joinRoom())}>Join</button>
       </div>
@@ -37,4 +39,4 @@ class SocketContainer extends Component {
   }
 }
 
-export default SocketContainer
+export default PlayerConnection
