@@ -17,9 +17,10 @@ const server = app.listen(app.get("port"), () => {
 const io = require('socket.io')(server)
 
 const currentPlayers = io.of('/current-players')
+const currentAdmin = io.of('/current-admin')
 
 currentPlayers.on('connection', (socket) => {
-  console.log('a user connected')
+  console.log('User connected')
 
   socket.on('new user join', (data) => {
     console.log(`${data.name} has joined the game.`)
@@ -27,6 +28,20 @@ currentPlayers.on('connection', (socket) => {
   })
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    console.log('User disconnected')
+  })
+})
+
+currentAdmin.on('connection', (socket) => {
+  socket.on('new admin join', (data) => {
+    console.log(`Admin connected.`)
+  })
+
+  socket.on('next slide', (data) => {
+    currentPlayers.emit('say works', { works: true })
+  })
+
+  socket.on('disconnect', () => {
+    console.log('Admin disconnected')
   })
 })

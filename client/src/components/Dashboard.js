@@ -1,14 +1,20 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-
 import '../index.css'
+
+const io = require('socket.io-client')
+let socket
 
 class Dashboard extends React.Component {
 
+  componentDidMount() {
+    socket = io('/current-admin')
+    socket.emit('new admin join')
+  }
+
   nextSlide = () => {
-    fetch('http://api.icndb.com/jokes/random')
-      .then(res => res.json())
-      .then(res => console.log(res))
+    socket.emit('next slide', {})
+    console.log('next slide')
   }
 
   pauseGame = () => {

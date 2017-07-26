@@ -11,13 +11,16 @@ class PlayerController extends React.Component {
       score: 1000,
       finished: false,
       answerSubmitted: false,
+      shouldRender: false // this needs to be stored in a contained component
     }
   }
 
   componentDidMount() {
     let seconds = 10
-    this.functioning(seconds)
-    this.scoreKeeping(seconds)
+    if (this.state.shouldRender) {
+      this.functioning(seconds)
+      this.scoreKeeping(seconds)
+    }
   }
 
   functioning = seconds => {
@@ -56,8 +59,12 @@ class PlayerController extends React.Component {
   }
 
   render() {
-    return (
-      <div className='wrapper playerButtonBuffer'>
+
+    let show
+
+    if (this.state.shouldRender) {
+      show =
+      <div>
         <div className='timer'>{ this.state.finished ? `Time's up!` : this.state.score }</div>
         <div><Progress percent={this.state.percent} color="teal" active className='progressBar' /></div>
         <Button
@@ -92,6 +99,14 @@ class PlayerController extends React.Component {
         >
           D
         </Button>
+      </div>
+    } else {
+      show = null
+    }
+
+    return (
+      <div className='wrapper playerButtonBuffer'>
+        {show}
       </div>
     )
   }

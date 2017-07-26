@@ -17,10 +17,15 @@ class PlayerConnection extends React.Component {
     console.log(`Hello, ${name}`)
   }
 
+  nextSlide = () => {
+    console.log('Render next slide')
+  }
+
   joinRoom = () => {
     socket = io('/current-players')
     socket.emit('new user join', { name: this.state.value })
     socket.on('say hello', (data) => this.sayHello(data.name))
+    socket.on('say works', (data) => console.log(data.works))
     this.setState({ value: '' })
   }
 
