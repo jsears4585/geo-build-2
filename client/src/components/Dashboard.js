@@ -1,5 +1,8 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
+
+import MapContainer from './Container'
+
 import '../index.css'
 
 const io = require('socket.io-client')
@@ -23,7 +26,8 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className='wrapper'>
+      <div>
+        <MapContainer />
         <Button
           color='facebook'
           basic={true}
