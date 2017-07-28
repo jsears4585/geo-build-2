@@ -6,7 +6,9 @@ import Join from './Join'
 import Create from './Create'
 import PlayerConnection from './PlayerConnection'
 import PlayerController from './PlayerController'
-import Dashboard from './Dashboard'
+import MapContainer from './MapContainer'
+
+import '../index.css'
 
 class App extends Component {
   render() {
@@ -22,7 +24,7 @@ class App extends Component {
               <PlayerConnection />
             </div>
           )}/>
-          <Route path='/dashboard' component={Dashboard}/>
+          <Route path='/dashboard' component={MapContainer}/>
         </Switch>
       </div>
     )

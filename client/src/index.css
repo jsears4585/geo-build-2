@@ -8,6 +8,16 @@
 
 /* Custom */
 
+#root {
+ height: 100%;
+ width: 100%;  
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -15,8 +25,13 @@ html, body {
   font-family: sans-serif;
 }
 
-#map {
+.map {
   height: 100%;
+  width: 100%;
+}
+
+.ariseChicken {
+  z-index: 99999;
 }
 
 p {
