@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="ariseChicken">
+      <div className="dashboardButtons">
         <Button
           color='facebook'
           basic={true}

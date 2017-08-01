@@ -8,9 +8,21 @@
 
 /* Custom */
 
+.ui.facebook.button {
+  cursor: pointer!important;
+  z-index: 999!important;
+  position: relative!important;
+}
+
+.dashboardButtons {
+  width: 82px;
+  display: block;
+  float: right;
+}
+
 #root {
  height: 100%;
- width: 100%;  
+ width: 100%;
 }
 
 .App {
@@ -23,15 +35,6 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: sans-serif;
-}
-
-.map {
-  height: 100%;
-  width: 100%;
-}
-
-.ariseChicken {
-  z-index: 99999;
 }
 
 p {

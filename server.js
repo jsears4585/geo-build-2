@@ -35,6 +35,7 @@ currentPlayers.on('connection', (socket) => {
 })
 
 currentAdmin.on('connection', (socket) => {
+
   socket.on('new admin join', (data) => {
     console.log(`Admin connected.`)
   })
@@ -46,4 +47,5 @@ currentAdmin.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('Admin disconnected')
   })
+  
 })

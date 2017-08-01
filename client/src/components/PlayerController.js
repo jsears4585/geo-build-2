@@ -11,7 +11,7 @@ class PlayerController extends React.Component {
       score: 1000,
       finished: false,
       answerSubmitted: false,
-      shouldRender: false // this needs to be stored in a contained component
+      shouldRender: true // this needs to be stored in a contained component
     }
   }
 
@@ -59,9 +59,7 @@ class PlayerController extends React.Component {
   }
 
   render() {
-
     let show
-
     if (this.state.shouldRender) {
       show =
       <div>
