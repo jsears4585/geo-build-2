@@ -22,11 +22,13 @@ const currentPlayers = io.of('/current-players')
 const currentAdmin = io.of('/current-admin')
 
 currentPlayers.on('connection', (socket) => {
-  console.log('User connected')
-
   socket.on('new user join', (data) => {
     console.log(`${data.name} has joined the game.`)
     socket.emit('say hello', { name: data.name })
+  })
+
+  socket.on('send answer', (data) => {
+    console.log(`${data.username}'s answer was ${data.answer} with ${data.points} points!`)
   })
 
   socket.on('disconnect', () => {
@@ -35,17 +37,15 @@ currentPlayers.on('connection', (socket) => {
 })
 
 currentAdmin.on('connection', (socket) => {
-
   socket.on('new admin join', (data) => {
-    console.log(`Admin connected.`)
+    console.log(`Admin has connected.`)
   })
 
   socket.on('next slide', (data) => {
-    currentPlayers.emit('say works', { works: true })
+    currentPlayers.emit('render controller', { render: true })
   })
 
   socket.on('disconnect', () => {
     console.log('Admin disconnected')
   })
-  
 })

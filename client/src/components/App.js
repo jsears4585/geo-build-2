@@ -4,10 +4,9 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Join from './Join'
 import Create from './Create'
-import PlayerConnection from './PlayerConnection'
-import PlayerController from './PlayerController'
 import Dashboard from './Dashboard'
 import MapContainer from './MapContainer'
+import Player from './Player'
 
 import '../index.css'
 
@@ -21,8 +20,7 @@ class App extends Component {
           <Route path='/create' component={Create} />
           <Route path='/game' render={(props)=>(
             <div>
-              <PlayerController />
-              <PlayerConnection />
+              <Player />
             </div>
           )}/>
           <Route path='/dashboard' render={(props)=>(

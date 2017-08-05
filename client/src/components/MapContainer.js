@@ -11,7 +11,7 @@ const style = {
 export class MapContainer extends Component {
 
   state = {
-    currentSlide: 2,
+    currentSlide: 5,
     coords: [],
   }
 
