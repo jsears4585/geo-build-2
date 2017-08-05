@@ -21,14 +21,27 @@ const io = require('socket.io')(server)
 const currentPlayers = io.of('/current-players')
 const currentAdmin = io.of('/current-admin')
 
+let playersArray = []
+let currentRound = 0
+
 currentPlayers.on('connection', (socket) => {
   socket.on('new user join', (data) => {
-    console.log(`${data.name} has joined the game.`)
+    console.log(`${data.name} has connected.`)
+    playersArray.push({ username: data.name })
     socket.emit('say hello', { name: data.name })
   })
 
   socket.on('send answer', (data) => {
     console.log(`${data.username}'s answer was ${data.answer} with ${data.points} points!`)
+
+    let index = playersArray.findIndex(function(el) {
+      return el.username === data.username
+    })
+
+    console.log('index is:', index)
+
+    playersArray[index][`round_${currentRound}`] = data.points
+    console.log(playersArray)
   })
 
   socket.on('disconnect', () => {
@@ -43,9 +56,11 @@ currentAdmin.on('connection', (socket) => {
 
   socket.on('next slide', (data) => {
     currentPlayers.emit('render controller', { render: true })
+    currentRound++
   })
 
   socket.on('disconnect', () => {
+    currentRound = 0
     console.log('Admin disconnected')
   })
 })
