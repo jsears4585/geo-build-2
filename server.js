@@ -3,11 +3,8 @@ const app = express()
 const http = require('http')
 const socketIO = require('socket.io')
 
-// Nothing changed
-
 app.set("port", process.env.PORT || 3001)
 
-// Express only serves static assets in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"))
 }
@@ -17,7 +14,6 @@ const server = app.listen(app.get("port"), () => {
 })
 
 const io = require('socket.io')(server)
-
 const currentPlayers = io.of('/current-players')
 const currentAdmin = io.of('/current-admin')
 
@@ -34,11 +30,9 @@ currentPlayers.on('connection', (socket) => {
       username: data.name,
       totalPoints: 0
     })
-
     playersNameArray.push(data.name)
 
     socket.emit('say hello', { name: data.name })
-
     currentAdmin.emit('new user joined', { playersNameArray: playersNameArray })
   })
 
@@ -77,6 +71,7 @@ currentAdmin.on('connection', (socket) => {
     currentRound = -1
     playersArray = []
     playersNameArray = []
+
     console.log('Admin disconnected')
   })
 })

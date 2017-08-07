@@ -87,7 +87,7 @@ export class MapContainer extends Component {
   render() {
     let toRender = null
 
-    if (this.state.currentSlide >= 0) {
+    if ( this.state.currentSlide >= 0 ) {
       toRender = this.renderMap()
     } else {
       toRender = this.renderNames()
