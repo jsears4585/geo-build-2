@@ -17,15 +17,12 @@ const style = {
 export class MapContainer extends Component {
 
   state = {
-    currentSlide: 0,
+    currentSlide: -1,
     coords: [],
     map: null,
   }
 
   componentDidMount() {
-    this.setState({
-      coords: this.prettyCoords(Borders[this.state.currentSlide].data),
-    })
     socket = io('/current-admin')
     socket.emit('new admin join')
   }
@@ -76,9 +73,14 @@ export class MapContainer extends Component {
   }
 
   render() {
+    let toRender = null
+    if (this.state.currentSlide >= 0) {
+      toRender = this.renderMap()
+    }
+
     return (
       <div>
-        {this.renderMap()}
+        {toRender}
         <div className="dashboardButtons">
           <Button
             color='facebook'
