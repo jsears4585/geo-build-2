@@ -6,7 +6,24 @@
   margin: 10px;
 }
 
+.ui.table {
+  width: 280px!important;
+}
+
 /* Custom */
+
+.leaderboard {
+  margin: 60px!important;
+  display: inline-block;
+}
+
+.playerColumn {
+  width: 17%!important;
+}
+
+.scoreColumn {
+  width: 80%!important;
+}
 
 .ui.facebook.button {
   cursor: pointer!important;
@@ -31,6 +48,7 @@
 }
 
 .dashboardButtons {
+  margin: 60px;
   width: 82px;
   display: block;
   float: right;

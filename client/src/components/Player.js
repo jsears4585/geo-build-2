@@ -160,10 +160,7 @@ class Player extends React.Component {
     return (
       <div className='wrapper playerButtonBuffer'>
         {signIn}
-        <hr />
-        <div className='wrapper playerButtonBuffer'>
-          {this.state.finished ? null : show}
-        </div>
+        {this.state.finished ? null : show}
       </div>
     )
   }

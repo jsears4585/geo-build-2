@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
 import Borders from '../data/Borders'
@@ -86,15 +86,29 @@ export class MapContainer extends Component {
 
   renderNames = () => {
     return (
-      this.state.playersNameArray.map(name => {
-        return <li>{name}</li>
-      })
+      <Table celled className="leaderboard">
+        <Table.Header>
+          <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
+          <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+        </Table.Header>
+        <Table.Body>
+          { this.state.playersNameArray.map(name => {
+            return (
+              <Table.Row>
+                <Table.Cell>{name}</Table.Cell>
+                <Table.Cell></Table.Cell>
+              </Table.Row>
+            )
+          }) }
+        </Table.Body>
+        <Table.Footer></Table.Footer>
+      </Table>
     )
   }
 
   render() {
-    let toRender = null
 
+    let toRender = null
     if ( this.state.currentSlide >= 0 ) {
       toRender = this.renderMap()
     } else {
