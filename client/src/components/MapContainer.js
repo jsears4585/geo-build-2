@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
 import Borders from '../data/Borders'
@@ -61,18 +61,18 @@ export class MapContainer extends Component {
       <div>
         <AnswersContainer answersArray={this.state.answersArray} />
         <Map
-          google={this.props.google}
-          style={style}
+          google={ this.props.google }
+          style={ style }
           initialCenter={{
             lng: Borders[this.state.currentSlide].lng,
             lat: Borders[this.state.currentSlide].lat
           }}
-          zoom={Borders[this.state.currentSlide].zoom}
+          zoom={ Borders[this.state.currentSlide].zoom }
           mapType='satellite'
-          key={this.state.currentSlide}
+          key={ this.state.currentSlide }
         >
         <Polygon
-          paths={this.state.coords}
+          paths={ this.state.coords }
           strokeColor="#ffff00"
           strokeOpacity={0.8}
           strokeWeight={2}
@@ -95,7 +95,7 @@ export class MapContainer extends Component {
           { this.state.playersNameArray.map(name => {
             return (
               <Table.Row>
-                <Table.Cell>{name}</Table.Cell>
+                <Table.Cell>{ name }</Table.Cell>
                 <Table.Cell></Table.Cell>
               </Table.Row>
             )
@@ -110,6 +110,7 @@ export class MapContainer extends Component {
 
     let toRender = null
     if ( this.state.currentSlide >= 0 ) {
+      // more logic here for leaderboard switches
       toRender = this.renderMap()
     } else {
       toRender = this.renderNames()
@@ -122,14 +123,14 @@ export class MapContainer extends Component {
           <Button
             color='facebook'
             basic={true}
-            onClick={ ()=> {this.nextSlide()} }
+            onClick={ ()=> { this.nextSlide() } }
           >
             Next Slide
           </Button>
           <Button
             color='facebook'
             basic={true}
-            onClick={ ()=> {this.pauseGame()} }
+            onClick={ ()=> { this.pauseGame() } }
           >
             Pause
           </Button>

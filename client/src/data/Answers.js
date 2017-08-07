@@ -1,10 +1,10 @@
 const Answers = [
   ['Finland', 'Sweden', 'Denmark', 'Norway'],
-  ['Congo', 'Sweden', 'Country Q', 'Smallville'],
-  ['Finland', 'Etc', 'Denmark', 'Norway'],
-  ['Finland', 'Sweden', 'Weaselton', 'Norway'],
-  ['Finland', 'DRNK', 'Denmark', 'Norway'],
-  ['SuperBestVille', 'Sweden', 'Denmark', 'Norway']
+  ['Japan', 'DR of Korea', 'Croatia', 'Colombia'],
+  ['The Netherlands', 'Algeria', 'Switzerland', 'USA'],
+  ['Bulgaria', 'Monaco', 'South Korea', 'Kenya'],
+  ['Mongolia', 'Ethiopia', 'Congo', 'Ukraine'],
+  ['South Africa', 'Ireland', 'Bosnia and Herzegovina', 'Czech Republic']
 ]
 
 export default Answers
