@@ -20,7 +20,7 @@ const currentAdmin = io.of('/current-admin')
 let playersArray = []
 let playersNameArray = []
 let currentRound = -1
-let answersArray = ['A', 'D', 'C', 'A']
+let answersArray = ['A', 'D', 'C', 'A', 'C', 'D']
 
 currentPlayers.on('connection', (socket) => {
   socket.on('new user join', (data) => {
