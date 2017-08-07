@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
+import { Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
 import Borders from '../data/Borders'
+
+import '../index.css'
+
+const io = require('socket.io-client')
+let socket
 
 const style = {
   width: '100%',
@@ -11,14 +17,31 @@ const style = {
 export class MapContainer extends Component {
 
   state = {
-    currentSlide: 5,
+    currentSlide: 0,
     coords: [],
+    map: null,
   }
 
   componentDidMount() {
     this.setState({
       coords: this.prettyCoords(Borders[this.state.currentSlide].data),
     })
+    socket = io('/current-admin')
+    socket.emit('new admin join')
+  }
+
+  nextSlide = () => {
+    socket.emit('next slide', {})
+    let newSlide = this.state.currentSlide + 1
+    this.setState({
+      currentSlide: newSlide,
+      coords: this.prettyCoords(Borders[newSlide].data)
+    })
+    console.log('next slide')
+  }
+
+  pauseGame = () => {
+    console.log('Game paused.')
   }
 
   prettyCoords = arr => {
@@ -27,7 +50,7 @@ export class MapContainer extends Component {
     })
   }
 
-  render() {
+  renderMap = () => {
     return (
       <Map
         google={this.props.google}
@@ -38,6 +61,7 @@ export class MapContainer extends Component {
         }}
         zoom={Borders[this.state.currentSlide].zoom}
         mapType='satellite'
+        key={this.state.currentSlide}
       >
       <Polygon
         paths={this.state.coords}
@@ -48,6 +72,30 @@ export class MapContainer extends Component {
         fillOpacity={0.15}
       />
       </Map>
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        {this.renderMap()}
+        <div className="dashboardButtons">
+          <Button
+            color='facebook'
+            basic={true}
+            onClick={()=> {this.nextSlide()} }
+          >
+            Next Slide
+          </Button>
+          <Button
+            color='facebook'
+            basic={true}
+            onClick={()=> {this.pauseGame()} }
+          >
+            Pause
+          </Button>
+        </div>
+      </div>
     )
   }
 }

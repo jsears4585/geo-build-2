@@ -23,11 +23,16 @@ const currentAdmin = io.of('/current-admin')
 
 let playersArray = []
 let currentRound = 0
+let answersArray = ['A', 'D', 'C', 'A']
 
 currentPlayers.on('connection', (socket) => {
   socket.on('new user join', (data) => {
     console.log(`${data.name} has connected.`)
-    playersArray.push({ username: data.name })
+
+    playersArray.push({
+      username: data.name,
+      totalPoints: 0
+    })
     socket.emit('say hello', { name: data.name })
   })
 
@@ -37,15 +42,18 @@ currentPlayers.on('connection', (socket) => {
     let index = playersArray.findIndex(function(el) {
       return el.username === data.username
     })
+    if ( answersArray[currentRound - 1] === data.answer ) {
+      playersArray[index][`round_${currentRound}`] = data.points
+      playersArray[index]['totalPoints'] += data.points 
+    } else {
+      playersArray[index][`round_${currentRound}`] = 0
+    }
 
-    console.log('index is:', index)
-
-    playersArray[index][`round_${currentRound}`] = data.points
     console.log(playersArray)
   })
 
   socket.on('disconnect', () => {
-    console.log('User disconnected')
+    console.log('A user has disconnected')
   })
 })
 

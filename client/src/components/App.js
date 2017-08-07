@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Join from './Join'
 import Create from './Create'
-import Dashboard from './Dashboard'
 import MapContainer from './MapContainer'
 import Player from './Player'
 
@@ -24,10 +23,7 @@ class App extends Component {
             </div>
           )}/>
           <Route path='/dashboard' render={(props)=>(
-            <div>
-              <MapContainer />
-              <Dashboard className="db" />
-            </div>
+            <MapContainer />
           )}/>
         </Switch>
       </div>
