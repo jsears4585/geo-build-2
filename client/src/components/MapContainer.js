@@ -20,11 +20,15 @@ export class MapContainer extends Component {
     currentSlide: -1,
     coords: [],
     map: null,
+    playersNameArray: []
   }
 
   componentDidMount() {
     socket = io('/current-admin')
     socket.emit('new admin join')
+    socket.on('new user joined', (data) => {
+      this.setState({ playersNameArray: data.playersNameArray })
+    })
   }
 
   nextSlide = () => {
@@ -72,10 +76,21 @@ export class MapContainer extends Component {
     )
   }
 
+  renderNames = () => {
+    return (
+      this.state.playersNameArray.map(name => {
+        return <li>{name}</li>
+      })
+    )
+  }
+
   render() {
     let toRender = null
+
     if (this.state.currentSlide >= 0) {
       toRender = this.renderMap()
+    } else {
+      toRender = this.renderNames()
     }
 
     return (
@@ -85,14 +100,14 @@ export class MapContainer extends Component {
           <Button
             color='facebook'
             basic={true}
-            onClick={()=> {this.nextSlide()} }
+            onClick={ ()=> {this.nextSlide()} }
           >
             Next Slide
           </Button>
           <Button
             color='facebook'
             basic={true}
-            onClick={()=> {this.pauseGame()} }
+            onClick={ ()=> {this.pauseGame()} }
           >
             Pause
           </Button>

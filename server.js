@@ -22,6 +22,7 @@ const currentPlayers = io.of('/current-players')
 const currentAdmin = io.of('/current-admin')
 
 let playersArray = []
+let playersNameArray = []
 let currentRound = -1
 let answersArray = ['A', 'D', 'C', 'A']
 
@@ -33,7 +34,12 @@ currentPlayers.on('connection', (socket) => {
       username: data.name,
       totalPoints: 0
     })
+
+    playersNameArray.push(data.name)
+
     socket.emit('say hello', { name: data.name })
+
+    currentAdmin.emit('new user joined', { playersNameArray: playersNameArray })
   })
 
   socket.on('send answer', (data) => {
@@ -69,6 +75,8 @@ currentAdmin.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     currentRound = -1
+    playersArray = []
+    playersNameArray = []
     console.log('Admin disconnected')
   })
 })
