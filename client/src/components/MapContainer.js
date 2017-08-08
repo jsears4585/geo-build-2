@@ -18,11 +18,9 @@ const style = {
 }
 
 export class MapContainer extends Component {
-
   state = {
     currentSlide: -1,
     coords: [],
-    map: null,
     playersNameArray: [],
     answersArray: [],
   }
@@ -35,6 +33,23 @@ export class MapContainer extends Component {
     })
   }
 
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
+  }
+
+  timer = () => {
+    if (this.state.currentSlide >= 5) {
+      clearInterval(this.intervalId)
+    } else {
+      this.nextSlide()
+    }
+  }
+
+  startGame = () => {
+    this.nextSlide()
+    this.intervalId = setInterval(this.timer.bind(this), 12000)
+  }
+
   nextSlide = () => {
     socket.emit('next slide', {})
     let newSlide = this.state.currentSlide + 1
@@ -43,11 +58,6 @@ export class MapContainer extends Component {
       coords: this.prettyCoords(Borders[newSlide].data),
       answersArray: Answers[newSlide],
     })
-    console.log('next slide')
-  }
-
-  pauseGame = () => {
-    console.log('Game paused.')
   }
 
   prettyCoords = arr => {
@@ -86,23 +96,34 @@ export class MapContainer extends Component {
 
   renderNames = () => {
     return (
-      <Table celled className="leaderboard">
-        <Table.Header>
-          <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-          <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
-        </Table.Header>
-        <Table.Body>
-          { this.state.playersNameArray.map(name => {
-            return (
-              <Table.Row>
-                <Table.Cell>{ name }</Table.Cell>
-                <Table.Cell></Table.Cell>
-              </Table.Row>
-            )
-          }) }
-        </Table.Body>
-        <Table.Footer></Table.Footer>
-      </Table>
+      <div>
+        <Table celled className="leaderboard">
+          <Table.Header>
+            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
+            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+          </Table.Header>
+          <Table.Body>
+            { this.state.playersNameArray.map(name => {
+              return (
+                <Table.Row>
+                  <Table.Cell>{ name }</Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>
+              )
+            }) }
+          </Table.Body>
+          <Table.Footer></Table.Footer>
+        </Table>
+        <div className="dashboardButtons">
+          <Button
+            color='facebook'
+            basic={true}
+            onClick={ ()=> { this.startGame() } }
+          >
+            Everybody Ready?
+          </Button>
+        </div>
+      </div>
     )
   }
 
@@ -110,7 +131,6 @@ export class MapContainer extends Component {
 
     let toRender = null
     if ( this.state.currentSlide >= 0 ) {
-      // more logic here for leaderboard switches
       toRender = this.renderMap()
     } else {
       toRender = this.renderNames()
@@ -119,22 +139,6 @@ export class MapContainer extends Component {
     return (
       <div>
         {toRender}
-        <div className="dashboardButtons">
-          <Button
-            color='facebook'
-            basic={true}
-            onClick={ ()=> { this.nextSlide() } }
-          >
-            Next Slide
-          </Button>
-          <Button
-            color='facebook'
-            basic={true}
-            onClick={ ()=> { this.pauseGame() } }
-          >
-            Pause
-          </Button>
-        </div>
       </div>
     )
   }

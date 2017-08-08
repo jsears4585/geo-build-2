@@ -39,9 +39,8 @@ currentPlayers.on('connection', (socket) => {
   socket.on('send answer', (data) => {
     console.log(`${data.username}'s answer was ${data.answer} with ${data.points} points!`)
 
-    let index = playersArray.findIndex(function(el) {
-      return el.username === data.username
-    })
+    let index = playersArray.findIndex(el => (el.username === data.username))
+
     if ( answersArray[currentRound] === data.answer ) {
       playersArray[index][`round_${currentRound}`] = data.points
       playersArray[index]['totalPoints'] += data.points

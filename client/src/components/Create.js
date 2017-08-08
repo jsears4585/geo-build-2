@@ -4,15 +4,16 @@ import { Button, Container, Divider } from 'semantic-ui-react'
 
 import '../index.css'
 
-let generateGameCode = (length, chars) => {
-  var code = ''
-  for (var i = length; i > 0; --i) {
+const generateGameCode = (length, chars) => {
+  let code = ''
+  for (let i = length; i > 0; --i) {
     code += chars[Math.floor(Math.random() * chars.length)]
   }
   return code
 }
 
 class Create extends React.Component {
+
   state = {
     code: null,
     startGame: false,
