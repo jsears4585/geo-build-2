@@ -66,6 +66,12 @@ currentAdmin.on('connection', (socket) => {
     currentRound++
   })
 
+  socket.on('ask for scores', (data) => {
+    socket.emit('received scores', {
+      scores: playersArray
+    })
+  })
+
   socket.on('disconnect', () => {
     currentRound = -1
     playersArray = []

@@ -22,7 +22,9 @@ export class MapContainer extends Component {
     currentSlide: -1,
     coords: [],
     playersNameArray: [],
+    playersScoreArray: [],
     answersArray: [],
+    showMap: true,
   }
 
   componentDidMount() {
@@ -31,23 +33,21 @@ export class MapContainer extends Component {
     socket.on('new user joined', (data) => {
       this.setState({ playersNameArray: data.playersNameArray })
     })
+    socket.on('received scores', (data) => {
+      console.log(data)
+      this.setState({ playersScoreArray: data.scores })
+    })
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId)
-  }
-
-  timer = () => {
-    if (this.state.currentSlide >= 5) {
-      clearInterval(this.intervalId)
-    } else {
-      this.nextSlide()
-    }
+  askForScores = () => {
+    socket.emit('ask for scores')
+    this.setState({ showMap: false })
   }
 
   startGame = () => {
+    this.setState({ showMap: true })
     this.nextSlide()
-    this.intervalId = setInterval(this.timer.bind(this), 12000)
+    setTimeout(this.askForScores, 11337)
   }
 
   nextSlide = () => {
@@ -127,11 +127,50 @@ export class MapContainer extends Component {
     )
   }
 
+  renderScoreboard = () => {
+    const sortedNames = this.state.playersScoreArray.sort(function(a, b) {
+      return b.totalPoints - a.totalPoints
+    })
+
+    return (
+      <div>
+        <Table celled className="leaderboard">
+          <Table.Header>
+            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
+            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+          </Table.Header>
+          <Table.Body>
+            { sortedNames.map(player => {
+              return (
+                <Table.Row>
+                  <Table.Cell>{ player.username }</Table.Cell>
+                  <Table.Cell>{ player.totalPoints }</Table.Cell>
+                </Table.Row>
+              )
+            }) }
+          </Table.Body>
+          <Table.Footer></Table.Footer>
+        </Table>
+        <div className="dashboardButtons">
+          <Button
+            color='facebook'
+            basic={true}
+            onClick={ ()=> { this.startGame() } }
+          >
+            Everybody Ready?
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
   render() {
 
     let toRender = null
-    if ( this.state.currentSlide >= 0 ) {
+    if ( this.state.currentSlide >= 0 && this.state.showMap ) {
       toRender = this.renderMap()
+    } else if ( this.state.currentSlide >= 0 && !this.state.showMap ) {
+      toRender = this.renderScoreboard()
     } else {
       toRender = this.renderNames()
     }
