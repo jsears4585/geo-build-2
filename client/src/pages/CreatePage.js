@@ -17,14 +17,22 @@ class CreatePage extends React.Component {
   state = {
     code: null,
     startGame: false,
+    games: []
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/games')
+      .then(res => res.json())
+      .then(response => this.setState({
+        games: response
+      }))
   }
 
   gameRedirect = () => { this.setState({ startGame: true, }) }
 
   render() {
-    const { startGame } = this.state
 
-    if (startGame) {
+    if (this.state.startGame) {
       return (
         <Redirect push to={`/game/${this.state.code}`}/>
       )
@@ -61,9 +69,25 @@ class CreatePage extends React.Component {
     }
 
     return (
-      <Container text textAlign='center' className='wrapper'>
+      <Container text textAlign='center'>
         <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Almost!'}</h1>
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
+        <div>
+          { this.state.games.map((game)=> {
+            return (
+              <div className='gameCard'>
+                <h3>{ game.title }</h3>
+                <p>{ game.description }</p>
+                <h5>Countries Featured</h5>
+                <ul>
+                  { game.countryArray.map((countryName)=> {
+                    return <li>{ countryName }</li>
+                  }) }
+                </ul>
+              </div>
+            )
+          }) }
+        </div>
         <Divider />
         <p>{this.state.code ? 'Share this code with the other players and have them log in to the game room.' : 'This will generate a special code for you to share with the other players.' }</p>
       </Container>

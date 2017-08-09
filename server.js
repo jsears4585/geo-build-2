@@ -51,7 +51,7 @@ app.post('/countries', (req, res) => {
 })
 
 app.get('/games', (req, res) => {
-  Game.find({}, {}, { sort: { 'createdAt' : -1 } }, (err, games) => {
+  Game.find({}, {}, { sort: { 'createdAt' : -1 }, limit: 8 }, (err, games) => {
     if (err) {
       console.log('Error occurred:', err)
       res.send('Error occurred.')

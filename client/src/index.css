@@ -12,6 +12,19 @@
 
 /* Custom */
 
+.gameCardWrapper {
+  width: 72%;
+}
+
+.gameCard {
+  background: #f6f6f6;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 11px;
+  display: inline-block;
+  width: 45%;
+}
+
 .leaderboard {
   margin: 60px!important;
   display: inline-block;

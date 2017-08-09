@@ -11,3 +11,4 @@
 - Save a game and render saved games to the create game screen
 - Depending on which game is selected, make call to DB and setup the game
 - Randomize the answer locations to encourage engagement
+- Move timeout bar from player's controller to main game display
