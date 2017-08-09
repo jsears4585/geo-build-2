@@ -19,12 +19,12 @@ class App extends Component {
           <Route exact path='/' component={HomePage}/>
           <Route path='/join' component={JoinPage}/>
           <Route path='/create' component={CreatePage} />
-          <Route path='/game' render={(props)=>(
+          <Route path='/player' render={(props)=>(
             <div>
               <PlayerContainer />
             </div>
           )}/>
-          <Route path='/dashboard' render={(props)=>(
+          <Route path='/game' render={(props)=>(
             <MapContainer />
           )}/>
         </Switch>

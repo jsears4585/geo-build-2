@@ -26,7 +26,7 @@ class CreatePage extends React.Component {
 
     if (startGame) {
       return (
-        <Redirect push to={`/dashboard/${this.state.code}`}/>
+        <Redirect push to={`/game/${this.state.code}`}/>
       )
     }
 
