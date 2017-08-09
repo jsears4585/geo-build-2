@@ -10,8 +10,6 @@ import PlayerContainer from './containers/PlayerContainer'
 
 import './index.css'
 
-// page was changed
-
 class App extends Component {
 
   render() {
