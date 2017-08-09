@@ -4,4 +4,4 @@
 
 - ~~Questions component~~
 - ~~Create leaderboard~~
-- Timeouts, switch between leaderboard and game panels
+- ~~Timeouts, switch between leaderboard and game panels~~
