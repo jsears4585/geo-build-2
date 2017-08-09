@@ -15,7 +15,8 @@ const uri = `mongodb://${dbAuth.user}:${dbAuth.pass}@geography-game-shard-00-00-
 mongoose.connect(uri, { useMongoClient: true })
 const db = mongoose.connection
 
-var Game = require( "./models/game" )
+const Game = require( "./models/game" )
+const Country = require( "./models/country" )
 
 db.on('error', console.error.bind(console, 'Connection error:'))
 db.once('open', () => {
@@ -57,8 +58,23 @@ const server = app.listen(app.get("port"), () => {
 
 // ROUTES
 app.post('/game', (req, res) => {
+
   console.log('Post route to /game received:', req.body)
   res.send({"thanks" : "that worked"})
+
+})
+
+app.get('/finland', (req, res) => {
+
+  Country.findOne({ 'name' : 'Finland' }, 'borderData', function(err, country) {
+    if (err) {
+      console.log('Error occurred:', err)
+    } else {
+      console.log('It worked, I think!')
+    }
+    res.send(country)
+  })
+
 })
 
 

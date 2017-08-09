@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const gameSchema = new Schema({
-  title: 'string',
+  title: String,
   payload: Schema.Types.Mixed
 })
 
