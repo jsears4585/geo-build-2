@@ -56,25 +56,23 @@ const server = app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`)
 })
 
+
 // ROUTES
 app.post('/game', (req, res) => {
-
   console.log('Post route to /game received:', req.body)
   res.send({"thanks" : "that worked"})
-
 })
 
-app.get('/finland', (req, res) => {
-
-  Country.findOne({ 'name' : 'Finland' }, 'borderData', function(err, country) {
+app.post('/finland', (req, res) => {
+  Country.find({ $or : req.body.query }, '-_id name borderData lat lng zoom', (err, countries) => {
     if (err) {
       console.log('Error occurred:', err)
+      res.send('Error occurred.')
     } else {
       console.log('It worked, I think!')
+      res.send(countries)
     }
-    res.send(country)
   })
-
 })
 
 
