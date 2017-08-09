@@ -2,6 +2,19 @@ const express = require("express")
 const app = express()
 const http = require('http')
 const socketIO = require('socket.io')
+const MongoClient = require('mongodb').MongoClient
+
+const dbAuth = require('./config/dbAuth')
+
+const uri = `mongodb://jason:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/test?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
+
+MongoClient.connect(uri, function(err, db) {
+  if (err) {
+    console.log('Connection error:', err)
+  } else {
+    console.log('Connected.')
+  }
+})
 
 app.set("port", process.env.PORT || 3001)
 
