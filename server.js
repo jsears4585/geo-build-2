@@ -6,7 +6,7 @@ const MongoClient = require('mongodb').MongoClient
 
 const dbAuth = require('./config/dbAuth')
 
-const uri = `mongodb://jason:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/test?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
+const uri = `mongodb://${dbAuth.user}:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/test?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
 
 MongoClient.connect(uri, function(err, db) {
   if (err) {
