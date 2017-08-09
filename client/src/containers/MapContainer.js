@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
-import BordersData from '../data/BordersData'
 import AnswersData from '../data/AnswersData'
 
 import Answers from '../components/Answers'
@@ -22,6 +21,7 @@ export class MapContainer extends Component {
   state = {
     currentSlide: -1,
     coords: [],
+    importedCountries: [],
     playersNameArray: [],
     playersScoreArray: [],
     answersArray: [],
@@ -29,6 +29,29 @@ export class MapContainer extends Component {
   }
 
   componentDidMount() {
+
+    let countriesToRequest = {
+      "query": [
+        {"name" : "Finland" },
+        {"name" : "Colombia" },
+        {"name" : "Switzerland" },
+        {"name" : "Bulgaria" },
+        {"name" : "Republic of the Congo" },
+        {"name" : "Czech Republic" }
+      ]
+    }
+
+    fetch('http://localhost:3000/retrieve_countries', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(countriesToRequest)
+    })
+      .then(res => res.json())
+      .then(response => this.setState({ importedCountries: response }))
+
     socket = io('/current-admin')
     socket.emit('new admin join')
     socket.on('new user joined', (data) => {
@@ -38,6 +61,7 @@ export class MapContainer extends Component {
       console.log(data)
       this.setState({ playersScoreArray: data.scores })
     })
+
   }
 
   askForScores = () => {
@@ -56,7 +80,7 @@ export class MapContainer extends Component {
     let newSlide = this.state.currentSlide + 1
     this.setState({
       currentSlide: newSlide,
-      coords: this.prettyCoords(BordersData[newSlide].data),
+      coords: this.prettyCoords(this.state.importedCountries[newSlide].borderData),
       answersArray: AnswersData[newSlide],
     })
   }
@@ -75,10 +99,10 @@ export class MapContainer extends Component {
           google={ this.props.google }
           style={ style }
           initialCenter={{
-            lng: BordersData[this.state.currentSlide].lng,
-            lat: BordersData[this.state.currentSlide].lat
+            lng: this.state.importedCountries[this.state.currentSlide].lng,
+            lat: this.state.importedCountries[this.state.currentSlide].lat
           }}
-          zoom={ BordersData[this.state.currentSlide].zoom }
+          zoom={ this.state.importedCountries[this.state.currentSlide].zoom }
           mapType='satellite'
           key={ this.state.currentSlide }
         >

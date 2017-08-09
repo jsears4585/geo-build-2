@@ -23,6 +23,7 @@
   margin: 11px;
   display: inline-block;
   width: 45%;
+  cursor: pointer;
 }
 
 .leaderboard {

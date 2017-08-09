@@ -17,7 +17,8 @@ class CreatePage extends React.Component {
   state = {
     code: null,
     startGame: false,
-    games: []
+    games: [],
+    clickedCardIndex: null
   }
 
   componentDidMount() {
@@ -30,8 +31,12 @@ class CreatePage extends React.Component {
 
   gameRedirect = () => { this.setState({ startGame: true, }) }
 
-  render() {
+  handleCardClick = e => {
+    let index = e.currentTarget.attributes["data-id"].value
+    this.setState({ clickedCardIndex: index })
+  }
 
+  render() {
     if (this.state.startGame) {
       return (
         <Redirect push to={`/game/${this.state.code}`}/>
@@ -76,7 +81,7 @@ class CreatePage extends React.Component {
         <div>
           { this.state.games.map((game, index)=> {
             return (
-              <div key={index} className='gameCard'>
+              <div key={index} data-id={index} className='gameCard' onClick={this.handleCardClick}>
                 <h3>{ game.title }</h3>
                 <p>{ game.description }</p>
                 <h5>Countries Featured</h5>
@@ -95,6 +100,5 @@ class CreatePage extends React.Component {
     )
   }
 }
-
 
 export default CreatePage
