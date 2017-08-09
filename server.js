@@ -7,14 +7,37 @@ const http = require('http')
 // DATABASE
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
+
 const dbAuth = require('./config/dbAuth')
-const uri = `mongodb://${dbAuth.user}:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/test?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
+const uri = `mongodb://${dbAuth.user}:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/prod?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
 
 mongoose.connect(uri, { useMongoClient: true })
+const db = mongoose.connection
 
-let db = mongoose.connection
+var Game = require( "./models/game" )
+
 db.on('error', console.error.bind(console, 'Connection error:'))
-db.once('open', () => console.log('Connected!'))
+db.once('open', () => {
+  console.log('DB Successfully Connected')
+
+  let testObj = new Game({
+    title: 'Test 1',
+    payload: {
+      thisWorks: 'really well',
+      doesit: 'oh yes'
+    }
+  })
+
+  console.log('testObj:', testObj)
+
+  testObj.save((err, testObj, numAffected) => {
+    if (err) {
+      console.log('Error occurred duing save.')
+    } else {
+      console.log('Saved:', testObj)
+    }
+  })
+})
 
 
 // SETTINGS
