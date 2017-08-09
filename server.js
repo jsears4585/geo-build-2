@@ -45,8 +45,31 @@ app.post('/countries', (req, res) => {
       console.log('Error occurred:', err)
       res.send('Error occurred.')
     } else {
-      console.log('It worked, I think!')
       res.send(countries)
+    }
+  })
+})
+
+app.get('/games', (req, res) => {
+  Game.find({}, {}, { sort: { 'createdAt' : -1 } }, (err, games) => {
+    if (err) {
+      console.log('Error occurred:', err)
+      res.send('Error occurred.')
+    } else {
+      res.send(games)
+    }
+  })
+})
+
+app.post('/game', (req, res) => {
+  let game = new Game(req.body.game)
+
+  game.save((err, game, numAffected) => {
+    if (err) {
+      console.log('Error occurred:', err)
+      res.send('Error occurred.')
+    } else {
+      res.send(game)
     }
   })
 })
