@@ -32,7 +32,7 @@ class JoinPage extends React.Component {
 
     if (startGame) {
       return (
-        <Redirect push to={`/game/${this.state.codeInput}`}/>
+        <Redirect push to={`/player/${this.state.codeInput}`}/>
       )
     }
 
