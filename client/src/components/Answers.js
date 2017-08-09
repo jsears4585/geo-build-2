@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import '../index.css'
 
-class AnswersContainer extends Component {
+class Answers extends Component {
 
   render() {
     return (
@@ -16,4 +16,4 @@ class AnswersContainer extends Component {
   }
 }
 
-export default AnswersContainer
+export default Answers

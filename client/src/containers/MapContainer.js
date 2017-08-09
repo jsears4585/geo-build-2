@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
-import Borders from '../data/Borders'
-import Answers from '../data/Answers'
+import BordersData from '../data/BordersData'
+import AnswersData from '../data/AnswersData'
 
-import AnswersContainer from './AnswersContainer'
+import Answers from '../components/Answers'
 
 import '../index.css'
 
@@ -18,6 +18,7 @@ const style = {
 }
 
 export class MapContainer extends Component {
+
   state = {
     currentSlide: -1,
     coords: [],
@@ -55,8 +56,8 @@ export class MapContainer extends Component {
     let newSlide = this.state.currentSlide + 1
     this.setState({
       currentSlide: newSlide,
-      coords: this.prettyCoords(Borders[newSlide].data),
-      answersArray: Answers[newSlide],
+      coords: this.prettyCoords(BordersData[newSlide].data),
+      answersArray: AnswersData[newSlide],
     })
   }
 
@@ -69,15 +70,15 @@ export class MapContainer extends Component {
   renderMap = () => {
     return (
       <div>
-        <AnswersContainer answersArray={this.state.answersArray} />
+        <Answers answersArray={this.state.answersArray} />
         <Map
           google={ this.props.google }
           style={ style }
           initialCenter={{
-            lng: Borders[this.state.currentSlide].lng,
-            lat: Borders[this.state.currentSlide].lat
+            lng: BordersData[this.state.currentSlide].lng,
+            lat: BordersData[this.state.currentSlide].lat
           }}
-          zoom={ Borders[this.state.currentSlide].zoom }
+          zoom={ BordersData[this.state.currentSlide].zoom }
           mapType='satellite'
           key={ this.state.currentSlide }
         >

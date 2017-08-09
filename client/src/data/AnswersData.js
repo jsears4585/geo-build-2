@@ -1,4 +1,4 @@
-const Answers = [
+const AnswersData = [
   ['Finland', 'Sweden', 'Denmark', 'Norway'],
   ['Japan', 'DR of Korea', 'Croatia', 'Colombia'],
   ['The Netherlands', 'Algeria', 'Switzerland', 'USA'],
@@ -7,4 +7,4 @@ const Answers = [
   ['South Africa', 'Ireland', 'Bosnia and Herzegovina', 'Czech Republic']
 ]
 
-export default Answers
+export default AnswersData

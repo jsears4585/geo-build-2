@@ -4,7 +4,8 @@ import { Button, Input, Container, Divider } from 'semantic-ui-react'
 
 import '../index.css'
 
-class Join extends React.Component {
+class JoinPage extends React.Component {
+
   state = {
     codeInput: '',
     startGame: false,
@@ -64,4 +65,4 @@ class Join extends React.Component {
   }
 }
 
-export default Join
+export default JoinPage
