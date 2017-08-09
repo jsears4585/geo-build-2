@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "geo-game-client",
   "version": "0.0.1",
   "dependencies": {
     "google-map-react": "^0.24.0",

@@ -1,9 +1,10 @@
 {
-  "name": "combo-test-1",
+  "name": "geo-game-backend",
   "version": "0.0.1",
   "dependencies": {
     "express": "4.13.3",
     "mongodb": "^2.2.31",
+    "mongoose": "^4.11.6",
     "nodemon": "^1.11.0",
     "socket.io": "^1.7.4"
   },

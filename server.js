@@ -1,21 +1,23 @@
+// INIT
 const express = require("express")
 const app = express()
 const http = require('http')
-const socketIO = require('socket.io')
+
+
+// DATABASE
 const MongoClient = require('mongodb').MongoClient
-
+const mongoose = require('mongoose')
 const dbAuth = require('./config/dbAuth')
-
 const uri = `mongodb://${dbAuth.user}:${dbAuth.pass}@geography-game-shard-00-00-qu8kc.mongodb.net:27017,geography-game-shard-00-01-qu8kc.mongodb.net:27017,geography-game-shard-00-02-qu8kc.mongodb.net:27017/test?ssl=true&replicaSet=geography-game-shard-0&authSource=admin`
 
-MongoClient.connect(uri, function(err, db) {
-  if (err) {
-    console.log('Connection error:', err)
-  } else {
-    console.log('Connected.')
-  }
-})
+mongoose.connect(uri, { useMongoClient: true })
 
+let db = mongoose.connection
+db.on('error', console.error.bind(console, 'Connection error:'))
+db.once('open', () => console.log('Connected!'))
+
+
+// SETTINGS
 app.set("port", process.env.PORT || 3001)
 
 if (process.env.NODE_ENV === "production") {
@@ -25,6 +27,9 @@ if (process.env.NODE_ENV === "production") {
 const server = app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`)
 })
+
+// SOCKETS
+const socketIO = require('socket.io')
 
 const io = require('socket.io')(server)
 const currentPlayers = io.of('/current-players')
@@ -50,8 +55,6 @@ currentPlayers.on('connection', (socket) => {
   })
 
   socket.on('send answer', (data) => {
-    console.log(`${data.username}'s answer was ${data.answer} with ${data.points} points!`)
-
     let index = playersArray.findIndex(el => (el.username === data.username))
 
     if ( answersArray[currentRound] === data.answer ) {
