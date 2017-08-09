@@ -4,7 +4,7 @@ import { Button, Container, Divider } from 'semantic-ui-react'
 
 import '../index.css'
 
-class Home extends React.Component {
+class HomePage extends React.Component {
 
   state = {
     redirectCreate: false,
@@ -54,4 +54,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default HomePage

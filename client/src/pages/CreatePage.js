@@ -12,7 +12,7 @@ const generateGameCode = (length, chars) => {
   return code
 }
 
-class Create extends React.Component {
+class CreatePage extends React.Component {
 
   state = {
     code: null,
@@ -72,4 +72,4 @@ class Create extends React.Component {
 }
 
 
-export default Create
+export default CreatePage

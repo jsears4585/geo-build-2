@@ -6,20 +6,17 @@ import '../index.css'
 const io = require('socket.io-client')
 let socket
 
-class Player extends React.Component {
-  constructor(props) {
-    super(props)
+class PlayerContainer extends React.Component {
 
-    this.state = {
-      value: '',
-      percent: 1,
-      score: 1000,
-      finished: false,
-      renderSignin: true,
-      answerSubmitted: false,
-      controllerShouldRender: false,
-      username: ''
-    }
+  state = {
+    value: '',
+    percent: 1,
+    score: 1000,
+    finished: false,
+    renderSignin: true,
+    answerSubmitted: false,
+    controllerShouldRender: false,
+    username: ''
   }
 
   functioning = seconds => {
@@ -166,4 +163,4 @@ class Player extends React.Component {
   }
 }
 
-export default Player
+export default PlayerContainer
