@@ -21,25 +21,6 @@ const Country = require( "./models/country" )
 db.on('error', console.error.bind(console, 'Connection error:'))
 db.once('open', () => {
   console.log('DB Successfully Connected')
-
-  // let testObj = new Game({
-  //   title: 'Test 1',
-  //   payload: {
-  //     thisWorks: 'really well',
-  //     doesit: 'oh yes'
-  //   }
-  // })
-  //
-  // console.log('testObj:', testObj)
-  //
-  // testObj.save((err, testObj, numAffected) => {
-  //   if (err) {
-  //     console.log('Error occurred duing save.')
-  //   } else {
-  //     console.log('Saved:', testObj)
-  //   }
-  // })
-
 })
 
 
@@ -58,12 +39,7 @@ const server = app.listen(app.get("port"), () => {
 
 
 // ROUTES
-app.post('/game', (req, res) => {
-  console.log('Post route to /game received:', req.body)
-  res.send({"thanks" : "that worked"})
-})
-
-app.post('/finland', (req, res) => {
+app.post('/countries', (req, res) => {
   Country.find({ $or : req.body.query }, '-_id name borderData lat lng zoom', (err, countries) => {
     if (err) {
       console.log('Error occurred:', err)
