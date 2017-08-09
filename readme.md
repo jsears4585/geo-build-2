@@ -8,7 +8,8 @@
 - ~~Refactor this morning~~
 - ~~Connect to DB (Atlas? mlab?)~~
 - ~~Draw out models, start working with Mongoose~~
-- Save a game and render saved games to the create game screen
-- Depending on which game is selected, make call to DB and setup the game
-- Randomize the answer locations to encourage engagement
+- ~~Render saved games to the create game screen~~
+- Develop 'Create a game' functionality (route already made)
+- Depending on which game is selected (via click), make call to DB and fetch setup info
+- Randomize the answer locations to encourage player engagement
 - Move timeout bar from player's controller to main game display

@@ -39,6 +39,7 @@ class CreatePage extends React.Component {
     }
 
     let buttonOrCode
+
     if (this.state.code) {
       buttonOrCode =
       <div>
@@ -73,15 +74,15 @@ class CreatePage extends React.Component {
         <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Almost!'}</h1>
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
         <div>
-          { this.state.games.map((game)=> {
+          { this.state.games.map((game, index)=> {
             return (
-              <div className='gameCard'>
+              <div key={index} className='gameCard'>
                 <h3>{ game.title }</h3>
                 <p>{ game.description }</p>
                 <h5>Countries Featured</h5>
                 <ul>
-                  { game.countryArray.map((countryName)=> {
-                    return <li>{ countryName }</li>
+                  { game.countryArray.map((countryName, index)=> {
+                    return <li key={index}>{ countryName }</li>
                   }) }
                 </ul>
               </div>
