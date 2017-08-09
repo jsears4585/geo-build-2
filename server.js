@@ -2,6 +2,7 @@
 const express = require("express")
 const app = express()
 const http = require('http')
+const bodyParser = require('body-parser')
 
 
 // DATABASE
@@ -20,28 +21,31 @@ db.on('error', console.error.bind(console, 'Connection error:'))
 db.once('open', () => {
   console.log('DB Successfully Connected')
 
-  let testObj = new Game({
-    title: 'Test 1',
-    payload: {
-      thisWorks: 'really well',
-      doesit: 'oh yes'
-    }
-  })
+  // let testObj = new Game({
+  //   title: 'Test 1',
+  //   payload: {
+  //     thisWorks: 'really well',
+  //     doesit: 'oh yes'
+  //   }
+  // })
+  //
+  // console.log('testObj:', testObj)
+  //
+  // testObj.save((err, testObj, numAffected) => {
+  //   if (err) {
+  //     console.log('Error occurred duing save.')
+  //   } else {
+  //     console.log('Saved:', testObj)
+  //   }
+  // })
 
-  console.log('testObj:', testObj)
-
-  testObj.save((err, testObj, numAffected) => {
-    if (err) {
-      console.log('Error occurred duing save.')
-    } else {
-      console.log('Saved:', testObj)
-    }
-  })
 })
 
 
 // SETTINGS
 app.set("port", process.env.PORT || 3001)
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"))
@@ -50,6 +54,13 @@ if (process.env.NODE_ENV === "production") {
 const server = app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`)
 })
+
+// ROUTES
+app.post('/game', (req, res) => {
+  console.log('Post route to /game received:', req.body)
+  res.send({"thanks" : "that worked"})
+})
+
 
 // SOCKETS
 const socketIO = require('socket.io')
