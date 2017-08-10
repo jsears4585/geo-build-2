@@ -6,14 +6,14 @@ import Names from '../components/Names'
 import Scoreboard from '../components/Scoreboard'
 import FinalScoreboard from '../components/FinalScoreboard'
 
+import * as utils from '../lib/utils.js';
+import * as mapHelpers from '../lib/mapContainerHelpers.js';
 import '../index.css'
 
 const io = require('socket.io-client')
 let socket
 
-const style = { width: '100%', height: '100%' }
-
-export class MapContainer extends Component {
+export class GameContainer extends Component {
 
   state = {
     coords: [],
@@ -45,6 +45,22 @@ export class MapContainer extends Component {
       .then(response => this.formatAnswers(response))
   }
 
+  retrieveCountries = countriesToRequest => {
+    fetch('http://localhost:3000/retrieve_countries', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(countriesToRequest)
+    })
+      .then(res => res.json())
+      .then(response => {
+        let ordered = mapHelpers.orderCountries(this.state.mapDisplayOrder, response)
+        this.setState({ importedCountries: ordered })
+      })
+  }
+
   initialEmit = () => {
     socket = io('/current-admin')
     socket.emit('new admin join')
@@ -57,37 +73,16 @@ export class MapContainer extends Component {
     })
   }
 
-  shuffleArray = a => {
-    for (let i = a.length; i; i--) {
-      let j = Math.floor(Math.random() * i);
-      [a[i - 1], a[j]] = [a[j], a[i - 1]];
-    }
-    return a
-  }
-
   createMultipleChoice = (shuffled, firsts) => {
-    let multiAnswers = shuffled.map((shuffledArr, index) => {
-      let shuffledIndex = shuffledArr.indexOf(firsts[index])
-      switch (shuffledIndex) {
-        case 0:
-          return 'A'
-        case 1:
-          return 'B'
-        case 2:
-          return 'C'
-        case 3:
-          return 'D'
-        default:
-          return 'Error occurred.'
-      }
-    })
+    let multiAnswers = mapHelpers.generateMultiChoice(shuffled, firsts)
     socket.emit('send multi answers', { multiAnswers: multiAnswers })
     this.setState({ multiAnswersArray: multiAnswers })
   }
 
   formatAnswers = () => {
     let firsts = this.state.importedAnswers.answers.map(answerArr => answerArr[0])
-    let shuffled = this.state.importedAnswers.answers.map(answerArr => this.shuffleArray(answerArr))
+    let shuffled = this.state.importedAnswers.answers.map(answerArr => utils.shuffleArray(answerArr))
+    console.log(shuffled)
     this.createMultipleChoice(shuffled, firsts)
     this.setState({
       mapDisplayOrder: firsts,
@@ -101,31 +96,6 @@ export class MapContainer extends Component {
       "query" : formatted
     }
     this.retrieveCountries(countriesToRequest)
-  }
-
-  orderCountries = asyncCountries => {
-    let newOrder = this.state.mapDisplayOrder.map(ordered => {
-      return asyncCountries.filter(country => country.name === ordered)
-    })
-    return newOrder.reduce((a, b) => {
-      return a.concat(b)
-    }, [])
-  }
-
-  retrieveCountries = countriesToRequest => {
-    fetch('http://localhost:3000/retrieve_countries', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(countriesToRequest)
-    })
-      .then(res => res.json())
-      .then(response => {
-        let ordered = this.orderCountries(response)
-        this.setState({ importedCountries: ordered })
-      })
   }
 
   askForScores = () => {
@@ -144,14 +114,8 @@ export class MapContainer extends Component {
     let newSlide = this.state.currentSlide + 1
     this.setState({
       currentSlide: newSlide,
-      coords: this.prettyCoords(this.state.importedCountries[newSlide].borderData),
+      coords: mapHelpers.prettyCoords(this.state.importedCountries[newSlide].borderData),
       answersArray: this.state.shuffledAnswersArray[newSlide],
-    })
-  }
-
-  prettyCoords = arr => {
-    return arr.map(function(array) {
-      return {lng: array[0], lat: array[1]}
     })
   }
 
@@ -162,7 +126,7 @@ export class MapContainer extends Component {
           <Answers answersArray={this.state.answersArray} />
           <Map
             google={ this.props.google }
-            style={ style }
+            style={ { width: '100%', height: '100%' } }
             initialCenter={{
               lng: this.state.importedCountries[this.state.currentSlide].lng,
               lat: this.state.importedCountries[this.state.currentSlide].lat
@@ -209,4 +173,4 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyDhs8heyr3zDwgAlQeOu6LiSSQ9m8V4xpA')
-})(MapContainer)
+})(GameContainer)

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
 
+import { sortNames } from '../lib/utils.js'
 import '../index.css'
 
 const Scoreboard = ({playersScoreArray, startGame}) => {
-    const sortedNames = playersScoreArray.sort(function(a, b) {
-      return b.totalPoints - a.totalPoints
-    })
+    const sortedNames = sortNames(playersScoreArray)
 
     return (
       <div>

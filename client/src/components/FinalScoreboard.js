@@ -1,15 +1,15 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 
+import { sortNames } from '../lib/utils.js'
 import '../index.css'
 
 const FinalScoreboard = ({playersScoreArray}) => {
-    const sortedNames = playersScoreArray.sort(function(a, b) {
-      return b.totalPoints - a.totalPoints
-    })
+    const sortedNames = sortNames(playersScoreArray)
 
     return (
       <div>
+        <h1>Final Scores!</h1>
         <Table celled className="leaderboard">
           <Table.Header>
             <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>

@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage'
 import JoinPage from './pages/JoinPage'
 import CreatePage from './pages/CreatePage'
 
-import MapContainer from './containers/MapContainer'
+import GameContainer from './containers/GameContainer'
 import PlayerContainer from './containers/PlayerContainer'
 
 import './index.css'
@@ -25,7 +25,7 @@ class App extends Component {
             </div>
           )}/>
           <Route path='/game' render={(props)=>(
-            <MapContainer />
+            <GameContainer />
           )}/>
         </Switch>
       </div>
