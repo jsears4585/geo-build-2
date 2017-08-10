@@ -12,8 +12,8 @@
 - ~~Load in countries (currently async, need to make sure the right answers are fired)~~
 - ~~Randomize the answer locations to encourage player engagement~~
 - ~~Stop the game when finished, show the final score and disable continue button~~
+- ~~Need to create more presentational components, starting with MapContainer~~
 
-- Need to create more presentational components, starting with MapContainer
 - Move timeout bar from player's controller to main game display
 - Depending on which game is selected (via click), make call to DB and fetch setup info
 - Develop 'Create a game' functionality (route already made)
