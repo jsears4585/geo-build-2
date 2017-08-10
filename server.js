@@ -170,7 +170,6 @@ currentAdmin.on('connection', (socket) => {
 
   socket.on('send multi answers', (data) => {
     answersArray = data.multiAnswers
-    console.log('answers sent:', answersArray)
   })
 
   socket.on('next slide', (data) => {

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
 import Answers from '../components/Answers'
+import Names from '../components/Names'
+import Scoreboard from '../components/Scoreboard'
+import FinalScoreboard from '../components/FinalScoreboard'
 
 import '../index.css'
 
@@ -17,8 +19,9 @@ const style = {
 export class MapContainer extends Component {
 
   state = {
-    currentSlide: -1,
     coords: [],
+    currentSlide: -1,
+    lastSlideIndex: null,
     importedCountries: [],
     importedAnswers: null,
     playersNameArray: [],
@@ -28,6 +31,30 @@ export class MapContainer extends Component {
     multiAnswersArray: [],
     mapDisplayOrder: [],
     showMap: true,
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000/retrieve_game_by_id', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({"game": { "title": "Sixth game ever." } })
+    })
+      .then(res => res.json())
+      .then(response => this.setState({ importedAnswers: response }))
+      .then(response => this.formatAnswers(response))
+
+    socket = io('/current-admin')
+    socket.emit('new admin join')
+    socket.on('new user joined', (data) => {
+      this.setState({ playersNameArray: data.playersNameArray })
+    })
+    socket.on('received scores', (data) => {
+      console.log(data)
+      this.setState({ playersScoreArray: data.scores })
+    })
   }
 
   shuffleArray = a => {
@@ -63,6 +90,7 @@ export class MapContainer extends Component {
     socket.emit('send multi answers', { multiAnswers: multiAnswers })
     this.setState({
       mapDisplayOrder: firsts,
+      lastSlideIndex: firsts.length - 1,
       shuffledAnswersArray: shuffled,
       multiAnswersArray: multiAnswers,
     })
@@ -77,7 +105,6 @@ export class MapContainer extends Component {
 
   orderCountries = asyncCountries => {
     let order = this.state.mapDisplayOrder
-    console.log('Ordered:', order)
     let newOrder = order.map(ordered => {
       return asyncCountries.filter(country => country.name === ordered)
     })
@@ -101,31 +128,6 @@ export class MapContainer extends Component {
         let ordered = this.orderCountries(response)
         this.setState({ importedCountries: ordered })
       })
-  }
-
-  componentDidMount() {
-
-    fetch('http://localhost:3000/retrieve_game_by_id', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({"game": { "title": "Sixth game ever." } })
-    })
-      .then(res => res.json())
-      .then(response => this.setState({ importedAnswers: response }))
-      .then(response => this.formatAnswers(response))
-
-    socket = io('/current-admin')
-    socket.emit('new admin join')
-    socket.on('new user joined', (data) => {
-      this.setState({ playersNameArray: data.playersNameArray })
-    })
-    socket.on('received scores', (data) => {
-      console.log(data)
-      this.setState({ playersScoreArray: data.scores })
-    })
   }
 
   askForScores = () => {
@@ -155,119 +157,55 @@ export class MapContainer extends Component {
     })
   }
 
-  renderMap = () => {
-    return (
-      <div>
-        <Answers answersArray={this.state.answersArray} />
-        <Map
-          google={ this.props.google }
-          style={ style }
-          initialCenter={{
-            lng: this.state.importedCountries[this.state.currentSlide].lng,
-            lat: this.state.importedCountries[this.state.currentSlide].lat
-          }}
-          zoom={ this.state.importedCountries[this.state.currentSlide].zoom }
-          mapType='satellite'
-          key={ this.state.currentSlide }
-        >
-        <Polygon
-          paths={ this.state.coords }
-          strokeColor="#ffff00"
-          strokeOpacity={0.8}
-          strokeWeight={2}
-          fillColor="#ffff00"
-          fillOpacity={0.15}
-        />
-        </Map>
-      </div>
-    )
-  }
-
-  renderNames = () => {
-    return (
-      <div>
-        <Table celled className="leaderboard">
-          <Table.Header>
-            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
-          </Table.Header>
-          <Table.Body>
-            { this.state.playersNameArray.map(name => {
-              return (
-                <Table.Row>
-                  <Table.Cell>{ name }</Table.Cell>
-                  <Table.Cell></Table.Cell>
-                </Table.Row>
-              )
-            }) }
-          </Table.Body>
-          <Table.Footer></Table.Footer>
-        </Table>
-        <div className="dashboardButtons">
-          <Button
-            color='facebook'
-            basic={true}
-            onClick={ ()=> { this.startGame() } }
-          >
-            Everybody Ready?
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  renderScoreboard = () => {
-    const sortedNames = this.state.playersScoreArray.sort(function(a, b) {
-      return b.totalPoints - a.totalPoints
-    })
-
-    return (
-      <div>
-        <Table celled className="leaderboard">
-          <Table.Header>
-            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
-          </Table.Header>
-          <Table.Body>
-            { sortedNames.map(player => {
-              return (
-                <Table.Row>
-                  <Table.Cell>{ player.username }</Table.Cell>
-                  <Table.Cell>{ player.totalPoints }</Table.Cell>
-                </Table.Row>
-              )
-            }) }
-          </Table.Body>
-          <Table.Footer></Table.Footer>
-        </Table>
-        <div className="dashboardButtons">
-          <Button
-            color='facebook'
-            basic={true}
-            onClick={ ()=> { this.startGame() } }
-          >
-            Everybody Ready?
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
   render() {
-    let toRender = null
     if ( this.state.currentSlide >= 0 && this.state.showMap ) {
-      toRender = this.renderMap()
+      return (
+        <div>
+          <Answers answersArray={this.state.answersArray} />
+          <Map
+            google={ this.props.google }
+            style={ style }
+            initialCenter={{
+              lng: this.state.importedCountries[this.state.currentSlide].lng,
+              lat: this.state.importedCountries[this.state.currentSlide].lat
+            }}
+            zoom={ this.state.importedCountries[this.state.currentSlide].zoom }
+            mapType='satellite'
+            key={ this.state.currentSlide }
+          >
+          <Polygon
+            paths={ this.state.coords }
+            strokeColor="#ffff00"
+            strokeOpacity={0.8}
+            strokeWeight={2}
+            fillColor="#ffff00"
+            fillOpacity={0.15}
+          />
+          </Map>
+        </div>
+      )
+    } else if ( this.state.currentSlide >= this.state.lastSlideIndex && !this.state.showMap) {
+      return (
+        <FinalScoreboard
+          playersScoreArray={this.state.playersScoreArray}
+          startGame={this.startGame}
+        />
+      )
     } else if ( this.state.currentSlide >= 0 && !this.state.showMap ) {
-      toRender = this.renderScoreboard()
+      return (
+        <Scoreboard
+          playersScoreArray={this.state.playersScoreArray}
+          startGame={this.startGame}
+        />
+      )
     } else {
-      toRender = this.renderNames()
+      return (
+        <Names
+          playersNameArray={this.state.playersNameArray}
+          startGame={this.startGame}
+        />
+      )
     }
-
-    return (
-      <div>
-        {toRender}
-      </div>
-    )
   }
 }
 
