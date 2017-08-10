@@ -11,10 +11,7 @@ import '../index.css'
 const io = require('socket.io-client')
 let socket
 
-const style = {
-  width: '100%',
-  height: '100%'
-}
+const style = { width: '100%', height: '100%' }
 
 export class MapContainer extends Component {
 
@@ -34,6 +31,7 @@ export class MapContainer extends Component {
   }
 
   componentDidMount() {
+    this.initialEmit()
     fetch('http://localhost:3000/retrieve_game_by_id', {
       headers: {
         'Accept': 'application/json',
@@ -45,7 +43,9 @@ export class MapContainer extends Component {
       .then(res => res.json())
       .then(response => this.setState({ importedAnswers: response }))
       .then(response => this.formatAnswers(response))
+  }
 
+  initialEmit = () => {
     socket = io('/current-admin')
     socket.emit('new admin join')
     socket.on('new user joined', (data) => {
@@ -65,13 +65,7 @@ export class MapContainer extends Component {
     return a
   }
 
-  formatAnswers = () => {
-    let firsts = this.state.importedAnswers.answers.map(answerArr => {
-      return answerArr[0]
-    })
-    let shuffled = this.state.importedAnswers.answers.map(answerArr => {
-      return this.shuffleArray(answerArr)
-    })
+  createMultipleChoice = (shuffled, firsts) => {
     let multiAnswers = shuffled.map((shuffledArr, index) => {
       let shuffledIndex = shuffledArr.indexOf(firsts[index])
       switch (shuffledIndex) {
@@ -88,11 +82,17 @@ export class MapContainer extends Component {
       }
     })
     socket.emit('send multi answers', { multiAnswers: multiAnswers })
+    this.setState({ multiAnswersArray: multiAnswers })
+  }
+
+  formatAnswers = () => {
+    let firsts = this.state.importedAnswers.answers.map(answerArr => answerArr[0])
+    let shuffled = this.state.importedAnswers.answers.map(answerArr => this.shuffleArray(answerArr))
+    this.createMultipleChoice(shuffled, firsts)
     this.setState({
       mapDisplayOrder: firsts,
       lastSlideIndex: firsts.length - 1,
-      shuffledAnswersArray: shuffled,
-      multiAnswersArray: multiAnswers,
+      shuffledAnswersArray: shuffled
     })
     let formatted = firsts.map(country => {
       return { "name" : country }
@@ -104,14 +104,12 @@ export class MapContainer extends Component {
   }
 
   orderCountries = asyncCountries => {
-    let order = this.state.mapDisplayOrder
-    let newOrder = order.map(ordered => {
+    let newOrder = this.state.mapDisplayOrder.map(ordered => {
       return asyncCountries.filter(country => country.name === ordered)
     })
-    let flattened = newOrder.reduce((a, b) => {
+    return newOrder.reduce((a, b) => {
       return a.concat(b)
     }, [])
-    return flattened
   }
 
   retrieveCountries = countriesToRequest => {
