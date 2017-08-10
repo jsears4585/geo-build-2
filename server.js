@@ -94,6 +94,17 @@ app.get('/games', (req, res) => {
   })
 })
 
+app.post('/retrieve_game_by_id', (req, res) => {
+  Game.findOne(req.body.game, {}, (err, game) => {
+    if (err) {
+      console.log('Error occurred:', err)
+      res.send('Error occurred.')
+    } else {
+      res.send(game)
+    }
+  })
+})
+
 app.post('/game', (req, res) => {
   let game = new Game(req.body.game)
 

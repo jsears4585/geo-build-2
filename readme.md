@@ -12,5 +12,6 @@
 - Load in countries (currently async, need to make sure the right answers are fired)
 - Develop 'Create a game' functionality (route already made)
 - Depending on which game is selected (via click), make call to DB and fetch setup info
+- Need to create more presentational components, starting with MapContainer
 - Randomize the answer locations to encourage player engagement
 - Move timeout bar from player's controller to main game display

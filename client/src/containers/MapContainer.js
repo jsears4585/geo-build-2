@@ -22,6 +22,7 @@ export class MapContainer extends Component {
     currentSlide: -1,
     coords: [],
     importedCountries: [],
+    importedAnswers: null,
     playersNameArray: [],
     playersScoreArray: [],
     answersArray: [],
@@ -41,6 +42,11 @@ export class MapContainer extends Component {
       ]
     }
 
+    // Create function that formats the first element in each array
+    //   like above, shuffles the answers, then sends the correct
+    //   A, B, C, or D choice to the node server
+
+    // Retrieve map rendering info for each country
     fetch('http://localhost:3000/retrieve_countries', {
       headers: {
         'Accept': 'application/json',
@@ -51,6 +57,18 @@ export class MapContainer extends Component {
     })
       .then(res => res.json())
       .then(response => this.setState({ importedCountries: response }))
+
+    // Retrieve game / answers
+    fetch('http://localhost:3000/retrieve_game_by_id', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({"game": { "title": "Sixth game ever." } })
+    })
+      .then(res => res.json())
+      .then(response => this.setState({ importedAnswers: response }))
 
     socket = io('/current-admin')
     socket.emit('new admin join')
