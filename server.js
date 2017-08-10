@@ -129,7 +129,7 @@ const currentAdmin = io.of('/current-admin')
 let playersArray = []
 let playersNameArray = []
 let currentRound = -1
-let answersArray = ['A', 'D', 'C', 'A', 'C', 'D']
+let answersArray = []
 
 currentPlayers.on('connection', (socket) => {
   socket.on('new user join', (data) => {
@@ -166,6 +166,11 @@ currentPlayers.on('connection', (socket) => {
 currentAdmin.on('connection', (socket) => {
   socket.on('new admin join', (data) => {
     console.log(`Admin has connected.`)
+  })
+
+  socket.on('send multi answers', (data) => {
+    answersArray = data.multiAnswers
+    console.log('answers sent:', answersArray)
   })
 
   socket.on('next slide', (data) => {

@@ -84,12 +84,6 @@ class CreatePage extends React.Component {
               <div key={index} data-id={index} className='gameCard' onClick={this.handleCardClick}>
                 <h3>{ game.title }</h3>
                 <p>{ game.description }</p>
-                <h5>Countries Featured</h5>
-                <ul>
-                  { game.countryArray.map((countryName, index)=> {
-                    return <li key={index}>{ countryName }</li>
-                  }) }
-                </ul>
               </div>
             )
           }) }

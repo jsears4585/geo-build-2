@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
 
-import AnswersData from '../data/AnswersData'
-
 import Answers from '../components/Answers'
 
 import '../index.css'
@@ -26,27 +24,70 @@ export class MapContainer extends Component {
     playersNameArray: [],
     playersScoreArray: [],
     answersArray: [],
+    shuffledAnswersArray: [],
+    multiAnswersArray: [],
+    mapDisplayOrder: [],
     showMap: true,
   }
 
-  componentDidMount() {
-
-    let countriesToRequest = {
-      "query": [
-        {"name" : "Finland" },
-        {"name" : "Colombia" },
-        {"name" : "Switzerland" },
-        {"name" : "Bulgaria" },
-        {"name" : "Republic of the Congo" },
-        {"name" : "Czech Republic" }
-      ]
+  shuffleArray = a => {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
     }
+    return a
+  }
 
-    // Create function that formats the first element in each array
-    //   like above, shuffles the answers, then sends the correct
-    //   A, B, C, or D choice to the node server
+  formatAnswers = () => {
+    let firsts = this.state.importedAnswers.answers.map(answerArr => {
+      return answerArr[0]
+    })
+    let shuffled = this.state.importedAnswers.answers.map(answerArr => {
+      return this.shuffleArray(answerArr)
+    })
+    let multiAnswers = shuffled.map((shuffledArr, index) => {
+      let shuffledIndex = shuffledArr.indexOf(firsts[index])
+      switch (shuffledIndex) {
+        case 0:
+          return 'A'
+        case 1:
+          return 'B'
+        case 2:
+          return 'C'
+        case 3:
+          return 'D'
+        default:
+          return 'Error occurred.'
+      }
+    })
+    socket.emit('send multi answers', { multiAnswers: multiAnswers })
+    this.setState({
+      mapDisplayOrder: firsts,
+      shuffledAnswersArray: shuffled,
+      multiAnswersArray: multiAnswers,
+    })
+    let formatted = firsts.map(country => {
+      return { "name" : country }
+    })
+    let countriesToRequest = {
+      "query" : formatted
+    }
+    this.retrieveCountries(countriesToRequest)
+  }
 
-    // Retrieve map rendering info for each country
+  orderCountries = asyncCountries => {
+    let order = this.state.mapDisplayOrder
+    console.log('Ordered:', order)
+    let newOrder = order.map(ordered => {
+      return asyncCountries.filter(country => country.name === ordered)
+    })
+    let flattened = newOrder.reduce((a, b) => {
+      return a.concat(b)
+    }, [])
+    return flattened
+  }
+
+  retrieveCountries = countriesToRequest => {
     fetch('http://localhost:3000/retrieve_countries', {
       headers: {
         'Accept': 'application/json',
@@ -56,9 +97,14 @@ export class MapContainer extends Component {
       body: JSON.stringify(countriesToRequest)
     })
       .then(res => res.json())
-      .then(response => this.setState({ importedCountries: response }))
+      .then(response => {
+        let ordered = this.orderCountries(response)
+        this.setState({ importedCountries: ordered })
+      })
+  }
 
-    // Retrieve game / answers
+  componentDidMount() {
+
     fetch('http://localhost:3000/retrieve_game_by_id', {
       headers: {
         'Accept': 'application/json',
@@ -69,6 +115,7 @@ export class MapContainer extends Component {
     })
       .then(res => res.json())
       .then(response => this.setState({ importedAnswers: response }))
+      .then(response => this.formatAnswers(response))
 
     socket = io('/current-admin')
     socket.emit('new admin join')
@@ -79,7 +126,6 @@ export class MapContainer extends Component {
       console.log(data)
       this.setState({ playersScoreArray: data.scores })
     })
-
   }
 
   askForScores = () => {
@@ -99,7 +145,7 @@ export class MapContainer extends Component {
     this.setState({
       currentSlide: newSlide,
       coords: this.prettyCoords(this.state.importedCountries[newSlide].borderData),
-      answersArray: AnswersData[newSlide],
+      answersArray: this.state.shuffledAnswersArray[newSlide],
     })
   }
 
@@ -208,7 +254,6 @@ export class MapContainer extends Component {
   }
 
   render() {
-
     let toRender = null
     if ( this.state.currentSlide >= 0 && this.state.showMap ) {
       toRender = this.renderMap()
