@@ -24,5 +24,6 @@
   },
   "devDependencies": {
     "webpack": "^3.3.0"
-  }
+  },
+  "proxy" : "http://localhost:3001"
 }
