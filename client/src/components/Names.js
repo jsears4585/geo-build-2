@@ -6,8 +6,8 @@ import '../index.css'
 const Names = ({playersNameArray, startGame, gameCode}) => {
   return (
     <div>
-      <h1 className="gameCodeNames">Use this code:
-        <span className="codeSpan">{gameCode || 'ABCD'}</span>
+      <h1 className="gameCodeNames">Use this code: <span className="codeSpan">
+        {gameCode || 'ABCD'}</span>
       </h1>
       <Table celled className="leaderboard">
         <Table.Header>

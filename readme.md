@@ -1,11 +1,10 @@
 ## Geography Game
 
 ### Current Focus
-- Game Code needs to be continued to displayed on Names component
-- Make answers full width
+
 - Move timeout bar from player's controller to main game display
 - Re-center extant countries in database
-- Basic UI redesign
+- Basic UI redesign (ideas?)
 
 #### To Do
 - Develop 'Create a game' functionality (route already made)
@@ -18,6 +17,8 @@
 - ~~Implement Mapbox GL~~
 - ~~Verify that current iteration deploys correctly to Heroku~~
 - ~~Depending on which game is selected (via click), make call to DB and fetch setup info~~
+- ~~Game Code needs to be continued to displayed on Names component~~
+- ~~Make answers full width~~
 
 #### Done
 - ~~Questions component~~

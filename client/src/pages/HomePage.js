@@ -48,7 +48,7 @@ class HomePage extends React.Component {
           </Button>
         </div>
         <Divider />
-        <p>An interactive geography game powered by Socket.io, MongoDB, & React.</p>
+        <p>An interactive geography game powered by React, MongoDB, Node.js, Mapbox GL, & Socket.io.</p>
       </Container>
     )
   }
