@@ -19,6 +19,7 @@ class CreatePage extends React.Component {
     this.state = {
       code: null,
       startGame: false,
+      createGame: false,
       games: [],
       currentTitle: null
     }
@@ -37,6 +38,10 @@ class CreatePage extends React.Component {
     this.props.updateGameCode(code)
   }
 
+  createGame = () => {
+    this.setState({ createGame: true, })
+  }
+
   handleCardClick = e => {
     let title = e.currentTarget.attributes["data-title"].value
     this.props.updateGameTitle(title)
@@ -47,6 +52,12 @@ class CreatePage extends React.Component {
     if (this.state.startGame) {
       return (
         <Redirect push to={`/game/${this.state.code}`}/>
+      )
+    }
+
+    if (this.state.createGame) {
+      return (
+        <Redirect push to={'/new'}/>
       )
     }
 
@@ -71,6 +82,7 @@ class CreatePage extends React.Component {
         className='Button'
         color="pink"
         basic={false}
+        onClick={()=>this.createGame()}
       >
         Create Your Own Game
       </Button>

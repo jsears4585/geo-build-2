@@ -7,10 +7,10 @@
 - Basic UI redesign (ideas?)
 
 #### To Do
-- Develop 'Create a game' functionality (route already made)
+- Develop 'Create a game' functionality (route already made), flags, fuzzy search, answer drag and drop (or randomizer)
 - Add Hints Box, to give hints
-- Incorporate Flags
 - Allow Host/Admin to also be able to play the game at the same time, render leaderboards on player controllers (mobile mode)
+- Olympic-style top-three podium for end game and raining confetti
 
 #### Recently Finished
 - ~~Seed high-res country border data into cluster~~

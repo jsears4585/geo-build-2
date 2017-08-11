@@ -2,6 +2,20 @@ const Country = require( "../models/country" )
 
 module.exports = function(app) {
 
+  app.get('/get_country_names', (req, res) => {
+    console.log('hit')
+    Country.find({}, '-_id name', (err, countries) => {
+      if (err) {
+        console.log('Error occurred:', err)
+        res.send('Error occurred.')
+      } else {
+        let returnArray = countries.map(country=>country.name)
+        console.log(returnArray)
+        res.send(returnArray)
+      }
+    })
+  })
+
   app.post('/create_country', (req, res) => {
     let country = new Country(req.body.country)
     country.save((err, country, numAffected) => {

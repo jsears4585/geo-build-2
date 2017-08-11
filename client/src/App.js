@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage'
 import JoinPage from './pages/JoinPage'
 import CreatePage from './pages/CreatePage'
 
+import NewGame from './containers/NewGame'
+
 import GameContainer from './containers/GameContainer'
 import PlayerContainer from './containers/PlayerContainer'
 
@@ -50,6 +52,7 @@ class App extends Component {
               currentGameCode={this.state.currentGameCode}
             />
           )}/>
+          <Route path='/new' component={NewGame} />
         </Switch>
       </div>
     )
