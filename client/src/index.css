@@ -12,6 +12,10 @@
 
 /* Custom */
 
+.joinButtonPlayer {
+  margin-left: 10px!important;
+}
+
 .gameCardWrapper {
   width: 72%;
 }

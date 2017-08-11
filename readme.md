@@ -17,3 +17,6 @@
 - Move timeout bar from player's controller to main game display
 - Depending on which game is selected (via click), make call to DB and fetch setup info
 - Develop 'Create a game' functionality (route already made)
+- Add Hints Box, to give hints
+- Incorporate Flags
+- Allow Host/Admin to also be able to play the game at the same time, render leaderboards on player controllers (mobile mode)

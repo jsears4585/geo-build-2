@@ -3,7 +3,6 @@ const app = express()
 const http = require('http')
 const bodyParser = require('body-parser')
 
-// Database
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose')
 
@@ -18,7 +17,6 @@ db.once('open', () => {
   console.log('DB Successfully Connected')
 })
 
-// Settings
 app.set("port", process.env.PORT || 3001)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -29,11 +27,9 @@ const server = app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`)
 })
 
-// Routes
 require('./routes/countries')(app)
 require('./routes/games')(app)
 
-// SOCKETS
 const socketIO = require('socket.io')
 const io = require('socket.io')(server)
 require('./sockets/main')(io)

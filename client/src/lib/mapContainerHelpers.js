@@ -1,4 +1,4 @@
-export function prettyCoords(arr) {
+export function reCoord(arr) {
   return arr.map(function(array) {
     return {lng: array[0], lat: array[1]}
   })

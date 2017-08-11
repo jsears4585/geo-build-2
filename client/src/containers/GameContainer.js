@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Polygon } from 'google-maps-react'
+import ReactMapboxGl, { Layer, Feature, ZoomControl } from 'react-mapbox-gl'
 
 import Answers from '../components/Answers'
 import Names from '../components/Names'
 import Scoreboard from '../components/Scoreboard'
 import FinalScoreboard from '../components/FinalScoreboard'
 
-import * as utils from '../lib/utils.js';
-import * as mapHelpers from '../lib/mapContainerHelpers.js';
+import mapBoxAuth from '../config/mapboxAuth'
+import * as utils from '../lib/utils.js'
+import * as mapHelpers from '../lib/mapContainerHelpers.js'
 import '../index.css'
 
 const io = require('socket.io-client')
 let socket
+
+const Map = ReactMapboxGl({
+  accessToken: mapBoxAuth.pass
+})
+
+const multiPolygonPaint = {
+  'fill-color': '#FFFF00'
+};
 
 export class GameContainer extends Component {
 
@@ -21,6 +30,9 @@ export class GameContainer extends Component {
     lastSlideIndex: null,
     importedCountries: [],
     importedAnswers: null,
+    currentLat: null,
+    currentLng: null,
+    currentZoom: null,
     playersNameArray: [],
     playersScoreArray: [],
     answersArray: [],
@@ -38,7 +50,7 @@ export class GameContainer extends Component {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({"game": { "title": "Sixth game ever." } })
+      body: JSON.stringify({"game": { "title": "Learn the countries of Southeast Asia" } })
     })
       .then(res => res.json())
       .then(response => this.setState({ importedAnswers: response }))
@@ -55,8 +67,8 @@ export class GameContainer extends Component {
       body: JSON.stringify(countriesToRequest)
     })
       .then(res => res.json())
-      .then(response => {
-        let ordered = mapHelpers.orderCountries(this.state.mapDisplayOrder, response)
+      .then(res => {
+        let ordered = mapHelpers.orderCountries(this.state.mapDisplayOrder, res)
         this.setState({ importedCountries: ordered })
       })
   }
@@ -68,7 +80,6 @@ export class GameContainer extends Component {
       this.setState({ playersNameArray: data.playersNameArray })
     })
     socket.on('received scores', (data) => {
-      console.log(data)
       this.setState({ playersScoreArray: data.scores })
     })
   }
@@ -80,9 +91,12 @@ export class GameContainer extends Component {
   }
 
   formatAnswers = () => {
-    let firsts = this.state.importedAnswers.answers.map(answerArr => answerArr[0])
-    let shuffled = this.state.importedAnswers.answers.map(answerArr => utils.shuffleArray(answerArr))
-    console.log(shuffled)
+    let firsts = this.state.importedAnswers.answers.map(answerArr => {
+      return answerArr[0]
+    })
+    let shuffled = this.state.importedAnswers.answers.map(answerArr => {
+      return utils.shuffleArray(answerArr)
+    })
     this.createMultipleChoice(shuffled, firsts)
     this.setState({
       mapDisplayOrder: firsts,
@@ -114,8 +128,11 @@ export class GameContainer extends Component {
     let newSlide = this.state.currentSlide + 1
     this.setState({
       currentSlide: newSlide,
-      coords: mapHelpers.prettyCoords(this.state.importedCountries[newSlide].borderData),
+      coords: this.state.importedCountries[newSlide].borderData,
       answersArray: this.state.shuffledAnswersArray[newSlide],
+      currentLat: this.state.importedCountries[newSlide].lat,
+      currentLng: this.state.importedCountries[newSlide].lng,
+      currentZoom: this.state.importedCountries[newSlide].zoom,
     })
   }
 
@@ -125,28 +142,26 @@ export class GameContainer extends Component {
         <div>
           <Answers answersArray={this.state.answersArray} />
           <Map
-            google={ this.props.google }
-            style={ { width: '100%', height: '100%' } }
-            initialCenter={{
-              lng: this.state.importedCountries[this.state.currentSlide].lng,
-              lat: this.state.importedCountries[this.state.currentSlide].lat
+            style={'mapbox://styles/jsears5/cj674mwhz04k72soxxht9ghgq'}
+            center={[ this.state.currentLat, this.state.currentLng ]}
+            containerStyle={{
+              height: "100vh",
+              width: "100vw"
             }}
-            zoom={ this.state.importedCountries[this.state.currentSlide].zoom }
-            mapType='satellite'
-            key={ this.state.currentSlide }
+            zoom={[this.state.currentZoom]}
           >
-          <Polygon
-            paths={ this.state.coords }
-            strokeColor="#ffff00"
-            strokeOpacity={0.8}
-            strokeWeight={2}
-            fillColor="#ffff00"
-            fillOpacity={0.15}
-          />
+          <ZoomControl/>
+          <Layer
+            type="fill"
+            paint={multiPolygonPaint}
+          >
+          <Feature coordinates={this.state.coords} />
+          </Layer>
           </Map>
         </div>
       )
-    } else if ( this.state.currentSlide >= this.state.lastSlideIndex && !this.state.showMap) {
+    } else if ( this.state.currentSlide >= this.state.lastSlideIndex
+                && !this.state.showMap) {
       return (
         <FinalScoreboard
           playersScoreArray={this.state.playersScoreArray}
@@ -171,6 +186,4 @@ export class GameContainer extends Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyDhs8heyr3zDwgAlQeOu6LiSSQ9m8V4xpA')
-})(GameContainer)
+export default GameContainer

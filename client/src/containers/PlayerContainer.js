@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Progress } from 'semantic-ui-react'
+import { Button, Input, Label, Progress } from 'semantic-ui-react'
 
 import '../index.css'
 
@@ -147,8 +147,18 @@ class PlayerContainer extends React.Component {
     if (this.state.renderSignin) {
       signIn =
       <div>
-        <input type='text' name='username' value={this.state.value} onChange={this.onHandleChange}></input>
-        <button onClick={()=>(this.joinRoom())}>Join</button>
+        <Label pointing='below'>Make up a cool name!</Label><br />
+        <Input
+          type='text'
+          name='username'
+          value={this.state.value}
+          onChange={this.onHandleChange}>
+        </Input>
+        <Button
+          className="joinButtonPlayer"
+          onClick={()=>(this.joinRoom())}>
+          Join
+        </Button>
       </div>
     } else {
       signIn = null

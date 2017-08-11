@@ -12,8 +12,10 @@ const FinalScoreboard = ({playersScoreArray}) => {
         <h1>Final Scores!</h1>
         <Table celled className="leaderboard">
           <Table.Header>
-            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+            <Table.Row>
+              <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
+              <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+            </Table.Row>
           </Table.Header>
           <Table.Body>
             { sortedNames.map(player => {
