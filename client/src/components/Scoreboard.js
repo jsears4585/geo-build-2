@@ -28,7 +28,7 @@ const Scoreboard = ({playersScoreArray, startGame}) => {
           </Table.Body>
           <Table.Footer></Table.Footer>
         </Table>
-        <div className="readyButton">
+        <div className="readyButton2">
           <Button
             size='huge'
             color='violet'

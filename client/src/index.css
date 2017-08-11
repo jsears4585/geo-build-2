@@ -17,6 +17,7 @@
   margin-top: 30px!important;
   font-size: 52px;
   color: #626262;
+  display: block;
 }
 
 .codeSpan {
@@ -62,17 +63,18 @@
 
 .answerBox {
   display: inline-block;
-  width: 400px;
-  height: 54px;
-  background: #f3f3f3;
-  color: #5d5d65;
-  font-size: 26px;
-  padding-top: 17px;
+  width: 50%;
+  height: 74px;
+  background: #0B0B0B;
+  color: yellow;
+  /*font-size: 48px;*/
+  font-size: 2.4vw;
+  padding-top: 25px;
   text-align: center;
 }
 
 .answerContainer {
-  width: 800px;
+  width: 100%;
   border-radius: 8px;
 }
 
@@ -80,7 +82,14 @@
   width: 82px;
   display: block;
   float: right;
-  margin: 15px 104px;
+  margin: -71px 104px;
+}
+
+.readyButton2 {
+  width: 82px;
+  display: block;
+  float: right;
+  margin: 24px 104px;
 }
 
 #root {

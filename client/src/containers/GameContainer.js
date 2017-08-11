@@ -14,13 +14,9 @@ import '../index.css'
 const io = require('socket.io-client')
 let socket
 
-const Map = ReactMapboxGl({
-  accessToken: mapBoxAuth.pass
-})
+const Map = ReactMapboxGl({ accessToken: mapBoxAuth.pass })
 
-const multiPolygonPaint = {
-  'fill-color': '#FFFF00'
-};
+const multiPolygonPaint = { 'fill-color': '#FFFF00' }
 
 export class GameContainer extends Component {
 
@@ -43,7 +39,7 @@ export class GameContainer extends Component {
   }
 
   componentDidMount() {
-    let useThis = this.props.currentGameTitle || "Should have clicked on something!!"
+    let useThis = this.props.currentGameTitle || "Learn the countries of Southeast Asia"
     this.initialEmit()
     fetch('/retrieve_game_by_id', {
       headers: {
