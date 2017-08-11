@@ -16,14 +16,12 @@ class CreatePage extends React.Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       code: null,
       startGame: false,
       games: [],
       currentTitle: null
     }
-
   }
 
   componentDidMount() {
@@ -34,7 +32,10 @@ class CreatePage extends React.Component {
       }))
   }
 
-  gameRedirect = () => { this.setState({ startGame: true, }) }
+  gameRedirect = (code) => {
+    this.setState({ startGame: true, })
+    this.props.updateGameCode(code)
+  }
 
   handleCardClick = e => {
     let title = e.currentTarget.attributes["data-title"].value
@@ -59,7 +60,7 @@ class CreatePage extends React.Component {
           className='Button'
           color="teal"
           basic={false}
-          onClick={this.gameRedirect}
+          onClick={()=>this.gameRedirect(this.state.code)}
         >
           Start Game
         </Button>

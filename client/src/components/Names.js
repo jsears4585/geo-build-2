@@ -3,9 +3,10 @@ import { Table, Button } from 'semantic-ui-react'
 
 import '../index.css'
 
-const Names = ({playersNameArray, startGame}) => {
+const Names = ({playersNameArray, startGame, gameCode}) => {
   return (
     <div>
+      <h1 className="gameCodeNames">Use this code: <span className="codeSpan">{gameCode}</span></h1>
       <Table celled className="leaderboard">
         <Table.Header>
           <Table.Row>
@@ -25,13 +26,14 @@ const Names = ({playersNameArray, startGame}) => {
         </Table.Body>
         <Table.Footer></Table.Footer>
       </Table>
-      <div className="dashboardButtons">
+      <div className="readyButton">
         <Button
-          color='facebook'
-          basic={true}
+          size='huge'
+          color='violet'
+          circular={true}
           onClick={ ()=> { startGame() } }
         >
-          Everybody Ready?
+          Ready?
         </Button>
       </div>
     </div>

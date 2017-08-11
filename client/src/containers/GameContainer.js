@@ -180,6 +180,7 @@ export class GameContainer extends Component {
       return (
         <Names
           playersNameArray={this.state.playersNameArray}
+          gameCode={this.props.currentGameCode}
           startGame={this.startGame}
         />
       )

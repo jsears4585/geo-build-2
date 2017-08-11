@@ -13,12 +13,19 @@ import './index.css'
 class App extends Component {
 
   state = {
-    currentGameTitle: null
+    currentGameTitle: null,
+    currentGameCode: null
   }
 
   updateGameTitle = title => {
     this.setState({
       currentGameTitle: title
+    })
+  }
+
+  updateGameCode = code => {
+    this.setState({
+      currentGameCode: code
     })
   }
 
@@ -29,13 +36,19 @@ class App extends Component {
           <Route exact path='/' component={HomePage}/>
           <Route path='/join' component={JoinPage}/>
           <Route path='/create' render={()=>(
-            <CreatePage updateGameTitle={this.updateGameTitle} />
+            <CreatePage
+              updateGameTitle={this.updateGameTitle}
+              updateGameCode={this.updateGameCode}
+            />
           )}/>
           <Route path='/player' render={()=>(
             <PlayerContainer />
           )}/>
           <Route path='/game' render={()=>(
-            <GameContainer currentGameTitle={this.state.currentGameTitle} />
+            <GameContainer
+              currentGameTitle={this.state.currentGameTitle}
+              currentGameCode={this.state.currentGameCode}
+            />
           )}/>
         </Switch>
       </div>

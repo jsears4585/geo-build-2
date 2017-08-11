@@ -28,13 +28,14 @@ const Scoreboard = ({playersScoreArray, startGame}) => {
           </Table.Body>
           <Table.Footer></Table.Footer>
         </Table>
-        <div className="dashboardButtons">
+        <div className="readyButton">
           <Button
-            color='facebook'
-            basic={true}
+            size='huge'
+            color='violet'
+            circular={true}
             onClick={ ()=> { startGame() } }
           >
-            Everybody Ready?
+            Ready?
           </Button>
         </div>
       </div>
