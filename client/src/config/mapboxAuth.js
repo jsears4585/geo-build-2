@@ -1,1 +1,0 @@
-module.exports.pass = 'pk.eyJ1IjoianNlYXJzNSIsImEiOiJjajY3MmF3cmkwMjduMnFuNjZwNDhiMzNmIn0.njNFm6qHHsvs0odNY-xOoA'
