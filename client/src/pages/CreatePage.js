@@ -27,7 +27,7 @@ class CreatePage extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://jsga.me:3000/games')
+    fetch('/games')
       .then(res => res.json())
       .then(response => this.setState({
         games: response
