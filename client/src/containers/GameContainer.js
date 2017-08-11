@@ -45,7 +45,7 @@ export class GameContainer extends Component {
   componentDidMount() {
     let useThis = this.props.currentGameTitle || "Should have clicked on something!!"
     this.initialEmit()
-    fetch('http://localhost:3000/retrieve_game_by_id', {
+    fetch('http://jsga.me:3000/retrieve_game_by_id', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export class GameContainer extends Component {
   }
 
   retrieveCountries = countriesToRequest => {
-    fetch('http://localhost:3000/retrieve_countries', {
+    fetch('http://jsga.me:3000/retrieve_countries', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
