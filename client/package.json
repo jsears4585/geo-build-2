@@ -25,5 +25,5 @@
   "devDependencies": {
     "webpack": "^3.3.0"
   },
-  "proxy": "http://jsga.me:3001/"
+  "proxy": "http://jsga.me/"
 }
