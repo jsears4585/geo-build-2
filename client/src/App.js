@@ -12,20 +12,30 @@ import './index.css'
 
 class App extends Component {
 
+  state = {
+    currentGameTitle: null
+  }
+
+  updateGameTitle = title => {
+    this.setState({
+      currentGameTitle: title
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route path='/join' component={JoinPage}/>
-          <Route path='/create' component={CreatePage} />
-          <Route path='/player' render={(props)=>(
-            <div>
-              <PlayerContainer />
-            </div>
+          <Route path='/create' render={()=>(
+            <CreatePage updateGameTitle={this.updateGameTitle} />
           )}/>
-          <Route path='/game' render={(props)=>(
-            <GameContainer />
+          <Route path='/player' render={()=>(
+            <PlayerContainer />
+          )}/>
+          <Route path='/game' render={()=>(
+            <GameContainer currentGameTitle={this.state.currentGameTitle} />
           )}/>
         </Switch>
       </div>

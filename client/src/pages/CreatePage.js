@@ -14,11 +14,16 @@ const generateGameCode = (length, chars) => {
 
 class CreatePage extends React.Component {
 
-  state = {
-    code: null,
-    startGame: false,
-    games: [],
-    clickedCardIndex: null
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      code: null,
+      startGame: false,
+      games: [],
+      currentTitle: null
+    }
+
   }
 
   componentDidMount() {
@@ -32,8 +37,9 @@ class CreatePage extends React.Component {
   gameRedirect = () => { this.setState({ startGame: true, }) }
 
   handleCardClick = e => {
-    let index = e.currentTarget.attributes["data-id"].value
-    this.setState({ clickedCardIndex: index })
+    let title = e.currentTarget.attributes["data-title"].value
+    this.props.updateGameTitle(title)
+    this.setState({ code: generateGameCode(4, 'ABCDEF0123456789'), })
   }
 
   render() {
@@ -48,10 +54,10 @@ class CreatePage extends React.Component {
     if (this.state.code) {
       buttonOrCode =
       <div>
-        {this.state.code}
+        {this.state.code}<br />
         <Button
-          className='biggerButton'
-          color="facebook"
+          className='Button'
+          color="teal"
           basic={false}
           onClick={this.gameRedirect}
         >
@@ -61,33 +67,37 @@ class CreatePage extends React.Component {
     } else {
       buttonOrCode =
       <Button
-        className='biggerButton'
-        color="facebook"
+        className='Button'
+        color="pink"
         basic={false}
-        onClick={ ()=> {
-          this.setState({
-            code: generateGameCode(4, 'ABCDEF0123456789'),
-          })
-        }}
       >
-        Create Game
+        Create Your Own Game
       </Button>
     }
 
+    let displayGames
+
+    if (!this.state.code) {
+      displayGames = <div>
+        { this.state.games.map((game, index)=> {
+          return (
+            <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
+              <h3>{ game.title }</h3>
+              <p>{ game.description }</p>
+            </div>
+          )
+        }) }
+      </div>
+    } else {
+      displayGames = null
+    }
+
+
     return (
       <Container text textAlign='center'>
-        <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Almost!'}</h1>
+        <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Select a Game'}</h1>
+        {displayGames}
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
-        <div>
-          { this.state.games.map((game, index)=> {
-            return (
-              <div key={index} data-id={index} className='gameCard' onClick={this.handleCardClick}>
-                <h3>{ game.title }</h3>
-                <p>{ game.description }</p>
-              </div>
-            )
-          }) }
-        </div>
         <Divider />
         <p>{this.state.code ? 'Share this code with the other players and have them log in to the game room.' : 'This will generate a special code for you to share with the other players.' }</p>
       </Container>

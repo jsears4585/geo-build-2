@@ -43,6 +43,7 @@ export class GameContainer extends Component {
   }
 
   componentDidMount() {
+    let useThis = this.props.currentGameTitle || "Should have clicked on something!!"
     this.initialEmit()
     fetch('http://localhost:3000/retrieve_game_by_id', {
       headers: {
@@ -50,7 +51,7 @@ export class GameContainer extends Component {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({"game": { "title": "Learn the countries of Southeast Asia" } })
+      body: JSON.stringify({"game": { "title": useThis } })
     })
       .then(res => res.json())
       .then(response => this.setState({ importedAnswers: response }))
