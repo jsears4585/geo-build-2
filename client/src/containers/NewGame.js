@@ -17,17 +17,21 @@ export class NewGame extends Component {
       }))
   }
 
-
-
   render() {
 
     let displayNames
 
-    if (!this.state.code) {
+    if (this.state.countries) {
       displayNames = <div>
         { this.state.countries.map((name)=> {
+
+          let slugged = name.split(" ").join("-")
+
           return (
-            <li>{name}</li>
+            <div className='flagContainers'>
+              {name}<br />
+              <img src={require(`../images/flags/${slugged}.png`)} />
+            </div>
           )
         }) }
       </div>
@@ -37,9 +41,7 @@ export class NewGame extends Component {
 
     return (
       <div className="newGame">
-        <ul>
-          {displayNames}
-        </ul>
+        {displayNames}
       </div>
     )
   }

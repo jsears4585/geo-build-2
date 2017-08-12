@@ -12,6 +12,18 @@
 
 /* Custom */
 
+.flagContainers {
+  width: 16%;
+  min-width: 110px;
+  display: inline-block;
+  border-radius: 8px;
+  background: #efefef;
+  padding: 10px;
+  margin: 15px;
+  font-size: 19px;
+  cursor: pointer;
+}
+
 .gameCodeNames {
   text-align: center;
   margin-top: 30px!important;
