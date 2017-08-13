@@ -139,6 +139,7 @@ export class GameContainer extends Component {
         <div>
           <Answers answersArray={this.state.answersArray} />
           <Map
+            // eslint-disable-next-line
             style={'mapbox://styles/jsears5/cj674mwhz04k72soxxht9ghgq'}
             center={[ this.state.currentLat, this.state.currentLng ]}
             containerStyle={{
