@@ -50,7 +50,6 @@ export class NewGame extends Component {
 
   handleSubmit = () => {
     let payload = this.randomizeAnswers()
-    debugger
     fetch('/game', {
       headers: {
         'Accept': 'application/json',

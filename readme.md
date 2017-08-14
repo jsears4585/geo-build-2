@@ -3,8 +3,7 @@
 ### Current Focus
 
 - Move timeout bar from player's controller to main game display
-- Re-center extant countries in database
-- Basic UI redesign (ideas?)
+- User shouldn't be allow to begin game until all countries have been loaded into the game container
 
 #### To Do
 - Develop 'Create a game' functionality (route already made), flags, fuzzy search, answer drag and drop (or randomizer)
