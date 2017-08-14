@@ -1,7 +1,9 @@
 ## Geography Game
 
 ### Current Focus
-- Continue to develop 'Create a game' functionality, flags, fuzzy search
+- Continue to develop 'Create a game' functionality
+- Add Create a Game fuzzy search
+- Add Select a Game fuzzy search
 - Olympic-style top-three podium for end game and raining confetti
 
 #### To Do

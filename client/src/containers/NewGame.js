@@ -12,7 +12,8 @@ export class NewGame extends Component {
     title: '',
     description: '',
     answers: [],
-    payload: []
+    payload: [],
+    matchingCountries: []
   }
 
   componentDidMount() {
@@ -79,6 +80,19 @@ export class NewGame extends Component {
     })
   }
 
+  matchCountries = value => {
+    let regex = new RegExp('^' + value, "i")
+    let matches = this.state.countries.filter(country => {
+      if (country.match(regex)) return country
+    })
+    this.setState({ matchingCountries: matches })
+  }
+
+  onType = event => {
+    const { value } = event.target
+    this.matchCountries(value)
+  }
+
   render() {
 
     let displayNames
@@ -86,7 +100,7 @@ export class NewGame extends Component {
     if (this.state.countries) {
       displayNames =
       <div>
-        { this.state.countries.map((name, index)=> {
+        { this.state.matchingCountries.map((name, index)=> {
 
           let slugged = name.split(" ").join("-")
 
@@ -107,7 +121,10 @@ export class NewGame extends Component {
               }}
             >
               {name}<br />
-              <img src={require(`../images/flags/${slugged}.png`)} alt={slugged} />
+              <img
+                src={require(`../images/flags/${slugged}.png`)}
+                alt={slugged}
+              />
             </div>
           )
         }) }
@@ -119,12 +136,37 @@ export class NewGame extends Component {
     return (
       <div className="newGame">
         <Label>Title</Label><br />
-        <Input type="text" name="title" value={this.state.title} onChange={this.handleOnChange} /><br />
+        <Input
+          type="text"
+          name="title"
+          value={this.state.title}
+          onChange={this.handleOnChange}
+        /><br />
         <Label>Description</Label><br />
-        <Input type="text" name="description" value={this.state.description} onChange={this.handleOnChange} />
-        <Container text className="pickedAnswers">{this.state.answers.join(', ')}</Container>
+        <Input
+          type="text"
+          name="description"
+          value={this.state.description}
+          onChange={this.handleOnChange}
+        />
+
+        <div className="ui huge fluid icon input">
+          <input
+            type="text"
+            name="searchValue"
+            placeholder={"Search for Countries"}
+            onChange={this.onType}
+          />
+          <i className="circular search link icon"></i>
+        </div>
+
+        <Container text className="pickedAnswers">
+          {this.state.answers.join(', ')}
+        </Container>
         {displayNames}
-        <Button color="pink" onClick={()=>this.handleSubmit()}>Select your countries</Button>
+        <Button color="pink" onClick={()=>this.handleSubmit()}>
+          Select your countries
+        </Button>
       </div>
     )
   }
