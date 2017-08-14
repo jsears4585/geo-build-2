@@ -35,7 +35,21 @@ export class GameContainer extends Component {
     shuffledAnswersArray: [],
     multiAnswersArray: [],
     mapDisplayOrder: [],
+    time: 10,
     showMap: true,
+  }
+
+  timeKeeping = seconds => {
+    let time = setInterval(() => {
+      if (this.state.time <= 0) {
+        clearInterval(time)
+        this.setState({
+          time: seconds
+        })
+      } else {
+        this.setState({ time: this.state.time - 1 })
+      }
+    }, seconds * 100)
   }
 
   componentDidMount() {
@@ -117,6 +131,7 @@ export class GameContainer extends Component {
   startGame = () => {
     this.setState({ showMap: true })
     this.nextSlide()
+    this.timeKeeping(10)
     setTimeout(this.askForScores, 11337)
   }
 
@@ -137,6 +152,7 @@ export class GameContainer extends Component {
     if ( this.state.currentSlide >= 0 && this.state.showMap ) {
       return (
         <div>
+          <div className="timecard">{this.state.time === 10 ? null : this.state.time}</div>
           <Answers answersArray={this.state.answersArray} />
           <Map
             // eslint-disable-next-line
@@ -144,7 +160,9 @@ export class GameContainer extends Component {
             center={[ this.state.currentLat, this.state.currentLng ]}
             containerStyle={{
               height: "100vh",
-              width: "100vw"
+              width: "100vw",
+              position: "relative",
+              zIndex: "1"
             }}
             zoom={[this.state.currentZoom]}
           >
@@ -179,6 +197,8 @@ export class GameContainer extends Component {
           playersNameArray={this.state.playersNameArray}
           gameCode={this.props.currentGameCode}
           startGame={this.startGame}
+          countriesLength={this.state.importedCountries.length}
+          answersLength={this.state.multiAnswersArray.length}
         />
       )
     }

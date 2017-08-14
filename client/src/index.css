@@ -30,6 +30,15 @@ img {
 
 /* Custom */
 
+.timecard {
+  font-size: 112px;
+  color: yellow;
+  position: absolute;
+  z-index: 10000;
+  right: 16px;
+  bottom: 50px;
+}
+
 .pickedAnswers {
   background: #efefef;
   padding: 20px;
@@ -104,7 +113,7 @@ img {
   display: inline-block;
   width: 50%;
   height: 74px;
-  background: #0B0B0B;
+  background: rgba(6, 0, 38, 0.98);
   color: yellow;
   font-size: 2.4vw;
   padding-top: 25px;

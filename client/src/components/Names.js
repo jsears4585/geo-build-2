@@ -1,9 +1,33 @@
 import React from 'react'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, Loader } from 'semantic-ui-react'
 
 import '../index.css'
 
-const Names = ({playersNameArray, startGame, gameCode}) => {
+const Names = ({
+  playersNameArray,
+  startGame,
+  gameCode,
+  countriesLength,
+  answersLength
+}) => {
+
+  let button
+  if (countriesLength === answersLength) {
+    button =
+    <div className="readyButton">
+      <Button
+        size='huge'
+        color='violet'
+        circular={true}
+        onClick={ ()=> { startGame() } }
+      >
+        Ready?
+      </Button>
+    </div>
+  } else {
+    button = <Loader active inline='centered' />
+  }
+
   return (
     <div>
       <h1 className="gameCodeNames">Use this code: <span className="codeSpan">
@@ -28,16 +52,7 @@ const Names = ({playersNameArray, startGame, gameCode}) => {
         </Table.Body>
         <Table.Footer></Table.Footer>
       </Table>
-      <div className="readyButton">
-        <Button
-          size='huge'
-          color='violet'
-          circular={true}
-          onClick={ ()=> { startGame() } }
-        >
-          Ready?
-        </Button>
-      </div>
+      {button}
     </div>
   )
 }

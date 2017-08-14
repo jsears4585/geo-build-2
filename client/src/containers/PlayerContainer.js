@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Label, Progress } from 'semantic-ui-react'
+import { Button, Input, Label } from 'semantic-ui-react'
 
 import '../index.css'
 
@@ -10,26 +10,12 @@ class PlayerContainer extends React.Component {
 
   state = {
     value: '',
-    percent: 1,
     score: 1000,
     finished: false,
     renderSignin: true,
     answerSubmitted: false,
     controllerShouldRender: false,
     username: ''
-  }
-
-  functioning = seconds => {
-    let progressing = setInterval(() => {
-      if (this.state.percent >= 100) {
-        clearInterval(progressing)
-        this.setState({
-          percent: 1
-        })
-      } else {
-        this.setState({ percent: this.state.percent + 1 })
-      }
-    }, seconds * 10)
   }
 
   scoreKeeping = seconds => {
@@ -71,7 +57,6 @@ class PlayerContainer extends React.Component {
 
   fire = () => {
     let seconds = 10
-    this.functioning(seconds)
     this.scoreKeeping(seconds)
   }
 
@@ -104,8 +89,6 @@ class PlayerContainer extends React.Component {
     if (this.state.controllerShouldRender) {
       show =
       <div>
-        <div className='timer'>{ this.state.finished ? `Time's up!` : this.state.score }</div>
-        <div><Progress percent={ this.state.percent } color="teal" active className='progressBar' /></div>
         <Button
           className='squareButton'
           color='facebook'

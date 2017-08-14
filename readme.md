@@ -1,19 +1,18 @@
 ## Geography Game
 
 ### Current Focus
-
-- Develop 'Create a game' functionality, flags, fuzzy search
-- Move timeout bar from player's controller to main game display
-- User shouldn't be allow to begin game until all countries have been loaded into the game container
+- Continue to develop 'Create a game' functionality, flags, fuzzy search
 - Olympic-style top-three podium for end game and raining confetti
 
 #### To Do
-
 - Add Hints Box, to give hints
 - Allow Host/Admin to also be able to play the game at the same time, render leaderboards on player controllers (mobile mode)
+- Different difficulty levels
+- Different map types and highlight colors
 
 #### Recently Finished
-- N/a
+- User shouldn't be allow to begin game until all countries have been loaded into the game container
+- Move timeout bar from player's controller to main game display, switched from Progress bar to timer
 
 #### Done
 - ~~Questions component~~
