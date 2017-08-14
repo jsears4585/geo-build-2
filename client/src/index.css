@@ -30,6 +30,17 @@ img {
 
 /* Custom */
 
+.searchBar {
+  margin-bottom: 30px!important;
+}
+
+.gameSelectionContainer {
+  height: 392px;
+  overflow: scroll;
+  padding: 15px;
+  background: rgba(183, 183, 183, 0.58);
+}
+
 .timecard {
   font-size: 112px;
   color: yellow;
@@ -86,8 +97,10 @@ img {
   padding: 10px;
   margin: 11px;
   display: inline-block;
-  width: 45%;
+  width: 38%;
   cursor: pointer;
+  vertical-align: text-top;
+  box-shadow: 4px 3px #607D8B;
 }
 
 .leaderboard {

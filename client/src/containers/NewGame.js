@@ -20,7 +20,8 @@ export class NewGame extends Component {
     fetch('/get_country_names')
       .then(res => res.json())
       .then(response => this.setState({
-        countries: response
+        countries: response,
+        matchingCountries: response
       }))
   }
 
@@ -69,8 +70,10 @@ export class NewGame extends Component {
   }
 
   uniqueAnswers = (name) => {
-    let tempArray = utils.uniqueArray([...this.state.answers, name])
-    this.setState({answers: tempArray})
+    let answers = utils.uniqueArray([...this.state.answers, name])
+    this.setState({
+      answers: answers
+    })
   }
 
   removeAnswer = (name) => {
@@ -80,37 +83,20 @@ export class NewGame extends Component {
     })
   }
 
-  matchCountries = value => {
-    let regex = new RegExp('^' + value, "i")
-    let matches = this.state.countries.filter(country => {
-      if (country.match(regex)) return country
-    })
-    this.setState({ matchingCountries: matches })
-  }
-
-  onType = event => {
-    const { value } = event.target
-    this.matchCountries(value)
-  }
-
   render() {
 
     let displayNames
-
     if (this.state.countries) {
       displayNames =
       <div>
         { this.state.matchingCountries.map((name, index)=> {
 
           let slugged = name.split(" ").join("-")
-
           return (
             <div
-              id={`flag_${index}`}
-              key={index}
+              id={`${name}`}
               className='flagContainers noselect'
               onClick={(event)=> {
-                console.log(event.currentTarget)
                 if (event.currentTarget.classList.contains('selected')) {
                   event.currentTarget.classList.remove('selected')
                   this.removeAnswer(name)
@@ -149,17 +135,6 @@ export class NewGame extends Component {
           value={this.state.description}
           onChange={this.handleOnChange}
         />
-
-        <div className="ui huge fluid icon input">
-          <input
-            type="text"
-            name="searchValue"
-            placeholder={"Search for Countries"}
-            onChange={this.onType}
-          />
-          <i className="circular search link icon"></i>
-        </div>
-
         <Container text className="pickedAnswers">
           {this.state.answers.join(', ')}
         </Container>

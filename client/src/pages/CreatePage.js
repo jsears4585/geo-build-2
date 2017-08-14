@@ -21,7 +21,8 @@ class CreatePage extends React.Component {
       startGame: false,
       createGame: false,
       games: [],
-      currentTitle: null
+      currentTitle: null,
+      matchingGames: []
     }
   }
 
@@ -29,7 +30,8 @@ class CreatePage extends React.Component {
     fetch('/games')
       .then(res => res.json())
       .then(response => this.setState({
-        games: response
+        games: response,
+        matchingGames: response
       }))
   }
 
@@ -46,6 +48,19 @@ class CreatePage extends React.Component {
     let title = e.currentTarget.attributes["data-title"].value
     this.props.updateGameTitle(title)
     this.setState({ code: generateGameCode(4, 'ABCDEF0123456789'), })
+  }
+
+  matchGames = value => {
+    let regex = new RegExp('^' + value, "i")
+    let matches = this.state.games.filter(game => {
+      if (game.title.match(regex) || game.description.match(regex)) return game
+    })
+    this.setState({ matchingGames: matches })
+  }
+
+  onType = event => {
+    const { value } = event.target
+    this.matchGames(value)
   }
 
   render() {
@@ -91,26 +106,37 @@ class CreatePage extends React.Component {
     let displayGames
 
     if (!this.state.code) {
-      displayGames = <div>
-        { this.state.games.map((game, index)=> {
-          return (
-            <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
-              <h3>{ game.title }</h3>
-              <p>{ game.description }</p>
-            </div>
-          )
-        }) }
+      displayGames =
+      <div>
+        <div className="ui large icon input searchBar">
+          <input
+            type="text"
+            name="searchValue"
+            placeholder={"Search for Games"}
+            onChange={this.onType}
+          />
+          <i className="circular search link icon"></i>
+        </div>
+        <div className="gameSelectionContainer">
+          { this.state.matchingGames.map((game, index)=> {
+            return (
+              <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
+                <h3>{ game.title }</h3>
+                <p>{ game.description }</p>
+              </div>
+            )
+          }) }
+        </div>
       </div>
     } else {
       displayGames = null
     }
 
-
     return (
       <Container text textAlign='center'>
         <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Select a Game'}</h1>
-        {displayGames}
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
+        {displayGames}
         <Divider />
         <p>{this.state.code ? 'Share this code with the other players and have them log in to the game room.' : 'This will generate a special code for you to share with the other players.' }</p>
       </Container>

@@ -3,7 +3,7 @@ const Game = require( "../models/game" )
 module.exports = function(app) {
 
   app.get('/games', (req, res) => {
-    Game.find({}, {}, { sort: { 'createdAt' : -1 }, limit: 8 }, (err, games) => {
+    Game.find({}, {}, { sort: { 'createdAt' : -1 }}, (err, games) => {
       if (err) {
         console.log('Error occurred:', err)
         res.send('Error occurred.')

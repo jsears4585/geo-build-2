@@ -3,6 +3,7 @@
 ### Current Focus
 - Continue to develop 'Create a game' functionality
 - Add Create a Game fuzzy search
+- Add redirect to CreatePage
 - Add Select a Game fuzzy search
 - Olympic-style top-three podium for end game and raining confetti
 
