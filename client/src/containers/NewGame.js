@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Input, TextArea, Label, Button, Loader, Container } from 'semantic-ui-react'
 
 import * as utils from '../lib/utils.js'
@@ -13,7 +14,8 @@ export class NewGame extends Component {
     description: '',
     answers: [],
     payload: [],
-    matchingCountries: []
+    matchingCountries: [],
+    redirect: false
   }
 
   componentDidMount() {
@@ -66,7 +68,11 @@ export class NewGame extends Component {
         }
       })
     }).then(res => res.json())
-      .then(response => console.log(response))
+      .then(response => this.handleRedirect())
+  }
+
+  handleRedirect = () => {
+    this.setState({redirect: true})
   }
 
   uniqueAnswers = (name) => {
@@ -84,6 +90,12 @@ export class NewGame extends Component {
   }
 
   render() {
+
+    if (this.state.redirect) {
+      return (
+        <Redirect push to={'/create/'}/>
+      )
+    }
 
     let displayNames
     if (this.state.countries) {

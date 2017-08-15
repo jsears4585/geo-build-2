@@ -152,7 +152,9 @@ export class GameContainer extends Component {
     if ( this.state.currentSlide >= 0 && this.state.showMap ) {
       return (
         <div>
-          <div className="timecard">{this.state.time === 10 ? null : this.state.time}</div>
+          <div className="timecard">
+            <div className="timecardInside">{this.state.time === 10 ? null : this.state.time}</div>
+          </div>
           <Answers answersArray={this.state.answersArray} />
           <Map
             // eslint-disable-next-line

@@ -1,9 +1,6 @@
 ## Geography Game
 
 ### Current Focus
-- Add redirect to CreatePage from NewGame after submitting a new game
-- Prevent unnecessary start game after selecting a game / or use as confirmation box
-- Add Create a Game A-Z sort and pick
 - Olympic-style top-three podium for end game and raining confetti
 - Continue to seed country data
 
@@ -14,7 +11,9 @@
 - Different map types and highlight colors
 
 #### Recently Finished
-
+- Add redirect to CreatePage from NewGame after submitting a new game
+- Prevent unnecessary start game confirmation, convert to confirmation box
+- Add Create a New Game A-Z sort instead of fuzzy search
 
 #### Done
 - ~~Questions component~~

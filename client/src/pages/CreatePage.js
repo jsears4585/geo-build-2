@@ -47,11 +47,14 @@ class CreatePage extends React.Component {
   handleCardClick = e => {
     let title = e.currentTarget.attributes["data-title"].value
     this.props.updateGameTitle(title)
-    this.setState({ code: generateGameCode(4, 'ABCDEF0123456789'), })
+    this.setState({
+      code: generateGameCode(4, 'ABCDEF0123456789'),
+      currentTitle: title
+    })
   }
 
   matchGames = value => {
-    let regex = new RegExp('^' + value, "i")
+    let regex = new RegExp(value, "i")
     let matches = this.state.games.filter(game => {
       if (game.title.match(regex) || game.description.match(regex)) return game
     })
@@ -81,14 +84,14 @@ class CreatePage extends React.Component {
     if (this.state.code) {
       buttonOrCode =
       <div>
-        {this.state.code}<br />
+        You've selected: '{this.state.currentTitle}'<br />
         <Button
           className='Button'
           color="teal"
           basic={false}
           onClick={()=>this.gameRedirect(this.state.code)}
         >
-          Start Game
+          Start Game?
         </Button>
       </div>
     } else {
@@ -138,7 +141,7 @@ class CreatePage extends React.Component {
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
         {displayGames}
         <Divider />
-        <p>{this.state.code ? 'Share this code with the other players and have them log in to the game room.' : 'This will generate a special code for you to share with the other players.' }</p>
+        <p>{this.state.code ? 'This will generate a special code for you to share with the other players.' : 'Pick a game or create your own!' }</p>
       </Container>
     )
   }
