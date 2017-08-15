@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Label, Button, Loader, Container } from 'semantic-ui-react'
+import { Input, TextArea, Label, Button, Loader, Container } from 'semantic-ui-react'
 
 import * as utils from '../lib/utils.js'
 
@@ -106,11 +106,12 @@ export class NewGame extends Component {
                 }
               }}
             >
-              {name}<br />
               <img
                 src={require(`../images/flags/${slugged}.png`)}
+                className="newGameFlag"
                 alt={slugged}
               />
+              <p className="newGameCountryName">{name}</p>
             </div>
           )
         }) }
@@ -121,17 +122,27 @@ export class NewGame extends Component {
 
     return (
       <div className="newGame">
-        <Label>Title</Label><br />
+        <Label
+          className="newGameLabel"
+        >
+          Game Title
+        </Label><br />
         <Input
           type="text"
           name="title"
+          className="newGameInput"
           value={this.state.title}
           onChange={this.handleOnChange}
         /><br />
-        <Label>Description</Label><br />
-        <Input
+        <Label
+          className="newGameLabel"
+        >
+          Game Description
+        </Label><br />
+        <TextArea
           type="text"
           name="description"
+          className="newGameTextArea"
           value={this.state.description}
           onChange={this.handleOnChange}
         />
@@ -139,8 +150,14 @@ export class NewGame extends Component {
           {this.state.answers.join(', ')}
         </Container>
         {displayNames}
-        <Button color="pink" onClick={()=>this.handleSubmit()}>
-          Select your countries
+        <Button
+          className="gameSubmitButton"
+          size="large"
+          fluid={true}
+          color="pink"
+          onClick={()=>this.handleSubmit()}
+        >
+          Select these countries
         </Button>
       </div>
     )

@@ -1,11 +1,11 @@
 ## Geography Game
 
 ### Current Focus
-- Continue to develop 'Create a game' functionality
-- Add Create a Game fuzzy search
-- Add redirect to CreatePage
-- Add Select a Game fuzzy search
+- Add redirect to CreatePage from NewGame after submitting a new game
+- Prevent unnecessary start game after selecting a game / or use as confirmation box
+- Add Create a Game A-Z sort and pick
 - Olympic-style top-three podium for end game and raining confetti
+- Continue to seed country data
 
 #### To Do
 - Add Hints Box, to give hints
@@ -14,8 +14,7 @@
 - Different map types and highlight colors
 
 #### Recently Finished
-- User shouldn't be allow to begin game until all countries have been loaded into the game container
-- Move timeout bar from player's controller to main game display, switched from Progress bar to timer
+
 
 #### Done
 - ~~Questions component~~
@@ -37,3 +36,6 @@
 - ~~Make answers full width~~
 - ~~Create game allows a user to pick a country and the program randomizes answers~~
 - ~~Create game countries render with flags and are toggleable~~
+- ~~User shouldn't be allow to begin game until all countries have been loaded into the game container~~
+- ~~Move timeout bar from player's controller to main game display, switched from Progress bar to timer~~
+- ~~Add Select a Game fuzzy search~~

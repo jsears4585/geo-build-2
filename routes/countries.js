@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   app.get('/get_country_names', (req, res) => {
     console.log('hit')
-    Country.find({}, '-_id name', (err, countries) => {
+    Country.find({}, '-_id name', { sort: { 'name' : 1 }}, (err, countries) => {
       if (err) {
         console.log('Error occurred:', err)
         res.send('Error occurred.')

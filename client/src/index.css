@@ -28,7 +28,56 @@ img {
     user-select: none;
 }
 
+.ui.fluid.button, .ui.fluid.buttons {
+    width: 94%!important;
+}
+
 /* Custom */
+
+p.newGameCountryName {
+  display: inline-block;
+  font-size: 1.267em;
+  padding-left: 30px;
+  position: relative;
+  bottom: 28px;
+  color: #4c4c4c;
+}
+
+img.newGameFlag {
+  display: inline-block;
+  position: relative;
+  bottom: 7px;
+  left: 7px;
+}
+
+.flagContainers {
+  width: 94%;
+  border-radius: 8px;
+  background: #efefef;
+  padding: 5px;
+  margin: 3px 15px;
+  font-size: 19px;
+  cursor: pointer;
+  height: 60px;
+}
+
+.newGameLabel { margin: 15px 0px 0px 15px!important; }
+
+.newGameInput {
+  margin: 15px 0px 0px 15px;
+  width: 94%!important;
+}
+
+.newGameTextArea {
+  margin: 15px 0px 0px 15px;
+  border: 1px solid gainsboro!important;
+  border-radius: 5px;
+  width: 94%;
+}
+
+.gameSubmitButton {
+  margin: 15px!important;
+}
 
 .searchBar {
   margin-bottom: 30px!important;
@@ -53,23 +102,13 @@ img {
 .pickedAnswers {
   background: #efefef;
   padding: 20px;
+  margin: 20px;
   text-align: center;
   border-radius: 5px;
+  min-height: 66px;
 }
 
 .selected { background-color: rgba(109, 232, 246, 0.44)!important }
-
-.flagContainers {
-  width: 16%;
-  min-width: 110px;
-  display: inline-block;
-  border-radius: 8px;
-  background: #efefef;
-  padding: 10px;
-  margin: 15px;
-  font-size: 19px;
-  cursor: pointer;
-}
 
 .gameCodeNames {
   text-align: center;
