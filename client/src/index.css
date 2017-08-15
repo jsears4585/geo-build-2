@@ -32,6 +32,10 @@ img {
     width: 94%!important;
 }
 
+.ui.text.container.pickedAnswers {
+    width: 94%!important;
+}
+
 /* Custom */
 
 p.newGameCountryName {

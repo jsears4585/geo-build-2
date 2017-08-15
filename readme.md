@@ -5,10 +5,10 @@
 - Continue to seed country data
 
 #### To Do
+- Different map types and highlight colors
+- Allow different difficulty levels
 - Add Hints Box, to give hints
 - Allow Host/Admin to also be able to play the game at the same time, render leaderboards on player controllers (mobile mode)
-- Different difficulty levels
-- Different map types and highlight colors
 
 #### Recently Finished
 - Add redirect to CreatePage from NewGame after submitting a new game
