@@ -45,7 +45,7 @@ module.exports = function(app) {
 
   app.post('/retrieve_countries', (req, res) => {
     Country.find({$or : req.body.query },
-      '-_id name borderData lat lng zoom', (err, countries) => {
+      '-_id name borderData latitude longitude zoom', (err, countries) => {
       if (err) {
         console.log('Error occurred:', err)
         res.send('Error occurred.')

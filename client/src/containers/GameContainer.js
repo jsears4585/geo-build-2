@@ -142,8 +142,8 @@ export class GameContainer extends Component {
       currentSlide: newSlide,
       coords: this.state.importedCountries[newSlide].borderData,
       answersArray: this.state.shuffledAnswersArray[newSlide],
-      currentLat: this.state.importedCountries[newSlide].lat,
-      currentLng: this.state.importedCountries[newSlide].lng,
+      currentLat: this.state.importedCountries[newSlide].latitude,
+      currentLng: this.state.importedCountries[newSlide].longitude,
       currentZoom: this.state.importedCountries[newSlide].zoom,
     })
   }
@@ -159,7 +159,7 @@ export class GameContainer extends Component {
           <Map
             // eslint-disable-next-line
             style={'mapbox://styles/jsears5/cj674mwhz04k72soxxht9ghgq'}
-            center={[ this.state.currentLat, this.state.currentLng ]}
+            center={[ this.state.currentLng, this.state.currentLat ]}
             containerStyle={{
               height: "100vh",
               width: "100vw",
