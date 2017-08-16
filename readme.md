@@ -2,18 +2,26 @@
 
 ### Current Focus
 - Olympic-style top-three podium for end game and raining confetti
-- Continue to seed country data
+- Player controller feedback after round, success or fail, you said... correct answer
+- Continue Mobile optimization and country re-sizing
+- Allow user to randomize a game of a certain amount of countries in game selection
+- During game creation, allow user to select all countries of a certain region or continent
 
 #### To Do
+- Capitals?
+- Single player mode
+- Mobile multiplayer mode
+- Get a logo
+- Create different rooms from users to play different games in parallel
 - Different map types and highlight colors
 - Allow different difficulty levels
 - Add Hints Box, to give hints
-- Allow Host/Admin to also be able to play the game at the same time, render leaderboards on player controllers (mobile mode)
 
 #### Recently Finished
-- Add redirect to CreatePage from NewGame after submitting a new game
-- Prevent unnecessary start game confirmation, convert to confirmation box
-- Add Create a New Game A-Z sort instead of fuzzy search
+- ~~Add redirect to CreatePage from NewGame after submitting a new game~~
+- ~~Prevent unnecessary start game confirmation, convert to confirmation box~~
+- ~~Add Create a New Game A-Z sort instead of fuzzy search~~
+- ~~Continue to seed country data completed~~
 
 #### Done
 - ~~Questions component~~
