@@ -25,7 +25,7 @@ const Names = ({
       </Button>
     </div>
   } else {
-    button = <Loader active inline='centered' />
+    button = <Loader active size="massive">Loading Countries</Loader>
   }
 
   return (
