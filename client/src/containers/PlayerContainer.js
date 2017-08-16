@@ -91,7 +91,7 @@ class PlayerContainer extends React.Component {
       <div>
         <Button
           className='squareButton'
-          color='facebook'
+          color='violet'
           disabled={this.state.answerSubmitted}
           onClick={()=> {this.handleAnswer('A')} }
         >
@@ -99,7 +99,7 @@ class PlayerContainer extends React.Component {
         </Button>
         <Button
           className='squareButton'
-          color='facebook'
+          color='violet'
           disabled={this.state.answerSubmitted}
           onClick={()=> {this.handleAnswer('B')} }
         >
@@ -107,7 +107,7 @@ class PlayerContainer extends React.Component {
         </Button><br />
         <Button
           className='squareButton'
-          color='facebook'
+          color='violet'
           disabled={this.state.answerSubmitted}
           onClick={()=> {this.handleAnswer('C')} }
         >
@@ -115,7 +115,7 @@ class PlayerContainer extends React.Component {
         </Button>
         <Button
           className='squareButton'
-          color='facebook'
+          color='violet'
           disabled={this.state.answerSubmitted}
           onClick={()=> {this.handleAnswer('D')} }
         >
@@ -139,6 +139,7 @@ class PlayerContainer extends React.Component {
         </Input>
         <Button
           className="joinButtonPlayer"
+          color="violet"
           onClick={()=>(this.joinRoom())}>
           Join
         </Button>
