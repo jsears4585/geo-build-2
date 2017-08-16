@@ -7,7 +7,9 @@
 }
 
 .ui.table {
-  width: 280px!important;
+  width: 540px!important;
+  margin-top: 62px!important;
+  margin-left: 102px!important;
 }
 
 .noselect {
@@ -34,6 +36,10 @@ img {
 
 .ui.text.container.pickedAnswers {
     width: 94%!important;
+}
+
+.bigButton {
+    margin: 2px!important;
 }
 
 /* Custom */
@@ -79,8 +85,12 @@ img.newGameFlag {
   width: 94%;
 }
 
+p.footerBlurb {
+  margin-bottom: 40px;
+}
+
 .gameSubmitButton {
-  margin: 15px!important;
+  margin: 15px 0px 30px 15px!important;
 }
 
 .searchBar {
@@ -88,11 +98,9 @@ img.newGameFlag {
 }
 
 .gameSelectionContainer {
-  height: 392px;
-  overflow: scroll;
-  padding: 15px;
-  background: rgba(47, 82, 126, 0.25);
-  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+  bottom: 25px;
 }
 
 .timecard {
@@ -123,7 +131,9 @@ img.newGameFlag {
   min-height: 66px;
 }
 
-.selected { background-color: rgba(109, 232, 246, 0.44)!important }
+.selected {
+  background-color: rgba(137, 155, 228, 0.48)!important;
+}
 
 .gameCodeNames {
   text-align: center;
@@ -154,20 +164,11 @@ img.newGameFlag {
   width: 38%;
   cursor: pointer;
   vertical-align: text-top;
-  box-shadow: 4px 3px #607D8B;
+  box-shadow: 4px 3px #6881E4;
 }
 
 .leaderboard {
   margin: 22px 0px 0px 60px!important;
-  display: inline-block;
-}
-
-.playerColumn {
-  width: 17%!important;
-}
-
-.scoreColumn {
-  width: 80%!important;
 }
 
 .ui.facebook.button {
@@ -196,14 +197,14 @@ img.newGameFlag {
   width: 82px;
   display: block;
   float: right;
-  margin: -71px 104px;
+  margin: -53px 169px;
 }
 
 .readyButton2 {
   width: 82px;
   display: block;
   float: right;
-  margin: 24px 104px;
+  margin: -53px 169px;
 }
 
 #root {

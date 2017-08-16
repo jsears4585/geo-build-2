@@ -54,12 +54,18 @@ class JoinPage extends React.Component {
               />
             </div>
             <div>
-              <Button id='joinButton' type='submit'>Join</Button>
+              <Button
+                id='joinButton'
+                color='violet'
+                type='submit'
+              >
+                Join
+              </Button>
             </div>
           </form>
         </div>
         <Divider />
-        <p>Please input your 4-digit code. Don't worry, we're case-insensitive.</p>
+        <p className="footerBlurb">Please input your 4-digit code. Don't worry, we're case-insensitive.</p>
       </Container>
     )
   }

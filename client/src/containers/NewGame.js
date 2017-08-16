@@ -164,9 +164,9 @@ export class NewGame extends Component {
         {displayNames}
         <Button
           className="gameSubmitButton"
-          size="large"
+          size="huge"
           fluid={true}
-          color="pink"
+          color="violet"
           onClick={()=>this.handleSubmit()}
         >
           Select these countries

@@ -33,14 +33,14 @@ class HomePage extends React.Component {
         <div className='buttonWrapper'>
           <Button
             className='bigButton'
-            color="facebook"
+            color="violet"
             onClick={this.joinRedirect}
           >
             Join
           </Button>
+          <br />
           <Button
             className='bigButton'
-            color="facebook"
             basic={true}
             onClick={this.createRedirect}
           >
@@ -48,7 +48,7 @@ class HomePage extends React.Component {
           </Button>
         </div>
         <Divider />
-        <p>An interactive geography game powered by React, MongoDB, Node.js, Mapbox GL, & Socket.io.</p>
+        <p className="footerBlurb">An interactive geography game powered by React, MongoDB, Node.js, Mapbox GL, & Socket.io.</p>
       </Container>
     )
   }

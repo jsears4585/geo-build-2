@@ -36,8 +36,8 @@ const Names = ({
       <Table celled className="leaderboard">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-            <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+            <Table.HeaderCell>Player</Table.HeaderCell>
+            <Table.HeaderCell>Score</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

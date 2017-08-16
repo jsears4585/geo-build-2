@@ -87,7 +87,7 @@ class CreatePage extends React.Component {
         You've selected: '{this.state.currentTitle}'<br />
         <Button
           className='Button'
-          color="teal"
+          color="violet"
           basic={false}
           onClick={()=>this.gameRedirect(this.state.code)}
         >
@@ -98,7 +98,7 @@ class CreatePage extends React.Component {
       buttonOrCode =
       <Button
         className='Button'
-        color="pink"
+        color="violet"
         basic={false}
         onClick={()=>this.createGame()}
       >
@@ -141,7 +141,7 @@ class CreatePage extends React.Component {
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
         {displayGames}
         <Divider />
-        <p>{this.state.code ? 'This will generate a special code for you to share with the other players.' : 'Pick a game or create your own!' }</p>
+        <p className="footerBlurb">{this.state.code ? 'This will generate a special code for you to share with the other players.' : 'Pick a game or create your own!' }</p>
       </Container>
     )
   }
