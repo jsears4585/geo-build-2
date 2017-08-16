@@ -16,7 +16,7 @@ let socket
 
 const Map = ReactMapboxGl({ accessToken: mapBoxAuth.pass })
 
-const multiPolygonPaint = { 'fill-color': '#FFFF00' }
+const multiPolygonPaint = { 'fill-color': '#FF0' }
 
 export class GameContainer extends Component {
 

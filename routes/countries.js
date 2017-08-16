@@ -3,14 +3,12 @@ const Country = require( "../models/country" )
 module.exports = function(app) {
 
   app.get('/get_country_names', (req, res) => {
-    console.log('hit')
     Country.find({}, '-_id name', { sort: { 'name' : 1 }}, (err, countries) => {
       if (err) {
         console.log('Error occurred:', err)
         res.send('Error occurred.')
       } else {
         let returnArray = countries.map(country=>country.name)
-        console.log(returnArray)
         res.send(returnArray)
       }
     })
@@ -46,7 +44,8 @@ module.exports = function(app) {
   })
 
   app.post('/retrieve_countries', (req, res) => {
-    Country.find({ $or : req.body.query }, '-_id name borderData lat lng zoom', (err, countries) => {
+    Country.find({$or : req.body.query },
+      '-_id name borderData lat lng zoom', (err, countries) => {
       if (err) {
         console.log('Error occurred:', err)
         res.send('Error occurred.')
