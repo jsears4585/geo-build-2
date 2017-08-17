@@ -117,9 +117,7 @@ export class GameContainer extends Component {
     let formatted = firsts.map(country => {
       return { "name" : country }
     })
-    let countriesToRequest = {
-      "query" : formatted
-    }
+    let countriesToRequest = { "query" : formatted }
     this.retrieveCountries(countriesToRequest)
   }
 
@@ -138,6 +136,7 @@ export class GameContainer extends Component {
   nextSlide = () => {
     socket.emit('next slide', {})
     let newSlide = this.state.currentSlide + 1
+    this.props.setCurrentCountries(this.state.shuffledAnswersArray[newSlide])
     this.setState({
       currentSlide: newSlide,
       coords: this.state.importedCountries[newSlide].borderData,

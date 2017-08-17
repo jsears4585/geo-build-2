@@ -16,7 +16,8 @@ class App extends Component {
 
   state = {
     currentGameTitle: null,
-    currentGameCode: null
+    currentGameCode: null,
+    currentCountries: []
   }
 
   updateGameTitle = title => {
@@ -28,6 +29,13 @@ class App extends Component {
   updateGameCode = code => {
     this.setState({
       currentGameCode: code
+    })
+  }
+
+  setCurrentCountries = array => {
+    console.log(array)
+    this.setState({
+      currentCountries: array
     })
   }
 
@@ -44,12 +52,15 @@ class App extends Component {
             />
           )}/>
           <Route path='/player' render={()=>(
-            <PlayerContainer />
+            <PlayerContainer
+              currentCountries={this.state.currentCountries}
+            />
           )}/>
           <Route path='/game' render={()=>(
             <GameContainer
               currentGameTitle={this.state.currentGameTitle}
               currentGameCode={this.state.currentGameCode}
+              setCurrentCountries={this.setCurrentCountries}
             />
           )}/>
           <Route path='/new' component={NewGame} />

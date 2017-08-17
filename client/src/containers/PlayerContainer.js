@@ -15,6 +15,11 @@ class PlayerContainer extends React.Component {
     renderSignin: true,
     answerSubmitted: false,
     controllerShouldRender: false,
+    showRoundResults: false,
+    currentAnswersArray: [],
+    currentCountryAnswers: [],
+    userAnswer: '',
+    correctAnswer: '',
     username: ''
   }
 
@@ -23,9 +28,13 @@ class PlayerContainer extends React.Component {
       if (this.state.score <= 0) {
         clearInterval(scoring)
         this.setState({
+          controllerShouldRender: false,
           finished: true,
           score: 1000
         })
+        setTimeout(function() {
+          this.setState({ showRoundResults: true })
+        }.bind(this), 1000)
       } else {
         this.setState({ score: this.state.score - 1 })
       }
@@ -33,23 +42,18 @@ class PlayerContainer extends React.Component {
   }
 
   handleAnswer = answer => {
-    let clientAnswer = {
+    socket.emit('send answer', {
       username: this.state.username,
       answer: answer,
       points: this.state.score
-    }
-    socket.emit('send answer', clientAnswer)
+    })
     this.setState({
-      answerSubmitted: true
+      answerSubmitted: true,
+      userAnswer: answer
     })
   }
 
-  sayHello = name => {
-    console.log(`Hello, ${name}`)
-    this.setState({
-      username: name
-    })
-  }
+  sayHello = name => this.setState({ username: name })
 
   nextSlide = () => {
     console.log('Render next slide')
@@ -71,6 +75,12 @@ class PlayerContainer extends React.Component {
         answerSubmitted: false
        })
       this.fire()
+    })
+    socket.on('receive round data', (data) => {
+      this.setState({
+        correctAnswer: data.correctAnswer,
+        currentAnswersArray: data.answersArray
+      })
     })
     this.setState({
       value: '',
@@ -123,7 +133,21 @@ class PlayerContainer extends React.Component {
         </Button>
       </div>
     } else {
-      show = null
+
+      if (this.state.showRoundResults) {
+        show =
+        <div>
+          <p>You answered: {this.state.userAnswer}</p>
+          <p>Correct answer: {this.state.correctAnswer}</p>
+          <p> {  this.state.userAnswer === this.state.correctAnswer
+                ? 'You got it right!'
+                : 'Better luck next time!'
+              }
+          </p>
+        </div>
+      } else {
+        show = null
+      }
     }
 
     let signIn
@@ -151,7 +175,7 @@ class PlayerContainer extends React.Component {
     return (
       <div className='wrapper playerButtonBuffer'>
         {signIn}
-        {this.state.finished ? null : show}
+        {show}
       </div>
     )
   }

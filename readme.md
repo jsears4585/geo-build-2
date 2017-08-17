@@ -1,16 +1,17 @@
 ## Geography Game
 
 ### Current Focus
-- Olympic-style top-three podium for end game and raining confetti
 - Player controller feedback after round, success or fail, you said... correct answer
-- Continue Mobile optimization and country re-sizing
-- Allow user to randomize a game of a certain amount of countries in game selection
-- During game creation, allow user to select all countries of a certain region or continent
-
-#### To Do
-- Capitals?
 - Single player mode
 - Mobile multiplayer mode
+- Olympic-style top-three podium for end game and raining confetti
+- Continue Mobile optimization and country re-sizing
+
+#### To Do
+- Tell users pre-game: 1. make sure you're on wifi 2. faster answers score more points
+- Allow user to randomize a game of a certain amount of countries in game selection
+- During game creation, allow user to select all countries of a certain region or continent
+- Capitals?
 - Get a logo
 - Create different rooms from users to play different games in parallel
 - Different map types and highlight colors

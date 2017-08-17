@@ -7,6 +7,7 @@ module.exports = function(io) {
   let playersNameArray = []
   let currentRound = -1
   let answersArray = []
+  let countriesArray = []
 
   currentPlayers.on('connection', (socket) => {
     socket.on('new user join', (data) => {
@@ -31,6 +32,11 @@ module.exports = function(io) {
       } else {
         playersArray[index][`round_${currentRound}`] = 0
       }
+
+      socket.emit('receive round data', {
+        correctAnswer: answersArray[currentRound],
+        answersArray: countriesArray
+      })
 
       console.log(playersArray)
     })
