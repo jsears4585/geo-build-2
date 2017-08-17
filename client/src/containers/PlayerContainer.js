@@ -17,7 +17,6 @@ class PlayerContainer extends React.Component {
     controllerShouldRender: false,
     showRoundResults: false,
     currentAnswersArray: [],
-    currentCountryAnswers: [],
     userAnswer: '',
     correctAnswer: '',
     username: ''
@@ -34,7 +33,7 @@ class PlayerContainer extends React.Component {
         })
         setTimeout(function() {
           this.setState({ showRoundResults: true })
-        }.bind(this), 1000)
+        }.bind(this), 1747)
       } else {
         this.setState({ score: this.state.score - 1 })
       }
@@ -98,76 +97,99 @@ class PlayerContainer extends React.Component {
     let show
     if (this.state.controllerShouldRender) {
       show =
-      <div>
-        <Button
-          className='squareButton'
-          color='violet'
-          disabled={this.state.answerSubmitted}
-          onClick={()=> {this.handleAnswer('A')} }
-        >
-          A
-        </Button>
-        <Button
-          className='squareButton'
-          color='violet'
-          disabled={this.state.answerSubmitted}
-          onClick={()=> {this.handleAnswer('B')} }
-        >
-          B
-        </Button><br />
-        <Button
-          className='squareButton'
-          color='violet'
-          disabled={this.state.answerSubmitted}
-          onClick={()=> {this.handleAnswer('C')} }
-        >
-          C
-        </Button>
-        <Button
-          className='squareButton'
-          color='violet'
-          disabled={this.state.answerSubmitted}
-          onClick={()=> {this.handleAnswer('D')} }
-        >
-          D
-        </Button>
-      </div>
+        <div>
+          <Button
+            className='squareButton'
+            color='violet'
+            disabled={this.state.answerSubmitted}
+            onClick={()=> {this.handleAnswer('A')} }
+          >
+            A
+          </Button>
+          <Button
+            className='squareButton'
+            color='violet'
+            disabled={this.state.answerSubmitted}
+            onClick={()=> {this.handleAnswer('B')} }
+          >
+            B
+          </Button><br />
+          <Button
+            className='squareButton'
+            color='violet'
+            disabled={this.state.answerSubmitted}
+            onClick={()=> {this.handleAnswer('C')} }
+          >
+            C
+          </Button>
+          <Button
+            className='squareButton'
+            color='violet'
+            disabled={this.state.answerSubmitted}
+            onClick={()=> {this.handleAnswer('D')} }
+          >
+            D
+          </Button>
+        </div>
     } else {
 
+      let answerKey = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
+
       if (this.state.showRoundResults) {
+
+        let userAnswerIndex = answerKey[this.state.userAnswer]
+        let correctAnswerIndex = answerKey[this.state.correctAnswer]
+
+        if (this.state.userAnswer === this.state.correctAnswer) {
+          show =
+            <div>
+              <i className="massive check green circle icon userFeedbackIcons"></i>
+              <br />
+              <p>You got it right! {this.state.currentAnswersArray[correctAnswerIndex]} is correct.</p>
+            </div>
+        } else {
+          show =
+            <div>
+              <i className="massive check red circle icon userFeedbackIcons"></i>
+              <br />
+              <p>
+                You answered {this.state.currentAnswersArray[userAnswerIndex]}
+              </p>
+              <p>
+                The correct answer was {this.state.currentAnswersArray[correctAnswerIndex]}
+              </p>
+              <p>Better luck next time!</p>
+            </div>
+        }
+
+      } else if (   !this.state.renderSignin
+                    && !this.state.showRoundResults
+                    && this.state.currentAnswersArray.length <= 0 ) {
         show =
-        <div>
-          <p>You answered: {this.state.userAnswer}</p>
-          <p>Correct answer: {this.state.correctAnswer}</p>
-          <p> {  this.state.userAnswer === this.state.correctAnswer
-                ? 'You got it right!'
-                : 'Better luck next time!'
-              }
-          </p>
-        </div>
-      } else {
-        show = null
+          <div>
+            <p>The game is about ready to start!</p>
+          </div>
       }
     }
 
     let signIn
     if (this.state.renderSignin) {
       signIn =
-      <div>
-        <Label pointing='below'>Make up a cool name!</Label><br />
-        <Input
-          type='text'
-          name='username'
-          value={this.state.value}
-          onChange={this.onHandleChange}>
-        </Input>
-        <Button
-          className="joinButtonPlayer"
-          color="violet"
-          onClick={()=>(this.joinRoom())}>
-          Join
-        </Button>
-      </div>
+        <div>
+          <Label pointing='below'>Make up a cool name!</Label><br />
+          <Input
+            type='text'
+            name='username'
+            value={this.state.value}
+            onChange={this.onHandleChange}>
+          </Input>
+          <Button
+            className="joinButtonPlayer"
+            color="violet"
+            onClick={()=>(this.joinRoom())}>
+            Join
+          </Button>
+        </div>
     } else {
       signIn = null
     }

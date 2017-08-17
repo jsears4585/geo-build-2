@@ -136,7 +136,7 @@ export class GameContainer extends Component {
   nextSlide = () => {
     socket.emit('next slide', {})
     let newSlide = this.state.currentSlide + 1
-    this.props.setCurrentCountries(this.state.shuffledAnswersArray[newSlide])
+    socket.emit('new answers', { answers: this.state.shuffledAnswersArray[newSlide] })
     this.setState({
       currentSlide: newSlide,
       coords: this.state.importedCountries[newSlide].borderData,

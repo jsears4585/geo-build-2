@@ -32,13 +32,6 @@ class App extends Component {
     })
   }
 
-  setCurrentCountries = array => {
-    console.log(array)
-    this.setState({
-      currentCountries: array
-    })
-  }
-
   render() {
     return (
       <div className="App">
@@ -52,15 +45,12 @@ class App extends Component {
             />
           )}/>
           <Route path='/player' render={()=>(
-            <PlayerContainer
-              currentCountries={this.state.currentCountries}
-            />
+            <PlayerContainer />
           )}/>
           <Route path='/game' render={()=>(
             <GameContainer
               currentGameTitle={this.state.currentGameTitle}
               currentGameCode={this.state.currentGameCode}
-              setCurrentCountries={this.setCurrentCountries}
             />
           )}/>
           <Route path='/new' component={NewGame} />

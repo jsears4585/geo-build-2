@@ -55,8 +55,11 @@ class CreatePage extends React.Component {
 
   matchGames = value => {
     let regex = new RegExp(value, "i")
+    // eslint-disable-next-line
     let matches = this.state.games.filter(game => {
-      if (game.title.match(regex) || game.description.match(regex)) return game
+      if (game.title.match(regex) || game.description.match(regex)) {
+        return game
+      }
     })
     this.setState({ matchingGames: matches })
   }
