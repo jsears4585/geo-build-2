@@ -19,7 +19,7 @@ export class SoloContainer extends Component {
     coords: [],
     currentSlide: -1,
     lastSlideIndex: null,
-    importedCountries: [],
+    importedCountries: null,
     importedAnswers: null,
     currentLat: null,
     currentLng: null,
