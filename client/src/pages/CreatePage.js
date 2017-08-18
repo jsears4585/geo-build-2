@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { Button, Container, Divider } from 'semantic-ui-react'
+import { Button, Container, Divider, Form, Radio } from 'semantic-ui-react'
 
 import '../index.css'
 
@@ -22,7 +22,8 @@ class CreatePage extends React.Component {
       createGame: false,
       games: [],
       currentTitle: null,
-      matchingGames: []
+      matchingGames: [],
+      gameMode: ''
     }
   }
 
@@ -69,7 +70,15 @@ class CreatePage extends React.Component {
     this.matchGames(value)
   }
 
+  handleChange = (e, { value }) => this.setState({ gameMode: value })
+
   render() {
+    if (this.state.gameMode === 'solo') {
+      return (
+        <Redirect push to={`/solo`}/>
+      )
+    }
+
     if (this.state.startGame) {
       return (
         <Redirect push to={`/game/${this.state.code}`}/>
@@ -87,7 +96,43 @@ class CreatePage extends React.Component {
     if (this.state.code) {
       buttonOrCode =
       <div>
-        You've selected: '{this.state.currentTitle}'<br />
+        Next up: '{this.state.currentTitle}'<br />
+
+        <div className="gameToggles">
+          <h3>Select your gameplay mode:</h3>
+          <Form>
+            <Form.Field>
+              <Radio
+                label="Solo mode"
+                name='radioGroup'
+                value='solo'
+                checked={this.state.gameMode === 'solo'}
+                onChange={this.handleChange}
+                toggle
+              /><br />
+            </Form.Field>
+            <Form.Field>
+              <Radio
+                label="Multiplayer"
+                name='radioGroup'
+                value='multiplayer'
+                checked={this.state.gameMode === 'multiplayer'}
+                onChange={this.handleChange}
+                toggle
+              /><br />
+            </Form.Field>
+            <Form.Field>
+              <Radio
+                label="Presentation"
+                name='radioGroup'
+                value='presentation'
+                checked={this.state.gameMode === 'presentation'}
+                onChange={this.handleChange}
+                toggle
+              /><br />
+            </Form.Field>
+          </Form>
+        </div>
         <Button
           className='Button'
           color="violet"
@@ -114,25 +159,32 @@ class CreatePage extends React.Component {
     if (!this.state.code) {
       displayGames =
       <div>
-        <div className="ui large icon input searchBar">
-          <input
-            type="text"
-            name="searchValue"
-            placeholder={"Search for Games"}
-            onChange={this.onType}
-          />
-          <i className="circular search link icon"></i>
-        </div>
+
         <div className="gameSelectionContainer">
-          { this.state.matchingGames.map((game, index)=> {
-            return (
-              <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
-                <h3>{ game.title }</h3>
-                <p>{ game.description }</p>
-              </div>
-            )
-          }) }
+          <h3>Or pick a pre-made game:</h3>
+
+          <div className="ui large icon input searchBar">
+            <input
+              type="text"
+              name="searchValue"
+              placeholder={"Search for Games"}
+              onChange={this.onType}
+            />
+            <i className="circular search link icon"></i>
+          </div>
+
+          <div>
+            { this.state.matchingGames.map((game, index)=> {
+              return (
+                <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
+                  <h3>{ game.title }</h3>
+                  <p>{ game.description }</p>
+                </div>
+              )
+            }) }
+          </div>
         </div>
+
       </div>
     } else {
       displayGames = null
@@ -144,7 +196,14 @@ class CreatePage extends React.Component {
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
         {displayGames}
         <Divider />
-        <p className="footerBlurb">{this.state.code ? 'This will generate a special code for you to share with the other players.' : 'Pick a game or create your own!' }</p>
+        <p className="footerBlurb">
+          { this.state.code
+            ?
+              'Please select a game mode. You can play by yourself, with friends, or lead a class.'
+            :
+              'Geography is pretty fun, huh?'
+          }
+        </p>
       </Container>
     )
   }

@@ -48,6 +48,14 @@ img {
 
 /* Custom */
 
+.gameToggles {
+  padding: 16px;
+  background: rgba(213, 213, 213, 0.15);
+  border-radius: 5px;
+  width: 50%;
+  margin: 36px auto 42px;
+}
+
 p.newGameCountryName {
   display: inline-block;
   font-size: 1.267em;
@@ -98,7 +106,7 @@ p.footerBlurb {
 }
 
 .searchBar {
-  margin-bottom: 30px!important;
+  margin-bottom: 44px!important;
 }
 
 .gameSelectionContainer {
@@ -160,7 +168,7 @@ p.footerBlurb {
 }
 
 .gameCard {
-  background: #f6f6f6;
+  background: rgba(213, 213, 213, 0.15);
   border-radius: 4px;
   padding: 10px;
   margin: 11px;
@@ -168,7 +176,7 @@ p.footerBlurb {
   width: 38%;
   cursor: pointer;
   vertical-align: text-top;
-  box-shadow: 4px 3px #6881E4;
+  box-shadow: 4px 3px #2185d0;
 }
 
 .leaderboard {
@@ -190,6 +198,18 @@ p.footerBlurb {
   font-size: 3.7vh;
   padding-top: 30px;
   text-align: center;
+}
+
+.answerButton {
+  display: inline-block!important;
+  width: 50%;
+  padding: 0px!important;
+  margin: 0px!important;
+  height: 74px;
+  background-color: rgba(100, 53, 201, 1)!important;
+  color: white!important;
+  font-size: 3.7vh!important;
+  text-align: center!important;
 }
 
 .answerContainer {
@@ -289,7 +309,10 @@ p {
   height: 138px;
 }
 
-.bigCode { font-size: 32px; }
+.bigCode {
+  font-size: 32px;
+  margin-bottom: 70px;
+}
 
 .welcome {
   font-family: 'Niconne', cursive;

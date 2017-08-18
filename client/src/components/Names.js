@@ -4,12 +4,12 @@ import { Table, Button, Loader } from 'semantic-ui-react'
 import '../index.css'
 
 const Names = ({
-  playersNameArray,
-  startGame,
-  gameCode,
-  countriesLength,
-  answersLength
-}) => {
+    playersNameArray,
+    startGame,
+    gameCode,
+    countriesLength,
+    answersLength
+  }) => {
 
   let button
   if (countriesLength === answersLength) {

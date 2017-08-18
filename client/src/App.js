@@ -9,6 +9,7 @@ import NewGame from './containers/NewGame'
 
 import GameContainer from './containers/GameContainer'
 import PlayerContainer from './containers/PlayerContainer'
+import SoloContainer from './containers/SoloContainer'
 
 import './index.css'
 
@@ -46,6 +47,11 @@ class App extends Component {
           )}/>
           <Route path='/player' render={()=>(
             <PlayerContainer />
+          )}/>
+          <Route path='/solo' render={()=>(
+            <SoloContainer
+              currentGameTitle={this.state.currentGameTitle}
+            />
           )}/>
           <Route path='/game' render={()=>(
             <GameContainer
