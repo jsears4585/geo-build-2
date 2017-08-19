@@ -81,7 +81,7 @@ class CreatePage extends React.Component {
       return <Redirect push to={`/solo`}/>
     }
 
-    if (this.state.startGame) {
+    if (this.state.gameMode === 'presentation' && this.state.clicked) {
       return <Redirect push to={`/game/${this.state.code}`}/>
     }
 
@@ -101,20 +101,10 @@ class CreatePage extends React.Component {
           <Form>
             <Form.Field>
               <Radio
-                label="Solo mode"
+                label="Solo"
                 name='radioGroup'
                 value='solo'
                 checked={this.state.gameMode === 'solo'}
-                onChange={this.handleChange}
-                toggle
-              /><br />
-            </Form.Field>
-            <Form.Field>
-              <Radio
-                label="Multiplayer"
-                name='radioGroup'
-                value='multiplayer'
-                checked={this.state.gameMode === 'multiplayer'}
                 onChange={this.handleChange}
                 toggle
               /><br />
