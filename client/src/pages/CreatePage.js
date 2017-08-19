@@ -23,7 +23,8 @@ class CreatePage extends React.Component {
       games: [],
       currentTitle: null,
       matchingGames: [],
-      gameMode: ''
+      gameMode: '',
+      clicked: false
     }
   }
 
@@ -37,7 +38,10 @@ class CreatePage extends React.Component {
   }
 
   gameRedirect = (code) => {
-    this.setState({ startGame: true, })
+    this.setState({
+      startGame: true,
+      clicked: true
+    })
     this.props.updateGameCode(code)
   }
 
@@ -73,22 +77,16 @@ class CreatePage extends React.Component {
   handleChange = (e, { value }) => this.setState({ gameMode: value })
 
   render() {
-    if (this.state.gameMode === 'solo') {
-      return (
-        <Redirect push to={`/solo`}/>
-      )
+    if (this.state.gameMode === 'solo' && this.state.clicked) {
+      return <Redirect push to={`/solo`}/>
     }
 
     if (this.state.startGame) {
-      return (
-        <Redirect push to={`/game/${this.state.code}`}/>
-      )
+      return <Redirect push to={`/game/${this.state.code}`}/>
     }
 
     if (this.state.createGame) {
-      return (
-        <Redirect push to={'/new'}/>
-      )
+      return <Redirect push to={'/new'}/>
     }
 
     let buttonOrCode
@@ -148,6 +146,7 @@ class CreatePage extends React.Component {
         className='Button'
         color="violet"
         basic={false}
+        size='huge'
         onClick={()=>this.createGame()}
       >
         Create Your Own Game
@@ -158,12 +157,8 @@ class CreatePage extends React.Component {
 
     if (!this.state.code) {
       displayGames =
-      <div>
-
         <div className="gameSelectionContainer">
-          <h3>Or pick a pre-made game:</h3>
-
-          <div className="ui large icon input searchBar">
+          <div className="ui huge icon input searchBar">
             <input
               type="text"
               name="searchValue"
@@ -184,15 +179,13 @@ class CreatePage extends React.Component {
             }) }
           </div>
         </div>
-
-      </div>
     } else {
       displayGames = null
     }
 
     return (
       <Container text textAlign='center'>
-        <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Select a Game'}</h1>
+        <h1 className='welcome'>{this.state.code ? 'Game Time!' : 'Pick or Create'}</h1>
         <div className='buttonWrapper bigCode'>{buttonOrCode}</div>
         {displayGames}
         <Divider />

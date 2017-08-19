@@ -107,6 +107,7 @@ export class NewGame extends Component {
           return (
             <div
               id={`${name}`}
+              key={index}
               className='flagContainers noselect'
               onClick={(event)=> {
                 if (event.currentTarget.classList.contains('selected')) {
@@ -134,32 +135,43 @@ export class NewGame extends Component {
 
     return (
       <div className="newGame">
-        <Label
-          className="newGameLabel"
-        >
-          Game Title
-        </Label><br />
-        <Input
-          type="text"
-          name="title"
-          className="newGameInput"
-          value={this.state.title}
-          onChange={this.handleOnChange}
-        /><br />
-        <Label
-          className="newGameLabel"
-        >
-          Game Description
-        </Label><br />
-        <TextArea
-          type="text"
-          name="description"
-          className="newGameTextArea"
-          value={this.state.description}
-          onChange={this.handleOnChange}
-        />
-        <Container text className="pickedAnswers">
-          {this.state.answers.join(', ')}
+        <Container text textAlign='center'>
+          <h1 className='welcome'>Create Your Own</h1>
+          <Label
+            className="newGameLabel"
+          >
+            Game Title
+          </Label><br />
+          <Input
+            type="text"
+            name="title"
+            required
+            className="newGameInput"
+            value={this.state.title}
+            onChange={this.handleOnChange}
+          /><br />
+          <Label
+            className="newGameLabel"
+          >
+            Game Description
+          </Label><br />
+          <TextArea
+            type="text"
+            name="description"
+            required
+            className="newGameTextArea"
+            value={this.state.description}
+            onChange={this.handleOnChange}
+          />
+          <h3 style={{
+            textIndent: '16px',
+            color: 'rgb(80, 80, 80)'
+          }}>
+            Selected Countries:
+          </h3>
+          <Container text className="pickedAnswers">
+            {this.state.answers.join(', ')}
+          </Container>
         </Container>
         {displayNames}
         <Button

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Button, Loader } from 'semantic-ui-react'
-import ReactMapboxGl, { Layer, Feature, ZoomControl } from 'react-mapbox-gl'
+import { Button, Container, Loader } from 'semantic-ui-react'
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 
 import SoloAnswers from '../components/SoloAnswers'
 
@@ -34,7 +34,42 @@ export class SoloContainer extends Component {
     showMap: true,
     gameOver: false,
     runningTotal: 0,
-    disableButtons: false
+    disableButtons: false,
+    currentMessage: ''
+  }
+
+  loadMessages = () => {
+    const messages = [  'Time-Compressing Simulator Clock',
+                        'Stratifying Ground Layers',
+                        'Polishing Water Highlights',
+                        'Reticulating Splines',
+                        'Graphing Whale Migration',
+                        'Building Data Trees',
+                        'Splatting Transforms',
+                        'Deciding Which Message to Display Next',
+                        'Reconfiguring Political Landscape',
+                        'Prepping Special Sauce',
+                        'Persisting Country Data',
+                        'Curbing Enthusiasm',
+                        'Playing DOOM on Windows 95',
+                        'Searching Worldwide Info-structures',
+                        'Un-nesting Loops',
+                        'Plotting Revenge Against Humans',
+                        'Polling Llama Interface',
+                        'Incrementing Happiness Indicators',
+                        'Normalizing Frequencies',
+                        'Calculating Centroids'
+                      ]
+
+    setInterval(()=> {
+      this.setState({
+        currentMessage: messages[utils.getRandomInt(0, messages.length)]
+      })
+    }, 1448)
+
+    this.setState({
+      currentMessage: messages[utils.getRandomInt(0, messages.length)]
+    })
   }
 
   timeKeeping = seconds => {
@@ -54,6 +89,7 @@ export class SoloContainer extends Component {
   }
 
   componentDidMount() {
+    this.loadMessages()
     let useThis = this.props.currentGameTitle || "Learn the countries of Southeast Asia"
     fetch('/retrieve_game_by_id', {
       headers: {
@@ -81,6 +117,7 @@ export class SoloContainer extends Component {
       .then(res => {
         let ordered = mapHelpers.orderCountries(this.state.mapDisplayOrder, res)
         this.setState({ importedCountries: ordered })
+
       })
   }
 
@@ -167,7 +204,6 @@ export class SoloContainer extends Component {
             }}
             zoom={[this.state.currentZoom]}
           >
-          <ZoomControl/>
           <Layer
             type="fill"
             paint={multiPolygonPaint}
@@ -180,15 +216,23 @@ export class SoloContainer extends Component {
     } else {
       if (this.state.importedCountries) {
         return (
-          <Button
-            onClick={()=>this.nextSlide()}
-          >
-            Ready?
-          </Button>
+          <Container id="soloLoadingGame" text>
+            <Button
+              onClick={()=>this.nextSlide()}
+              className="startButtonSolo"
+              size='massive'
+              color='violet'
+              fluid
+            >
+              Begin
+            </Button>
+          </Container>
         )
       } else {
         return (
-          <Loader active inline='centered' />
+          <Loader size="huge" active>
+            { this.state.currentMessage }
+          </Loader>
         )
       }
     }

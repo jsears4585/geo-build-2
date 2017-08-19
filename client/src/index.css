@@ -48,20 +48,35 @@ img {
 
 /* Custom */
 
+#soloLoadingGame {
+  margin-top: 20px!important;
+}
+
+.startButtonSolo {
+  margin: 0 auto!important;
+  width: 100%!important;
+  margin-top: 10px;
+}
+
 .gameToggles {
-  padding: 16px;
-  background: rgba(213, 213, 213, 0.15);
+  padding: 26px;
+  background-color: rgba(210, 160, 222, 0.08);
+  background-image: url('images/rough-cloth.png');
   border-radius: 5px;
-  width: 50%;
+  width: 84%;
   margin: 36px auto 42px;
+}
+
+.gameToggles label {
+  font-weight: 700;
 }
 
 p.newGameCountryName {
   display: inline-block;
-  font-size: 1.267em;
+  font-size: 1em;
   padding-left: 30px;
   position: relative;
-  bottom: 28px;
+  bottom: 31px;
   color: #4c4c4c;
 }
 
@@ -91,6 +106,10 @@ img.newGameFlag {
 }
 
 .newGameTextArea {
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.21428571em;
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 15px;
   margin: 15px 0px 0px 15px;
   border: 1px solid gainsboro!important;
   border-radius: 5px;
@@ -98,7 +117,7 @@ img.newGameFlag {
 }
 
 p.footerBlurb {
-  margin-bottom: 40px;
+  margin-bottom: 27px;
 }
 
 .gameSubmitButton {
@@ -106,7 +125,7 @@ p.footerBlurb {
 }
 
 .searchBar {
-  margin-bottom: 44px!important;
+  margin-bottom: 19px!important;
 }
 
 .gameSelectionContainer {
@@ -116,30 +135,31 @@ p.footerBlurb {
 }
 
 .timecard {
-  font-size: 112px;
+  font-size: 52px;
   color: white;
   background-color: #6435c9;
   position: absolute;
   z-index: 10000;
   right: 16px;
   bottom: 16px;
-  height: 106px;
-  width: 109px;
+  height: 56px;
+  width: 53px;
   border-radius: 5px;
 }
 
 .timecardInside {
   position: relative;
-  left: 22px;
-  top: 43px;
+  left: 12px;
+  top: 19px;
 }
 
 .pickedAnswers {
-  background: #efefef;
-  padding: 20px;
   margin: 20px;
-  text-align: center;
+  padding: 26px;
+  background-color: rgba(147, 9, 181, 0.14);
+  background-image: url('images/rough-cloth.png');
   border-radius: 5px;
+  text-align: center;
   min-height: 66px;
 }
 
@@ -168,15 +188,16 @@ p.footerBlurb {
 }
 
 .gameCard {
-  background: rgba(213, 213, 213, 0.15);
-  border-radius: 4px;
+  background: rgba(180, 163, 226, 0.22);
+  border-radius: 9px;
   padding: 10px;
   margin: 11px;
   display: inline-block;
   width: 38%;
   cursor: pointer;
   vertical-align: text-top;
-  box-shadow: 4px 3px #2185d0;
+  -webkit-box-shadow: 4px 3px #2185d0;
+  box-shadow: 3px 3px rgba(33, 124, 208, 0.67);
 }
 
 .leaderboard {
@@ -193,28 +214,35 @@ p.footerBlurb {
   display: inline-block;
   width: 50%;
   height: 74px;
-  background-color: rgba(100, 53, 201, 0.65);
+  background-color: rgb(100, 53, 201);
   color: white;
-  font-size: 3.7vh;
+  font-size: 3.3vh;
   padding-top: 30px;
   text-align: center;
 }
 
 .answerButton {
   display: inline-block!important;
-  width: 50%;
-  padding: 0px!important;
-  margin: 0px!important;
+  vertical-align: text-top!important;
+  width: 48%;
+  border: 1px dashed white!important;
+  padding: 10px!important;
+  margin: 3px!important;
   height: 74px;
-  background-color: rgba(100, 53, 201, 1)!important;
+  background-color: rgb(100, 53, 201)!important;
   color: white!important;
-  font-size: 3.7vh!important;
+  font-size: 3vh!important;
   text-align: center!important;
+}
+
+.buttonContainer {
+  width: 101%;
+  margin: 0 auto;
 }
 
 .answerContainer {
   width: 100%;
-  background-color: rgba(100, 53, 201, 0.65);
+  background-color: rgb(100, 53, 201);
 }
 
 .readyButton {
@@ -241,11 +269,14 @@ p.footerBlurb {
   width: 100%;
 }
 
-html, body {
+body {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: sans-serif;
+  opacity: 0;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s; /* Safari */
 }
 
 p {
@@ -311,7 +342,7 @@ p {
 
 .bigCode {
   font-size: 32px;
-  margin-bottom: 70px;
+  margin-bottom: 55px;
 }
 
 .welcome {
