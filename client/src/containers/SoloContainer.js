@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Container, Loader } from 'semantic-ui-react'
+
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 
 import SoloAnswers from '../components/SoloAnswers'
@@ -10,7 +11,6 @@ import * as mapHelpers from '../lib/mapContainerHelpers.js'
 import '../index.css'
 
 const Map = ReactMapboxGl({ accessToken: mapBoxAuth.pass })
-
 const multiPolygonPaint = { 'fill-color': '#FF0' }
 
 export class SoloContainer extends Component {
@@ -35,7 +35,8 @@ export class SoloContainer extends Component {
     gameOver: false,
     runningTotal: 0,
     disableButtons: false,
-    currentMessage: ''
+    currentMessage: '',
+    successMessage: null
   }
 
   loadMessages = () => {
@@ -117,7 +118,6 @@ export class SoloContainer extends Component {
       .then(res => {
         let ordered = mapHelpers.orderCountries(this.state.mapDisplayOrder, res)
         this.setState({ importedCountries: ordered })
-
       })
   }
 
@@ -146,19 +146,31 @@ export class SoloContainer extends Component {
     this.retrieveCountries(countriesToRequest)
   }
 
+  showSuccess = () => {
+    let runningTotal = this.state.runningTotal + 1
+    let totalSlides = this.state.lastSlideIndex + 1
+    this.setState({
+      successMessage: 'Success! ' + runningTotal + " / " + totalSlides
+    })
+  }
+
+  showFailure = () => {
+    let runningTotal = this.state.runningTotal
+    let totalSlides = this.state.lastSlideIndex + 1
+    this.setState({
+      successMessage: 'Whoops! ' + runningTotal + " / " + totalSlides
+    })
+  }
+
   recordAnswer = answer => {
-    if (!this.state.disableButtons) {
-      if (this.state.multiAnswersArray[this.state.currentSlide] === answer) {
-        this.setState({
-          runningTotal: this.state.runningTotal + 1,
-          disableButtons: true
-        })
-      } else {
-        this.setState({
-          disableButtons: true
-        })
-      }
+    if (!this.state.disableButtons
+        && this.state.multiAnswersArray[this.state.currentSlide] === answer) {
+      this.setState({ runningTotal: this.state.runningTotal + 1 })
+      this.showSuccess()
+    } else {
+      this.showFailure()
     }
+    this.setState({ disableButtons: true })
   }
 
   nextSlide = () => {
@@ -178,14 +190,19 @@ export class SoloContainer extends Component {
   render() {
     if ( this.state.gameOver ) {
       return (
-        <div>You got {this.state.runningTotal} out of {this.state.lastSlideIndex + 1} correct! </div>
+        <div>You got {this.state.runningTotal} out of {this.state.lastSlideIndex + 1} correct!</div>
       )
     }
     if ( this.state.currentSlide >= 0 ) {
       return (
         <div>
           <div className="timecard">
-            <div className="timecardInside">{this.state.time === 10 ? null : this.state.time}</div>
+            <div className="timecardInside">
+              {this.state.time === 10 ? null : this.state.time}
+            </div>
+          </div>
+          <div className="successFlash">
+            <h1>{this.state.successMessage}</h1>
           </div>
           <SoloAnswers
             answersArray={this.state.answersArray}
@@ -230,9 +247,7 @@ export class SoloContainer extends Component {
         )
       } else {
         return (
-          <Loader size="huge" active>
-            { this.state.currentMessage }
-          </Loader>
+          <Loader size="huge" active>{this.state.currentMessage}</Loader>
         )
       }
     }

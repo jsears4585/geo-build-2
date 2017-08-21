@@ -1,52 +1,92 @@
-/* Overwrites */
-
-.ui.button.squareButton {
-  font-size: 38px!important;
-  max-width: 138px;
-  margin: 10px;
-}
-
-.ui.table {
-  width: 540px!important;
-  margin-top: 62px!important;
-  margin-left: 102px!important;
-}
-
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-
-img {
-    -khtml-user-select: none;
-    -o-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.ui.fluid.button, .ui.fluid.buttons {
-    width: 94%!important;
-}
-
-.ui.text.container.pickedAnswers {
-    width: 94%!important;
-}
-
-.bigButton {
-    margin: 2px!important;
-}
-
-.userFeedbackIcons {
-    margin: 30px!important
-}
-
 /* Custom */
+
+.podium {
+  height: 300px;
+  width: 330px;
+  font-size: 42px;
+  color: #6435c9;
+  text-align: center;
+  position: absolute;
+  top: 280px;
+  left: 750px;
+}
+
+.winners {
+  position: absolute;
+  font-size: 32px;
+  height: 350px;
+  width: 470px;
+  left: 747px;
+  bottom: 219px;
+  color: #3f51b5;
+}
+
+.winner_1 {
+  -ms-transform: rotate(-17deg); /* IE 9 */
+  -webkit-transform: rotate(-17deg); /* Chrome, Safari, Opera */
+  transform: rotate(-17deg);
+  position: relative;
+  bottom: 21px;
+  left: 20px;
+}
+
+.winner_2 {
+  -ms-transform: rotate(-17deg); /* IE 9 */
+  -webkit-transform: rotate(-17deg); /* Chrome, Safari, Opera */
+  transform: rotate(-17deg);
+  position: relative;
+  top: 99px;
+  left: 126px;
+}
+
+.winner_3 {
+  -ms-transform: rotate(-17deg); /* IE 9 */
+  -webkit-transform: rotate(-17deg); /* Chrome, Safari, Opera */
+  transform: rotate(-17deg);
+  top: 171px;
+  left: 239px;
+  position: relative;
+}
+
+.podium_1 {
+  display: inline-block;
+  background: url('images/gold-medal-2.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: -5px 58px;
+  background-color: rgba(248, 224, 101, 0.45);
+  margin: 5px;
+  padding-top: 28px;
+  border-radius: 12px 12px 0px 0px;
+  height: 300px;
+  width: 100px;
+  vertical-align: bottom;
+  border: 5px solid #6435c9;
+}
+
+.podium_2 {
+  display: inline-block;
+  background-color: rgba(192, 192, 192, 0.57);
+  margin: 5px;
+  padding-top: 26px;
+  border-radius: 12px 12px 0px 0px;
+  height: 166px;
+  width: 100px;
+  vertical-align: bottom;
+  border: 5px solid #6435c9;
+}
+
+.podium_3 {
+  display: inline-block;
+  background-color: rgba(230, 203, 60, 0.78);
+  margin: 5px;
+  padding-top: 22px;
+  border-radius: 12px 12px 0px 0px;
+  height: 74px;
+  width: 100px;
+  vertical-align: bottom;
+  border: 5px solid #6435c9;
+}
 
 #soloLoadingGame {
   margin-top: 20px!important;
@@ -153,6 +193,18 @@ p.footerBlurb {
   top: 19px;
 }
 
+.successFlash {
+  color: white;
+  background-color: #6435c9;
+  position: absolute;
+  z-index: 10000;
+  left: 16px;
+  bottom: 16px;
+  width: auto;
+  padding: 8px;
+  border-radius: 5px;
+}
+
 .pickedAnswers {
   margin: 20px;
   padding: 26px;
@@ -229,7 +281,7 @@ p.footerBlurb {
   padding: 10px!important;
   margin: 3px!important;
   height: 74px;
-  background-color: rgb(100, 53, 201)!important;
+  background-color: rgb(100, 53, 201);
   color: white!important;
   font-size: 3vh!important;
   text-align: center!important;
@@ -349,4 +401,61 @@ p {
   font-family: 'Niconne', cursive;
   font-size: 54px;
   margin-top: 30px!important;
+}
+
+/* Overwrites */
+
+.fade {
+  animation: fade-in-keyframes 1s;
+}
+
+@keyframes fade-in-keyframes {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.ui.button.squareButton {
+  font-size: 38px!important;
+  max-width: 138px;
+  margin: 10px;
+}
+
+.ui.table {
+  width: 540px!important;
+  margin-top: 62px!important;
+  margin-left: 102px!important;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+img {
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.ui.fluid.button, .ui.fluid.buttons {
+    width: 94%!important;
+}
+
+.ui.text.container.pickedAnswers {
+    width: 94%!important;
+}
+
+.bigButton {
+    margin: 2px!important;
+}
+
+.userFeedbackIcons {
+    margin: 30px!important
 }

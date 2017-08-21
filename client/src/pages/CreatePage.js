@@ -162,8 +162,8 @@ class CreatePage extends React.Component {
             { this.state.matchingGames.map((game, index)=> {
               return (
                 <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
-                  <h3>{ game.title }</h3>
-                  <p>{ game.description }</p>
+                  <h3>{game.title}</h3>
+                  <p>{game.description}</p>
                 </div>
               )
             }) }
@@ -182,7 +182,7 @@ class CreatePage extends React.Component {
         <p className="footerBlurb">
           { this.state.code
             ?
-              'Please select a game mode. You can play by yourself, with friends, or lead a class.'
+              'Please select a game mode. You can play by yourself or lead a class.'
             :
               'Geography is pretty fun, huh?'
           }
