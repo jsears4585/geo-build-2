@@ -199,12 +199,10 @@ export class SoloContainer extends Component {
       return (
         <div>
           <div className="timecard">
-            <div className="timecardInside">
-              {this.state.time === 10 ? null : this.state.time}
-            </div>
+            <h2>{this.state.time === 10 ? null : this.state.time}</h2>
           </div>
           <div className="successFlash">
-            <h1>{this.state.successMessage}</h1>
+            <h2>{this.state.successMessage}</h2>
           </div>
           <SoloAnswers
             answersArray={this.state.answersArray}

@@ -175,22 +175,15 @@ p.footerBlurb {
 }
 
 .timecard {
-  font-size: 52px;
   color: white;
   background-color: #6435c9;
   position: absolute;
   z-index: 10000;
-  right: 16px;
-  bottom: 16px;
-  height: 56px;
-  width: 53px;
+  right: 0.5vh;
+  bottom: 0.5vh;
+  width: auto;
+  padding: 8px;
   border-radius: 5px;
-}
-
-.timecardInside {
-  position: relative;
-  left: 12px;
-  top: 19px;
 }
 
 .successFlash {
