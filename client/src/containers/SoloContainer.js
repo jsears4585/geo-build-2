@@ -24,8 +24,6 @@ export class SoloContainer extends Component {
     currentLat: null,
     currentLng: null,
     currentZoom: null,
-    playersNameArray: [],
-    playersScoreArray: [],
     answersArray: [],
     shuffledAnswersArray: [],
     multiAnswersArray: [],
@@ -62,11 +60,15 @@ export class SoloContainer extends Component {
                         'Calculating Centroids'
                       ]
 
-    setInterval(()=> {
+    let goofyInterval = setInterval(()=> {
       this.setState({
         currentMessage: messages[utils.getRandomInt(0, messages.length)]
       })
     }, 1448)
+
+    setTimeout(() => {
+      clearInterval(goofyInterval)
+    }, 10000)
 
     this.setState({
       currentMessage: messages[utils.getRandomInt(0, messages.length)]

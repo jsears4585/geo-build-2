@@ -198,8 +198,8 @@ p.footerBlurb {
   background-color: #6435c9;
   position: absolute;
   z-index: 10000;
-  left: 16px;
-  bottom: 16px;
+  left: 0.5vh;
+  bottom: 0.5vh;
   width: auto;
   padding: 8px;
   border-radius: 5px;
