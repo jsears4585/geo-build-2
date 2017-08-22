@@ -55,10 +55,6 @@ class PlayerContainer extends React.Component {
 
   sayHello = name => this.setState({ username: name })
 
-  nextSlide = () => {
-    console.log('Render next slide')
-  }
-
   fire = () => {
     let seconds = 10
     this.scoreKeeping(seconds)
@@ -67,16 +63,17 @@ class PlayerContainer extends React.Component {
   joinRoom = () => {
     socket = io('/current-players')
     socket.emit('new user join', { name: this.state.value })
-    socket.on('say hello', (data) => this.sayHello(data.name))
-    socket.on('render controller', (data) => {
+    socket.on('say hello', data => this.sayHello(data.name))
+    socket.on('render controller', data => {
       this.setState({
         controllerShouldRender: true,
+        userAnswer: '',
         finished: false,
         answerSubmitted: false
        })
       this.fire()
     })
-    socket.on('receive round data', (data) => {
+    socket.on('receive round data', data => {
       this.setState({
         correctAnswer: data.correctAnswer,
         currentAnswersArray: data.answersArray
@@ -98,8 +95,8 @@ class PlayerContainer extends React.Component {
     if (this.state.controllerShouldRender) {
       show =
         <PresentationPlayerButtons
-          answerSubmitted={this.state.answerSubmitted}
-          handleAnswer={this.handleAnswer}
+          answerSubmitted={ this.state.answerSubmitted }
+          handleAnswer={ this.handleAnswer }
         />
     } else {
       let answerKey = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
@@ -111,7 +108,7 @@ class PlayerContainer extends React.Component {
             <div className="playerResultwrapper">
               <i className="massive check green circle icon userFeedbackIcons"></i>
               <br />
-              <p>You got it right! {this.state.currentAnswersArray[correctAnswerIndex]} is correct.</p>
+              <p>You got it right! { this.state.currentAnswersArray[correctAnswerIndex] } is correct.</p>
             </div>
         } else {
           show =
@@ -119,10 +116,15 @@ class PlayerContainer extends React.Component {
               <i className="massive remove red circle icon userFeedbackIcons"></i>
               <br />
               <p>
-                You answered {this.state.currentAnswersArray[userAnswerIndex]}
+                You answered { this.state.userAnswer === ''
+                  ?
+                    'nothing this round.'
+                  :
+                    this.state.currentAnswersArray[userAnswerIndex]
+                  }
               </p>
               <p>
-                The correct answer was {this.state.currentAnswersArray[correctAnswerIndex]}
+                The correct answer was { this.state.currentAnswersArray[correctAnswerIndex] }.
               </p>
               <p>Better luck next time!</p>
             </div>
@@ -144,13 +146,13 @@ class PlayerContainer extends React.Component {
           <Input
             type='text'
             name='username'
-            value={this.state.value}
-            onChange={this.onHandleChange}>
+            value={ this.state.value }
+            onChange={ this.onHandleChange} >
           </Input>
           <Button
             className="joinButtonPlayer"
             color="green"
-            onClick={()=>(this.joinRoom())}>
+            onClick={ ()=> this.joinRoom() }>
             Join
           </Button>
         </div>
@@ -159,8 +161,8 @@ class PlayerContainer extends React.Component {
     }
     return (
       <div className='wrapper playerButtonBuffer'>
-        {signIn}
-        {show}
+        { signIn }
+        { show }
       </div>
     )
   }

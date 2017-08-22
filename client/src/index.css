@@ -138,7 +138,6 @@
 
 .gameToggles {
   padding: 26px;
-  background-color: rgba(210, 160, 222, 0.08);
   background-image: url('images/rough-cloth.png');
   border-radius: 5px;
   width: 84%;
@@ -168,7 +167,7 @@ img.newGameFlag {
 .flagContainers {
   width: 94%;
   border-radius: 8px;
-  background: #efefef;
+  background: rgba(222, 222, 222, 0.50);
   padding: 5px;
   margin: 3px 15px;
   font-size: 19px;
