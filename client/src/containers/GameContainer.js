@@ -1,22 +1,16 @@
 import React, { Component } from 'react'
-import ReactMapboxGl, { Layer, Feature, ZoomControl } from 'react-mapbox-gl'
 
-import Answers from '../components/Answers'
 import Names from '../components/Names'
 import Scoreboard from '../components/Scoreboard'
 import FinalScoreboard from '../components/FinalScoreboard'
+import CurrentMap from '../components/CurrentMap'
 
-import mapBoxAuth from '../config/mapboxAuth'
 import * as utils from '../lib/utils.js'
 import * as mapHelpers from '../lib/mapContainerHelpers.js'
 import '../index.css'
 
 const io = require('socket.io-client')
 let socket
-
-const Map = ReactMapboxGl({ accessToken: mapBoxAuth.pass })
-
-const multiPolygonPaint = { 'fill-color': '#FF0' }
 
 export class GameContainer extends Component {
 
@@ -61,7 +55,7 @@ export class GameContainer extends Component {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({"game": { "title": useThis } })
+      body: JSON.stringify({ "game": { "title": useThis } })
     })
       .then(res => res.json())
       .then(response => this.setState({ importedAnswers: response }))
@@ -150,32 +144,14 @@ export class GameContainer extends Component {
   render() {
     if ( this.state.currentSlide >= 0 && this.state.showMap ) {
       return (
-        <div>
-          <div className="timecard">
-            <div className="timecardInside">{this.state.time === 10 ? null : this.state.time}</div>
-          </div>
-          <Answers answersArray={this.state.answersArray} />
-          <Map
-            // eslint-disable-next-line
-            style={'mapbox://styles/jsears5/cj674mwhz04k72soxxht9ghgq'}
-            center={[ this.state.currentLng, this.state.currentLat ]}
-            containerStyle={{
-              height: "100vh",
-              width: "100vw",
-              position: "relative",
-              zIndex: "1"
-            }}
-            zoom={[this.state.currentZoom]}
-          >
-          <ZoomControl/>
-          <Layer
-            type="fill"
-            paint={multiPolygonPaint}
-          >
-          <Feature coordinates={this.state.coords} />
-          </Layer>
-          </Map>
-        </div>
+        <CurrentMap
+          time={ this.state.time }
+          answersArray={ this.state.answersArray }
+          currentLng={ this.state.currentLng }
+          currentLat={ this.state.currentLat }
+          currentZoom={ this.state.currentZoom }
+          coords={ this.state.coords }
+        />
       )
     } else if ( this.state.currentSlide >= this.state.lastSlideIndex
                 && !this.state.showMap) {
@@ -187,25 +163,25 @@ export class GameContainer extends Component {
 
       return (
         <FinalScoreboard
-          playersScoreArray={this.state.playersScoreArray}
-          winnerArray={winnerArray}
+          playersScoreArray={ this.state.playersScoreArray }
+          winnerArray={ winnerArray }
         />
       )
     } else if ( this.state.currentSlide >= 0 && !this.state.showMap ) {
       return (
         <Scoreboard
-          playersScoreArray={this.state.playersScoreArray}
-          startGame={this.startGame}
+          playersScoreArray={ this.state.playersScoreArray }
+          startGame={ this.startGame }
         />
       )
     } else {
       return (
         <Names
-          playersNameArray={this.state.playersNameArray}
-          gameCode={this.props.currentGameCode}
-          startGame={this.startGame}
-          countriesLength={this.state.importedCountries.length}
-          answersLength={this.state.multiAnswersArray.length}
+          playersNameArray={ this.state.playersNameArray }
+          gameCode={ this.props.currentGameCode }
+          startGame={ this.startGame }
+          countriesLength={ this.state.importedCountries.length }
+          answersLength={ this.state.multiAnswersArray.length }
         />
       )
     }
