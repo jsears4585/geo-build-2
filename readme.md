@@ -1,28 +1,14 @@
 ## Geography Game
 
 ### Current Focus
-- Player controller feedback after round, success or fail, you said... correct answer
-- Single player mode
-- Mobile multiplayer mode
-- Olympic-style top-three podium for end game and raining confetti
-- Continue Mobile optimization and country re-sizing
+- Pre-made games for all countries of a certain region or continent
+- Allow user to randomize a game of a certain amount of countries in game selection
 
 #### To Do
-- Tell users pre-game: 1. make sure you're on wifi 2. faster answers score more points
-- Allow user to randomize a game of a certain amount of countries in game selection
-- During game creation, allow user to select all countries of a certain region or continent
 - Capitals?
-- Get a logo
 - Create different rooms from users to play different games in parallel
-- Different map types and highlight colors
 - Allow different difficulty levels
 - Add Hints Box, to give hints
-
-#### Recently Finished
-- ~~Add redirect to CreatePage from NewGame after submitting a new game~~
-- ~~Prevent unnecessary start game confirmation, convert to confirmation box~~
-- ~~Add Create a New Game A-Z sort instead of fuzzy search~~
-- ~~Continue to seed country data completed~~
 
 #### Done
 - ~~Questions component~~
@@ -47,3 +33,11 @@
 - ~~User shouldn't be allow to begin game until all countries have been loaded into the game container~~
 - ~~Move timeout bar from player's controller to main game display, switched from Progress bar to timer~~
 - ~~Add Select a Game fuzzy search~~
+- ~~Player controller feedback after round, success or fail, you said... correct answer~~
+- ~~Single player mode~~
+- ~~Olympic-style top-three podium for end game~~
+- ~~Continue Mobile optimization and country re-sizing~~
+- ~~Add redirect to CreatePage from NewGame after submitting a new game~~
+- ~~Prevent unnecessary start game confirmation, convert to confirmation box~~
+- ~~Add Create a New Game A-Z sort instead of fuzzy search~~
+- ~~Continue to seed country data completed~~
