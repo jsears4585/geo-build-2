@@ -10,7 +10,7 @@ const SoloAnswers = ({ answersArray, recordAnswer, disableButtons }) => {
         <Button
           className="answerButton"
           disabled={ disableButtons }
-          color="violet"
+          color="teal"
           onClick={ (event)=> {
             recordAnswer('A')
             event.target.classList.add('answerSelected')
@@ -20,7 +20,7 @@ const SoloAnswers = ({ answersArray, recordAnswer, disableButtons }) => {
         </Button>
         <Button
           className="answerButton"
-          color="violet"
+          color="teal"
           disabled={ disableButtons }
           onClick={ (event)=> {
             recordAnswer('B')
@@ -31,7 +31,7 @@ const SoloAnswers = ({ answersArray, recordAnswer, disableButtons }) => {
         </Button><br />
         <Button
           className="answerButton"
-          color="violet"
+          color="teal"
           disabled={ disableButtons }
           onClick={ (event)=> {
             recordAnswer('C')
@@ -42,7 +42,7 @@ const SoloAnswers = ({ answersArray, recordAnswer, disableButtons }) => {
         </Button>
         <Button
           className="answerButton"
-          color="violet"
+          color="teal"
           disabled={ disableButtons }
           onClick={ (event)=> {
             recordAnswer('D')

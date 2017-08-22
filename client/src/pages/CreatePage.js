@@ -123,7 +123,7 @@ class CreatePage extends React.Component {
         </div>
         <Button
           className='Button'
-          color="violet"
+          color="teal"
           basic={false}
           onClick={()=>this.gameRedirect(this.state.code)}
         >
@@ -134,7 +134,7 @@ class CreatePage extends React.Component {
       buttonOrCode =
       <Button
         className='Button'
-        color="violet"
+        color="green"
         basic={false}
         size='huge'
         onClick={()=>this.createGame()}

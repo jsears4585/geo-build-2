@@ -56,7 +56,7 @@ const CreateYourOwn = ({
         className="gameSubmitButton"
         size="huge"
         fluid={true}
-        color="violet"
+        color="green"
         onClick={()=>handleSubmit()}
       >
         Select these countries

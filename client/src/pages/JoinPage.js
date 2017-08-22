@@ -56,7 +56,7 @@ class JoinPage extends React.Component {
             <div>
               <Button
                 id='joinButton'
-                color='violet'
+                color='green'
                 type='submit'
               >
                 Join

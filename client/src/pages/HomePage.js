@@ -33,15 +33,15 @@ class HomePage extends React.Component {
         <div className='buttonWrapper'>
           <Button
             className='bigButton'
-            color='violet'
+            color='teal'
             onClick={this.createRedirect}
           >
             Play
           </Button>
           <br />
           <Button
-            className='bigButton'
-            basic={true}
+            className='bigButton joinButton'
+            color='green'
             onClick={this.joinRedirect}
           >
             Join

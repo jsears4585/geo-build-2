@@ -31,7 +31,7 @@ const Scoreboard = ({playersScoreArray, startGame}) => {
         <div className="readyButton2">
           <Button
             size='huge'
-            color='violet'
+            color='green'
             circular={true}
             onClick={ ()=> { startGame() } }
           >

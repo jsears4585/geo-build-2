@@ -238,7 +238,7 @@ export class SoloContainer extends Component {
               onClick={()=>this.nextSlide()}
               className="startButtonSolo"
               size='massive'
-              color='violet'
+              color='green'
               fluid
             >
               Begin

@@ -8,7 +8,7 @@ const PresentationPlayerButtons = ({ answerSubmitted, handleAnswer }) => {
     <div>
       <Button
         className='squareButton'
-        color='violet'
+        color='teal'
         disabled={ answerSubmitted }
         onClick={ ()=> { handleAnswer('A') } }
       >
@@ -16,7 +16,7 @@ const PresentationPlayerButtons = ({ answerSubmitted, handleAnswer }) => {
       </Button>
       <Button
         className='squareButton'
-        color='violet'
+        color='teal'
         disabled={ answerSubmitted }
         onClick={ ()=> { handleAnswer('B') } }
       >
@@ -24,7 +24,7 @@ const PresentationPlayerButtons = ({ answerSubmitted, handleAnswer }) => {
       </Button><br />
       <Button
         className='squareButton'
-        color='violet'
+        color='teal'
         disabled={ answerSubmitted }
         onClick={ ()=> { handleAnswer('C') } }
       >
@@ -32,7 +32,7 @@ const PresentationPlayerButtons = ({ answerSubmitted, handleAnswer }) => {
       </Button>
       <Button
         className='squareButton'
-        color='violet'
+        color='teal'
         disabled={ answerSubmitted }
         onClick={ ()=> { handleAnswer('D') } }
       >

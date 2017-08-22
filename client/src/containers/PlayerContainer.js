@@ -94,7 +94,6 @@ class PlayerContainer extends React.Component {
   }
 
   render() {
-
     let show
     if (this.state.controllerShouldRender) {
       show =
@@ -103,14 +102,10 @@ class PlayerContainer extends React.Component {
           handleAnswer={this.handleAnswer}
         />
     } else {
-
       let answerKey = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
-
       if (this.state.showRoundResults) {
-
         let userAnswerIndex = answerKey[this.state.userAnswer]
         let correctAnswerIndex = answerKey[this.state.correctAnswer]
-
         if (this.state.userAnswer === this.state.correctAnswer) {
           show =
             <div>
@@ -132,7 +127,6 @@ class PlayerContainer extends React.Component {
               <p>Better luck next time!</p>
             </div>
         }
-
       } else if (   !this.state.renderSignin
                     && !this.state.showRoundResults
                     && this.state.currentAnswersArray.length <= 0 ) {
@@ -142,7 +136,6 @@ class PlayerContainer extends React.Component {
           </div>
       }
     }
-
     let signIn
     if (this.state.renderSignin) {
       signIn =
@@ -156,7 +149,7 @@ class PlayerContainer extends React.Component {
           </Input>
           <Button
             className="joinButtonPlayer"
-            color="violet"
+            color="green"
             onClick={()=>(this.joinRoom())}>
             Join
           </Button>
@@ -164,7 +157,6 @@ class PlayerContainer extends React.Component {
     } else {
       signIn = null
     }
-
     return (
       <div className='wrapper playerButtonBuffer'>
         {signIn}

@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react'
 import { sortNames } from '../lib/utils.js'
 import '../index.css'
 
-const FinalScoreboard = ({playersScoreArray, winnerArray}) => {
+const FinalScoreboard = ({ playersScoreArray, winnerArray }) => {
     const sortedNames = sortNames(playersScoreArray)
 
     return (
@@ -31,9 +31,9 @@ const FinalScoreboard = ({playersScoreArray, winnerArray}) => {
 
         <div id="finalScores">
           <div className="winners">
-            <div className="winner_1">{!winnerArray[0] ? null : winnerArray[0].username}</div>
-            <div className="winner_2">{!winnerArray[1] ? null : winnerArray[1].username}</div>
-            <div className="winner_3">{!winnerArray[2] ? null : winnerArray[2].username}</div>
+            <div className="winner_1">{ !winnerArray[0] ? null : winnerArray[0].username }</div>
+            <div className="winner_2">{ !winnerArray[1] ? null : winnerArray[1].username }</div>
+            <div className="winner_3">{ !winnerArray[2] ? null : winnerArray[2].username }</div>
           </div>
           <div className="podium">
             <div className="podium_1">
@@ -47,6 +47,16 @@ const FinalScoreboard = ({playersScoreArray, winnerArray}) => {
             </div>
           </div>
         </div>
+        <img
+          alt="earth"
+          src={ require('../images/earth.png') }
+          style={ { position: 'absolute',
+                    top: '480px',
+                    left: '500px',
+                    zIndex: '15'
+          }}
+          width="900"
+        />
       </div>
     )
 }

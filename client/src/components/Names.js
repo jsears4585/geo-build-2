@@ -17,7 +17,7 @@ const Names = ({
     <div className="readyButton">
       <Button
         size='huge'
-        color='violet'
+        color='green'
         circular={true}
         onClick={ ()=> { startGame() } }
       >

@@ -1,14 +1,31 @@
 /* Custom */
 
-.podium {
-  height: 300px;
-  width: 330px;
-  font-size: 42px;
-  color: #6435c9;
-  text-align: center;
-  position: absolute;
-  top: 280px;
-  left: 750px;
+#finalScoreboard {
+  background: url('images/space.jpg');
+  height: 100vh;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#finalScoreboard .playerColumn {
+  background: rgba(62, 62, 62, 0.97);
+  color: rgb(192, 241, 255);
+  font-size: 26px;
+}
+
+#finalScoreboard .scoreColumn {
+  background: rgba(62, 62, 62, 0.97);
+  color: rgb(192, 241, 255);
+  font-size: 26px;
+}
+
+#finalScoreboard .leaderboard {
+  border-color: #565656;
+}
+
+#finalScoreboard tbody tr {
+  font-size: 22px;
+  text-indent: 2px;
 }
 
 .winners {
@@ -16,9 +33,18 @@
   font-size: 32px;
   height: 350px;
   width: 470px;
-  left: 747px;
-  top: 191px;
-  color: #3f51b5;
+  left: 789px;
+  top: 132px;
+  color: rgba(255,255,255,1);
+  text-decoration: normal;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  white-space: pre;
+  text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #ff00de , 0 0 70px #ff00de , 0 0 80px #ff00de , 0 0 100px #ff00de ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 .winner_1 {
@@ -48,13 +74,25 @@
   position: relative;
 }
 
+.podium {
+  height: 300px;
+  width: 330px;
+  font-size: 42px;
+  color: #6435c9;
+  text-align: center;
+  position: absolute;
+  top: 214px;
+  left: 785px;
+  z-index: 40;
+}
+
 .podium_1 {
   display: inline-block;
   background: url('images/gold-medal-2.png');
   background-size: 100px;
   background-repeat: no-repeat;
   background-position: -5px 58px;
-  background-color: rgba(248, 224, 101, 0.45);
+  background-color: rgba(248, 224, 101, 0.97);
   margin: 5px;
   padding-top: 28px;
   border-radius: 12px 12px 0px 0px;
@@ -66,7 +104,7 @@
 
 .podium_2 {
   display: inline-block;
-  background-color: rgba(192, 192, 192, 0.57);
+  background-color: rgba(192, 192, 192, 0.97);
   margin: 5px;
   padding-top: 26px;
   border-radius: 12px 12px 0px 0px;
@@ -78,9 +116,9 @@
 
 .podium_3 {
   display: inline-block;
-  background-color: rgba(230, 203, 60, 0.78);
+  background-color: rgba(230, 203, 60, 0.97);
   margin: 5px;
-  padding-top: 22px;
+  padding-top: 24px;
   border-radius: 12px 12px 0px 0px;
   height: 74px;
   width: 100px;
@@ -176,7 +214,7 @@ p.footerBlurb {
 
 .timecard {
   color: white;
-  background-color: #6435c9;
+  background-color: green;
   position: absolute;
   z-index: 10000;
   right: 0.5vh;
@@ -188,7 +226,7 @@ p.footerBlurb {
 
 .successFlash {
   color: white;
-  background-color: #6435c9;
+  background-color: green;
   position: absolute;
   z-index: 10000;
   left: 0.5vh;
@@ -201,7 +239,7 @@ p.footerBlurb {
 .pickedAnswers {
   margin: 20px;
   padding: 26px;
-  background-color: rgba(147, 9, 181, 0.14);
+  background-color: rgba(239, 239, 239, 0.16);
   background-image: url('images/rough-cloth.png');
   border-radius: 5px;
   text-align: center;
@@ -209,7 +247,7 @@ p.footerBlurb {
 }
 
 .selected {
-  background-color: rgba(137, 155, 228, 0.48)!important;
+  background-color: rgba(0, 128, 128, 0.2)!important;
 }
 
 .gameCodeNames {
@@ -233,7 +271,7 @@ p.footerBlurb {
 }
 
 .gameCard {
-  background: rgba(180, 163, 226, 0.22);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 9px;
   padding: 10px;
   margin: 11px;
@@ -242,11 +280,13 @@ p.footerBlurb {
   cursor: pointer;
   vertical-align: text-top;
   -webkit-box-shadow: 4px 3px #2185d0;
-  box-shadow: 3px 3px rgba(33, 124, 208, 0.67);
+  box-shadow: 3px 3px rgba(0, 128, 128, 0.8);
 }
 
 .leaderboard {
   margin: 22px 0px 0px 60px!important;
+  position: relative;
+  z-index: 50;
 }
 
 .ui.facebook.button {
@@ -287,7 +327,7 @@ p.footerBlurb {
 
 .answerContainer {
   width: 100%;
-  background-color: rgb(100, 53, 201);
+  background-color: #00b5ad;
 }
 
 .readyButton {
@@ -312,6 +352,11 @@ p.footerBlurb {
 .App {
   height: 100%;
   width: 100%;
+}
+
+html, body {
+  background-color: rgb(255, 254, 254)!important;
+  background-image: url('images/egg-shell.png');
 }
 
 body {
@@ -372,6 +417,7 @@ p {
   width: 180px;
   height: 55px;
   margin: 10px;
+  font-size: 18px!important;
 }
 
 .biggerButton {
@@ -387,7 +433,7 @@ p {
 
 .bigCode {
   font-size: 32px;
-  margin-bottom: 55px;
+  margin-bottom: 48px;
 }
 
 .welcome {
