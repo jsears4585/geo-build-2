@@ -150,7 +150,7 @@ class PlayerContainer extends React.Component {
         } else {
           show =
             <div>
-              <i className="massive check red circle icon userFeedbackIcons"></i>
+              <i className="massive remove red circle icon userFeedbackIcons"></i>
               <br />
               <p>
                 You answered {this.state.currentAnswersArray[userAnswerIndex]}

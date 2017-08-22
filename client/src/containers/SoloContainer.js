@@ -148,7 +148,7 @@ export class SoloContainer extends Component {
 
   showSuccess = () => {
     let runningTotal = this.state.runningTotal + 1
-    let totalSlides = this.state.lastSlideIndex + 1
+    let totalSlides = this.state.currentSlide + 1
     this.setState({
       successMessage: 'Success! ' + runningTotal + " / " + totalSlides
     })
@@ -156,7 +156,7 @@ export class SoloContainer extends Component {
 
   showFailure = () => {
     let runningTotal = this.state.runningTotal
-    let totalSlides = this.state.lastSlideIndex + 1
+    let totalSlides = this.state.currentSlide + 1
     this.setState({
       successMessage: 'Whoops! ' + runningTotal + " / " + totalSlides
     })

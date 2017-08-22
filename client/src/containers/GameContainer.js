@@ -36,7 +36,7 @@ export class GameContainer extends Component {
     multiAnswersArray: [],
     mapDisplayOrder: [],
     time: 10,
-    showMap: true,
+    showMap: true
   }
 
   timeKeeping = seconds => {
@@ -53,7 +53,7 @@ export class GameContainer extends Component {
   }
 
   componentDidMount() {
-    let useThis = this.props.currentGameTitle || "Learn the countries of Southeast Asia"
+    let useThis = this.props.currentGameTitle || "It's Croatia"
     this.initialEmit()
     fetch('/retrieve_game_by_id', {
       headers: {
@@ -179,10 +179,16 @@ export class GameContainer extends Component {
       )
     } else if ( this.state.currentSlide >= this.state.lastSlideIndex
                 && !this.state.showMap) {
+
+      let sorted = this.state.playersScoreArray.sort((a, b)=>{
+        return b.totalPoints - a.totalPoints
+      })
+      let winnerArray = sorted.slice(0, 3)
+
       return (
         <FinalScoreboard
           playersScoreArray={this.state.playersScoreArray}
-          startGame={this.startGame}
+          winnerArray={winnerArray}
         />
       )
     } else if ( this.state.currentSlide >= 0 && !this.state.showMap ) {

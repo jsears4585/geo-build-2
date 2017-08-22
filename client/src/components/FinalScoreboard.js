@@ -4,12 +4,11 @@ import { Table } from 'semantic-ui-react'
 import { sortNames } from '../lib/utils.js'
 import '../index.css'
 
-const FinalScoreboard = ({playersScoreArray}) => {
+const FinalScoreboard = ({playersScoreArray, winnerArray}) => {
     const sortedNames = sortNames(playersScoreArray)
 
     return (
       <div id="finalScoreboard">
-        <h1>Final Scores!</h1>
         <Table celled className="leaderboard">
           <Table.Header>
             <Table.Row>
@@ -21,7 +20,7 @@ const FinalScoreboard = ({playersScoreArray}) => {
             { sortedNames.map(player => {
               return (
                 <Table.Row>
-                  <Table.Cell>{ player.username }</Table.Cell>
+                  <Table.Cell className="userFinal">{ player.username }</Table.Cell>
                   <Table.Cell>{ player.totalPoints }</Table.Cell>
                 </Table.Row>
               )
@@ -32,9 +31,9 @@ const FinalScoreboard = ({playersScoreArray}) => {
 
         <div id="finalScores">
           <div className="winners">
-            <div className="winner_1">Winner #1</div>
-            <div className="winner_2">Winner #2</div>
-            <div className="winner_3">Winner #3</div>
+            <div className="winner_1">{!winnerArray[0] ? null : winnerArray[0].username}</div>
+            <div className="winner_2">{!winnerArray[1] ? null : winnerArray[1].username}</div>
+            <div className="winner_3">{!winnerArray[2] ? null : winnerArray[2].username}</div>
           </div>
           <div className="podium">
             <div className="podium_1">
