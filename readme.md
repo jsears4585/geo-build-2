@@ -5,9 +5,9 @@
 - Allow user to randomize a game of a certain amount of countries in game selection
 
 #### To Do
+- Allow different difficulty levels
 - Capitals?
 - Create different rooms from users to play different games in parallel
-- Allow different difficulty levels
 - Add Hints Box, to give hints
 
 #### Done
