@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Input, Label } from 'semantic-ui-react'
 
+import PresentationPlayerButtons from '../components/PresentationPlayerButtons'
 import '../index.css'
 
 const io = require('socket.io-client')
@@ -97,40 +98,10 @@ class PlayerContainer extends React.Component {
     let show
     if (this.state.controllerShouldRender) {
       show =
-        <div>
-          <Button
-            className='squareButton'
-            color='violet'
-            disabled={this.state.answerSubmitted}
-            onClick={()=> {this.handleAnswer('A')} }
-          >
-            A
-          </Button>
-          <Button
-            className='squareButton'
-            color='violet'
-            disabled={this.state.answerSubmitted}
-            onClick={()=> {this.handleAnswer('B')} }
-          >
-            B
-          </Button><br />
-          <Button
-            className='squareButton'
-            color='violet'
-            disabled={this.state.answerSubmitted}
-            onClick={()=> {this.handleAnswer('C')} }
-          >
-            C
-          </Button>
-          <Button
-            className='squareButton'
-            color='violet'
-            disabled={this.state.answerSubmitted}
-            onClick={()=> {this.handleAnswer('D')} }
-          >
-            D
-          </Button>
-        </div>
+        <PresentationPlayerButtons
+          answerSubmitted={this.state.answerSubmitted}
+          handleAnswer={this.handleAnswer}
+        />
     } else {
 
       let answerKey = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
