@@ -108,14 +108,14 @@ class PlayerContainer extends React.Component {
         let correctAnswerIndex = answerKey[this.state.correctAnswer]
         if (this.state.userAnswer === this.state.correctAnswer) {
           show =
-            <div>
+            <div className="playerResultwrapper">
               <i className="massive check green circle icon userFeedbackIcons"></i>
               <br />
               <p>You got it right! {this.state.currentAnswersArray[correctAnswerIndex]} is correct.</p>
             </div>
         } else {
           show =
-            <div>
+            <div className="playerResultWrapper">
               <i className="massive remove red circle icon userFeedbackIcons"></i>
               <br />
               <p>

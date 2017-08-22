@@ -17,11 +17,9 @@ const CurrentMap = ({
   coords
 }) => {
   return (
-    <div>
+    <div id="bigMap">
       <div className="timecard">
-        <div className="timecardInside">
-          { time === 10 ? null : time }
-        </div>
+        <h1>{ time === 10 ? null : time }</h1>
       </div>
       <Answers answersArray={ answersArray } />
       <Map
