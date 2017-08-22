@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import fetch from 'isomorphic-fetch'
 import { Button, Container, Divider, Form, Radio } from 'semantic-ui-react'
 
 import '../index.css'
@@ -13,7 +14,6 @@ const generateGameCode = (length, chars) => {
 }
 
 class CreatePage extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
