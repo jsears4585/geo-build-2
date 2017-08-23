@@ -6,7 +6,10 @@ import '../index.css'
 const JoinGameInput = ({ value, onHandleChange, joinRoom }) => {
   return (
     <div>
-      <Label pointing='below'>
+      <Label
+        pointing='below'
+        style={{ background: '#fff' }}
+      >
         Make up a cool name!
       </Label>
       <br />

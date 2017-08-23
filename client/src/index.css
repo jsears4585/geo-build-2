@@ -1,7 +1,7 @@
 /* Custom */
 
 #finalScoreboard {
-  background: url('images/space.jpg');
+  background: url('images/space-2.jpg');
   height: 100vh;
   background-size: cover;
   overflow: hidden;
@@ -10,13 +10,13 @@
 #finalScoreboard .playerColumn {
   background: rgba(62, 62, 62, 0.97);
   color: rgba(255, 255, 255, 0.82);
-  font-size: 26px;
+  font-size: 22px;
 }
 
 #finalScoreboard .scoreColumn {
   background: rgba(62, 62, 62, 0.97);
   color: rgba(255, 255, 255, 0.82);
-  font-size: 26px;
+  font-size: 22px;
 }
 
 #finalScoreboard .leaderboard {
@@ -24,17 +24,17 @@
 }
 
 #finalScoreboard tbody tr {
-  font-size: 22px;
+  font-size: 18px;
   text-indent: 4px;
 }
 
 .winners {
   position: absolute;
-  font-size: 32px;
+  font-size: 40px;
   height: 350px;
   width: 470px;
-  left: 789px;
-  top: 132px;
+  top: 292px;
+  left: 1019px;
   color: rgba(255,255,255,1);
   text-decoration: normal;
   -o-text-overflow: clip;
@@ -54,6 +54,7 @@
   position: relative;
   bottom: 21px;
   left: 20px;
+  font-size: 52px;
 }
 
 .winner_2 {
@@ -81,8 +82,8 @@
   color: #1b567e;
   text-align: center;
   position: absolute;
-  top: 214px;
-  left: 785px;
+  top: 384px;
+  left: 1019px;
   z-index: 40;
 }
 
@@ -195,6 +196,9 @@ img.newGameFlag {
 
 p.footerBlurb {
   margin-bottom: 27px;
+  color: #393939;
+  width: 300px;
+  margin: 0 auto;
 }
 
 .gameSubmitButton {

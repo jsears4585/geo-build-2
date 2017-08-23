@@ -1,8 +1,12 @@
 ## Geography Game
 
 ### Current Focus
-- Pre-made games for all countries of a certain region or continent
-- Allow user to randomize a game of a certain amount of countries in game selection
+- (3 or so) pre-made games for all countries of a certain region or continent
+- Render country count on game selection screen
+- Make Create a Game country selection more responsive with full display media queries
+- Let the user know that they submitted an answer on their controller Interface
+- Clean up color scheme, font selections, etc.
+- Refactor everything
 
 #### To Do
 - Allow different difficulty levels

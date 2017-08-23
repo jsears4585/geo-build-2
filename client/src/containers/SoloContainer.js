@@ -3,7 +3,7 @@ import { Button, Container, Loader } from 'semantic-ui-react'
 
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 
-import SoloAnswers from '../components/SoloAnswers'
+import CurrentSoloMap from '../components/CurrentSoloMap'
 
 import mapBoxAuth from '../config/mapboxAuth'
 import * as utils from '../lib/utils.js'
@@ -192,50 +192,34 @@ export class SoloContainer extends Component {
   render() {
     if ( this.state.gameOver ) {
       return (
-        <div>You got {this.state.runningTotal} out of {this.state.lastSlideIndex + 1} correct!</div>
+        <div>
+          You got {this.state.runningTotal} out of {this.state.lastSlideIndex + 1} correct!
+        </div>
       )
     }
     if ( this.state.currentSlide >= 0 ) {
       return (
-        <div>
-          <div className="timecard">
-            <h2>{this.state.time === 10 ? null : this.state.time}</h2>
-          </div>
-          <div className="successFlash">
-            <h2>{this.state.successMessage}</h2>
-          </div>
-          <SoloAnswers
-            answersArray={this.state.answersArray}
-            recordAnswer={this.recordAnswer}
-            disableButtons={this.state.disableButtons}
-          />
-          <Map
-            // eslint-disable-next-line
-            style={'mapbox://styles/jsears5/cj674mwhz04k72soxxht9ghgq'}
-            center={[ this.state.currentLng, this.state.currentLat ]}
-            containerStyle={{
-              height: "100vh",
-              width: "100vw",
-              position: "relative",
-              zIndex: "1"
-            }}
-            zoom={[this.state.currentZoom]}
-          >
-          <Layer
-            type="fill"
-            paint={multiPolygonPaint}
-          >
-          <Feature coordinates={this.state.coords} />
-          </Layer>
-          </Map>
-        </div>
+        <CurrentSoloMap
+          time={ this.state.time }
+          successMessage={ this.state.successMessage }
+          answersArray={ this.state.answersArray }
+          recordAnswer={ this.recordAnswer }
+          disableButtons={ this.state.disableButtons }
+          currentLng={ this.state.currentLng }
+          currentLat={ this.state.currentLat }
+          currentZoom={ this.state.currentZoom }
+          coords={ this.state.coords }
+        />
       )
     } else {
-      if (this.state.importedCountries) {
+      if ( this.state.importedCountries ) {
         return (
-          <Container id="soloLoadingGame" text>
+          <Container
+            id="soloLoadingGame"
+            text
+          >
             <Button
-              onClick={()=>this.nextSlide()}
+              onClick={ ()=>this.nextSlide() }
               className="startButtonSolo"
               size='massive'
               color='green'
@@ -247,7 +231,7 @@ export class SoloContainer extends Component {
         )
       } else {
         return (
-          <Loader size="huge" active>{this.state.currentMessage}</Loader>
+          <Loader size="huge" active >{ this.state.currentMessage }</Loader>
         )
       }
     }

@@ -49,13 +49,14 @@ const FinalScoreboard = ({ playersScoreArray, winnerArray }) => {
         </div>
         <img
           alt="earth"
-          src={ require('../images/earth.png') }
+          src={ require('../images/earth-real-2.png') }
           style={ { position: 'absolute',
-                    top: '480px',
-                    left: '500px',
-                    zIndex: '15'
+                    top: '559px',
+                    left: '655px',
+                    zIndex: '15',
+                    overflow: 'hidden'
           }}
-          width="900"
+          width="1080"
         />
       </div>
     )

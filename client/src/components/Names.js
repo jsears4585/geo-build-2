@@ -29,7 +29,7 @@ const Names = ({
   }
 
   return (
-    <div>
+    <div className="presentationWrapper">
       <h1 className="gameCodeNames">Use this code: <span className="codeSpan">
         {gameCode || 'ABCD'}</span>
       </h1>

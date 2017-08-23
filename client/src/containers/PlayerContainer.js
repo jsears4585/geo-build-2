@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button, Input, Label } from 'semantic-ui-react'
 
 import PresentationPlayerButtons from '../components/PresentationPlayerButtons'
 import JoinGameInput from '../components/JoinGameInput'
