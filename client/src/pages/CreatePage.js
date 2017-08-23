@@ -49,8 +49,8 @@ class CreatePage extends React.Component {
     this.setState({ createGame: true, })
   }
 
-  handleCardClick = e => {
-    let title = e.currentTarget.attributes["data-title"].value
+  handleCardClick = event => {
+    let title = event.currentTarget.attributes["data-title"].value
     this.props.updateGameTitle(title)
     this.setState({
       code: generateGameCode(4, 'ABCDEF0123456789'),
@@ -161,9 +161,17 @@ class CreatePage extends React.Component {
           <div>
             { this.state.matchingGames.map((game, index)=> {
               return (
-                <div key={index} data-title={game.title} className='gameCard' onClick={this.handleCardClick}>
-                  <h3>{game.title}</h3>
-                  <p>{game.description}</p>
+                <div
+                  key={index}
+                  data-title={ game.title }
+                  className='gameCard'
+                  onClick={ this.handleCardClick }
+                >
+                  <h3>{ game.title }</h3>
+                  <p>{ game.description }</p>
+                  <p>
+                    { game.answers.length } { game.answers.length === 1 ? 'Country' : 'Countries' }
+                  </p>
                 </div>
               )
             }) }

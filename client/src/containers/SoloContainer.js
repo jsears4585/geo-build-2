@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Button, Container, Loader } from 'semantic-ui-react'
 
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
@@ -34,7 +35,8 @@ export class SoloContainer extends Component {
     runningTotal: 0,
     disableButtons: false,
     currentMessage: '',
-    successMessage: null
+    successMessage: null,
+    redirectToCreate: null
   }
 
   loadMessages = () => {
@@ -189,11 +191,32 @@ export class SoloContainer extends Component {
     this.timeKeeping(10)
   }
 
+  redirectToCreate = () => {
+    this.setState({ redirectToCreate: true })
+  }
+
   render() {
+
+    if (this.state.redirectToCreate) {
+      return <Redirect push to={`/create`}/>
+    }
+
     if ( this.state.gameOver ) {
       return (
-        <div>
-          You got {this.state.runningTotal} out of {this.state.lastSlideIndex + 1} correct!
+        <div className="finalSoloDisplay">
+          Game over<br />
+          {this.state.runningTotal} / {this.state.lastSlideIndex + 1} correct!
+          <Button
+            onClick={ ()=>this.redirectToCreate() }
+            style={{
+              'marginTop' : '44px'
+            }}
+            size='huge'
+            color='teal'
+            fluid
+          >
+            Play again?
+          </Button>
         </div>
       )
     }

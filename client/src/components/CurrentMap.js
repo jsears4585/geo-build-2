@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactMapboxGl, { Layer, Feature, ZoomControl } from 'react-mapbox-gl'
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 
 import Answers from './Answers'
 import mapBoxAuth from '../config/mapboxAuth'
@@ -34,7 +34,6 @@ const CurrentMap = ({
         }}
         zoom={ [currentZoom] }
       >
-      <ZoomControl/>
       <Layer
         type="fill"
         paint={ multiPolygonPaint }

@@ -13,7 +13,7 @@ const FinalScoreboard = ({ playersScoreArray, winnerArray }) => {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell className="playerColumn">Player</Table.HeaderCell>
-              <Table.HeaderCell className="scoreColumn">Score</Table.HeaderCell>
+              <Table.HeaderCell className="scoreColumn">Final Score</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

@@ -1,14 +1,14 @@
 ## Geography Game
 
 ### Current Focus
-- (3 or so) pre-made games for all countries of a certain region or continent
-- Render country count on game selection screen
-- Make Create a Game country selection more responsive with full display media queries
 - Let the user know that they submitted an answer on their controller Interface
+- Fade in images on final screen, or downsize them
+- Make Create a Game country selection more responsive with full display media queries
 - Clean up color scheme, font selections, etc.
-- Refactor everything
+- Make more games?
 
 #### To Do
+- Refactor everything
 - Allow different difficulty levels
 - Capitals?
 - Create different rooms from users to play different games in parallel
@@ -45,3 +45,5 @@
 - ~~Prevent unnecessary start game confirmation, convert to confirmation box~~
 - ~~Add Create a New Game A-Z sort instead of fuzzy search~~
 - ~~Continue to seed country data completed~~
+- ~~Render country count on game selection screen~~
+- ~~Reformat the final score display on Solo~~

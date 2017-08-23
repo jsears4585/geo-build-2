@@ -1,5 +1,14 @@
 /* Custom */
 
+.finalSoloDisplay {
+  width: 280px;
+  margin: 66px auto;
+  font-size: 32px;
+  color: green;
+  text-align: center;
+  line-height: 1.3;
+}
+
 #finalScoreboard {
   background: url('images/space-2.jpg');
   height: 100vh;
@@ -196,6 +205,7 @@ img.newGameFlag {
 
 p.footerBlurb {
   margin-bottom: 27px;
+  padding-bottom: 40px;
   color: #393939;
   width: 300px;
   margin: 0 auto;
