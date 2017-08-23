@@ -2,6 +2,10 @@ import React from 'react'
 import { Button, Input, Label } from 'semantic-ui-react'
 
 import PresentationPlayerButtons from '../components/PresentationPlayerButtons'
+import JoinGameInput from '../components/JoinGameInput'
+import AnswerCorrect from '../components/AnswerCorrect'
+import AnswerIncorrect from '../components/AnswerIncorrect'
+
 import '../index.css'
 
 const io = require('socket.io-client')
@@ -85,9 +89,9 @@ class PlayerContainer extends React.Component {
     })
   }
 
-  onHandleChange = e => {
-    e.preventDefault()
-    this.setState({ value: e.target.value })
+  onHandleChange = event => {
+    event.preventDefault()
+    this.setState({ value: event.target.value })
   }
 
   render() {
@@ -101,33 +105,21 @@ class PlayerContainer extends React.Component {
     } else {
       let answerKey = { 'A': 0, 'B': 1, 'C': 2, 'D': 3 }
       if (this.state.showRoundResults) {
-        let userAnswerIndex = answerKey[this.state.userAnswer]
         let correctAnswerIndex = answerKey[this.state.correctAnswer]
         if (this.state.userAnswer === this.state.correctAnswer) {
           show =
-            <div className="playerResultwrapper">
-              <i className="massive check green circle icon userFeedbackIcons"></i>
-              <br />
-              <p>You got it right! { this.state.currentAnswersArray[correctAnswerIndex] } is correct.</p>
-            </div>
+            <AnswerCorrect
+              currentAnswersArray={ this.state.currentAnswersArray }
+              correctAnswerIndex={ correctAnswerIndex }
+            />
         } else {
           show =
-            <div className="playerResultWrapper">
-              <i className="massive remove red circle icon userFeedbackIcons"></i>
-              <br />
-              <p>
-                You answered { this.state.userAnswer === ''
-                  ?
-                    'nothing this round.'
-                  :
-                    this.state.currentAnswersArray[userAnswerIndex]
-                  }
-              </p>
-              <p>
-                The correct answer was { this.state.currentAnswersArray[correctAnswerIndex] }.
-              </p>
-              <p>Better luck next time!</p>
-            </div>
+            <AnswerIncorrect
+              currentAnswersArray={ this.state.currentAnswersArray }
+              userAnswer={ this.state.userAnswer }
+              userAnswerIndex={ answerKey[this.state.userAnswer] }
+              correctAnswerIndex={ correctAnswerIndex }
+            />
         }
       } else if (   !this.state.renderSignin
                     && !this.state.showRoundResults
@@ -141,21 +133,11 @@ class PlayerContainer extends React.Component {
     let signIn
     if (this.state.renderSignin) {
       signIn =
-        <div>
-          <Label pointing='below'>Make up a cool name!</Label><br />
-          <Input
-            type='text'
-            name='username'
-            value={ this.state.value }
-            onChange={ this.onHandleChange} >
-          </Input>
-          <Button
-            className="joinButtonPlayer"
-            color="green"
-            onClick={ ()=> this.joinRoom() }>
-            Join
-          </Button>
-        </div>
+        <JoinGameInput
+          value={ this.state.value }
+          onHandleChange={ this.onHandleChange }
+          joinRoom={ this.joinRoom }
+        />
     } else {
       signIn = null
     }
